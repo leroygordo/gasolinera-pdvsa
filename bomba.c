@@ -33,18 +33,23 @@ int main(int argc, char **argv) {
    for(j = 0 ; j < 5 ; j++) {
      if(!strcmp(argv[2 * j + 1],"-cp")) {
        capacidad = atoi(argv[2*j+2]);
+       continue;
      }
      else if(!strcmp(argv[2 * j + 1],"-fc")) {
        fichero_centros = argv[2 * j + 2];
+       continue;
      }
      else if(!strcmp(argv[2 * j + 1],"-n")) {
        nombre_bomba = argv[2 * j+2];
+       continue;
      }
      else if(!strcmp(argv[2 * j + 1],"-i")) {
        inventario = atoi(argv[2 * j+2]);
+       continue;
      }
      else if(!strcmp(argv[2 * j + 1],"-c")) {
        consumo = atoi(argv[2 * j + 2]);
+       continue;
      }
      else {
         print_use();
@@ -53,5 +58,28 @@ int main(int argc, char **argv) {
    }
   }
 
-  printf("%s %d %d %d %s\n",nombre_bomba,capacidad,inventario,consumo,fichero_centros);
+  //  printf("%s %d %d %d %s\n",nombre_bomba,capacidad,inventario,consumo,fichero_centros);
+
+  // Lectura del archivo con los centros de distribucion
+
+  FILE *archivo = fopen(fichero_centros,"r");
+  if (!archivo) {
+    printf("Error: no se puede o no existe el archivo \"%s\".\n",fichero_centros);
+    exit(EXIT_FAILURE);
+  }
+
+  char *nombre_centro, *hostname, linea[80], *token;
+  int puerto;
+  while(fscanf(archivo,"%s",linea) != EOF) {
+    token = (char *) strtok(linea,"&");
+    nombre_centro = token;
+    token = (char *) strtok (NULL, "&");
+    hostname = token;
+    token = (char *) strtok (NULL, "&");
+    puerto = atoi(token);
+    //printf("%s %s %d\n\n",nombre_centro,hostname,puerto);
+  }
+  
+  fclose(archivo);
+  exit(EXIT_SUCCESS);
 }
