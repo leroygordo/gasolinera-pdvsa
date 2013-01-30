@@ -2,6 +2,12 @@
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+
 
 # define TRUE 1
 # define FALSE 0
@@ -27,7 +33,7 @@ int main(int argc, char **argv) {
  
   char *nombre_bomba, *fichero_centros;
   int capacidad, inventario, consumo;
-
+  
   {
    int j;
    for(j = 0 ; j < 5 ; j++) {
@@ -77,9 +83,35 @@ int main(int argc, char **argv) {
     hostname = token;
     token = (char *) strtok (NULL, "&");
     puerto = atoi(token);
-    //printf("%s %s %d\n\n",nombre_centro,hostname,puerto);
   }
+  //printf("%s %s %d\n\n",nombre_centro,hostname,puerto);
   
+  int socketID;
+  struct sockaddr_in dirServ;
+  struct hostent *server;
+  char buffer[256];
+  
+  socketID = socket(AF_INET,SOCK_STREAM,0);
+
+  server = gethostbyname(hostname);
+
+  bzero((char *) &dirServ, sizeof(dirServ));
+
+  dirServ.sin_family = AF_INET;
+  dirServ.sin_port = htons(puerto);
+
+  connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ));
+  
+  printf("Mensaje: ");
+  bzero(buffer,256);
+  fgets(buffer,256,stdin);
+
+  send(socketID,buffer,256,0);
+
+  recv(socketID,buffer,256,0);
+  printf(buffer);
+
+  close(socketID);
   fclose(archivo);
   exit(EXIT_SUCCESS);
 }
