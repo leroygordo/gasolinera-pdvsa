@@ -11,6 +11,7 @@
 # define TRUE 1
 # define FALSE 0
 
+int busy = 0;
 static void print_use(){
   printf("uso: centro OPCIONES ...\n");
   printf("     OPCIONES:\n");
@@ -25,10 +26,23 @@ static void print_use(){
 void procesarPeticion(int socket){
   char buffer[256];
   bzero(buffer,256);
-  recv(socket, buffer,256,0);
+  if (recv(socket, buffer,256,0) < 0){
+    error("Error recibiendo los datos");
+  };
   printf(buffer);
-  sleep(3);
-  send(socket, buffer, 256,0);
+  if (busy == 0) {
+    sleep(100);
+    strcpy(buffer,"Disponible");
+    *(&busy) = 1;
+  }
+  else
+    strcpy(buffer,"No disponible");
+  if (send(socket, buffer, 256,0) < 0) {
+    error("Error mandando los datos");
+  }
+  *(&busy) = 0;
+  close(socket);
+  pthread_exit(0);
 } 
 
 int main(int argc, char **argv) {
@@ -93,16 +107,22 @@ int main(int argc, char **argv) {
   struct sockaddr_in dirServ, dirCli;
   char buffer[256];
   pid_t son;
+  pthread_t h;
 
   socketID = socket(AF_INET,SOCK_STREAM,0);
-  
+  if (socketID == 0) {
+    error("Error abriendo el socket");
+  }
+
   bzero((char*)&dirServ,sizeof(dirServ));
 
   dirServ.sin_family = AF_INET;
   dirServ.sin_port = htons(puerto);
   dirServ.sin_addr.s_addr = htonl(INADDR_ANY);
-
-  bind(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ));
+  
+  if (bind(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) < 0 ) {
+    error("Error en la conexion");
+  }
   
   listen(socketID,5);
 
@@ -110,15 +130,13 @@ int main(int argc, char **argv) {
 
   while (TRUE) {
     newSocketID = accept(socketID,(struct sockaddr *)&dirCli,&addrlen);
-    son = fork();
-    if(!son) {
-      procesarPeticion(newSocketID);
-      exit(EXIT_SUCCESS);
+    if (newSocketID < 0) {
+      error("Error aceptando la conexion");
     }
-    else {
-      close(newSocketID);
-    }
-  }
+    pthread_create(&h,NULL,procesarPeticion, (void *)newSocketID);
+    //busy = 0;
+  }  
+  
   close(socketID);
   exit(EXIT_SUCCESS);
 }
