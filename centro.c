@@ -31,12 +31,12 @@ void procesarPeticion(int socket){
   };
   printf(buffer);
   if (busy == 0) {
-    sleep(100);
+    sleep(3);
     strcpy(buffer,"Disponible");
     *(&busy) = 1;
   }
   else
-    strcpy(buffer,"No disponible");
+    strcpy(buffer,"No disponiblek");
   if (send(socket, buffer, 256,0) < 0) {
     error("Error mandando los datos");
   }

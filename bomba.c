@@ -13,6 +13,8 @@
 # define FALSE 0
 
 int inventario;
+int t_funcionamiento = 480;
+
 
 struct centro_servidor;
 typedef struct centro_servidor centro;
@@ -26,27 +28,20 @@ struct centro_servidor {
 
 
 void agregar_directorio(centro** directorio, char *nombre_centro, char *hostname, int puerto) {
-  centro *tmp;
-  if(!(tmp = (centro *) (malloc(sizeof(centro))))) {
+  centro *centro_;
+  if(!(centro_ = (centro *) (malloc(sizeof(centro))))) {
     printf("Error: no se pudo reservar memoria para crear el directorio de centros.\n");
     exit(EXIT_FAILURE);
   }
-  tmp->nombre_centro = nombre_centro;
-  tmp->hostname = hostname;
-  tmp->puerto = puerto;
-  tmp->next = NULL;
+  centro_->nombre_centro = (char *) malloc(strlen(nombre_centro));
+  strcpy(centro_->nombre_centro,nombre_centro);
+  centro_->hostname = (char *) malloc(strlen(hostname));
+  strcpy(centro_->hostname,hostname);
+  centro_->puerto = puerto;
+  centro_->next = NULL;
 
-  tmp->next = *directorio;
-  *directorio = tmp;
-}
-
-void print_dir(centro *dir) {
-  centro *tmp;
-  tmp = dir;
-  while(tmp) {
-    printf("%s %s %d\n",tmp->nombre_centro,tmp->hostname,tmp->puerto);
-    tmp = tmp->next;
-  }
+  centro_->next = *directorio;
+  *directorio = centro_;
 }
 
 static void print_use(){
@@ -114,10 +109,17 @@ int valid_arg(int capacidad, char *fichero_centros, char *nombre_bomba, int inve
   return valid;
 }
 void *print_inventario(void * tid) {
+  int consumo = (int) tid;
   while (TRUE) {
     sleep(3);
-    //printf("inventario: %d\n",inventario);
-    inventario--;
+    inventario-=consumo;
+  }
+}
+
+void *tiempo(void * tid) {
+  while (TRUE) {
+    sleep(3);
+    t_funcionamiento--;
   }
 }
 
@@ -138,8 +140,6 @@ int main(int argc, char **argv) {
   if (!valid_arg(capacidad,fichero_centros,nombre_bomba,inventario,consumo))
     exit(EXIT_FAILURE);
 
-  //printf("%s %d %d %d %s\n",nombre_bomba,capacidad,inventario,consumo,fichero_centros);
-
   // Lectura del archivo con los centros de distribucion
 
   FILE *archivo = fopen(fichero_centros,"r");
@@ -153,73 +153,68 @@ int main(int argc, char **argv) {
   centro *directorio_centros = NULL;
 
   while(fscanf(archivo,"%s",linea) != EOF) {
-    char *token = (char *) strtok(linea,"&");
-    char *nombre_centro = token;
-    token = (char *) strtok (NULL, "&");
-    char *hostname = token;
-    token = (char *) strtok (NULL, "&");
-    int puerto = atoi(token);
+    char *nombre_centro = (char *) strtok(linea,"&");
+    char *hostname =  (char *) strtok (NULL, "&");
+    int puerto = atoi((char *) strtok (NULL, "&"));
     agregar_directorio(&directorio_centros,nombre_centro,hostname,puerto);
   }
 
-  {
-    centro *tmp;
-    tmp = directorio_centros;
-    while(tmp) {
-     printf("%s %s %d\n",tmp->nombre_centro,tmp->hostname,tmp->puerto);
-     tmp = tmp->next;
-    }
-  } 
+  pthread_t thread_inv, thread_func;
+  pthread_attr_t attr1, attr2;
 
-  exit(EXIT_SUCCESS);
- 
-  pthread_t thread;
-  pthread_attr_t attr;
-
-  pthread_attr_init(&attr);
-  pthread_attr_setdetachstate(&attr,PTHREAD_CREATE_JOINABLE);
-
-  if (pthread_create(&thread, &attr, print_inventario, (void *) &inventario)) {
-    printf("Error: no se pudo crear el hilo.");
+  pthread_attr_init(&attr1);
+  pthread_attr_setdetachstate(&attr1,PTHREAD_CREATE_JOINABLE);
+  if (pthread_create(&thread_inv, &attr1, print_inventario, (void *) consumo)) {
+    printf("Error: no se pudo crear el hilo para controlar el inventario.");
     exit(EXIT_FAILURE);
   }
- 
-  while (TRUE){
-    printf("%d\n",inventario);
-    sleep(5);
+
+  pthread_attr_init(&attr2);
+  pthread_attr_setdetachstate(&attr2,PTHREAD_CREATE_JOINABLE);
+  if (pthread_create(&thread_func, &attr2, tiempo,NULL)) {
+    printf("Error: no se pudo crear el hilo para controlar el funcionamiento.");
+    exit(EXIT_FAILURE);
   }
 
-/*  int socketID;
-  struct sockaddr_in dirServ;
-  struct hostent *server;
-  char buffer[256];
+
+  int socketID;
+  while (t_funcionamiento > 0 ) { 
+    //printf("%d %d\n",inventario,t_funcionamiento);
+    //sleep(4);
+    if (capacidad - inventario >= 38000) {
+     struct sockaddr_in dirServ;
+     struct hostent *server;
+     char buffer[256];
   
-  socketID = socket(AF_INET,SOCK_STREAM,0);
+     socketID = socket(AF_INET,SOCK_STREAM,0);
+     server = gethostbyname(directorio_centros->hostname);
 
-  server = gethostbyname(hostname);
+     bzero((char *) &dirServ, sizeof(dirServ));
 
-  bzero((char *) &dirServ, sizeof(dirServ));
+     dirServ.sin_family = AF_INET;
+     dirServ.sin_port = htons(directorio_centros->puerto);
 
-  dirServ.sin_family = AF_INET;
-  dirServ.sin_port = htons(puerto);
-
-  connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ));
+     if(connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) == -1) {
+       continue;
+     }
   
-  printf("Mensaje: ");
-  bzero(buffer,256);
-  fgets(buffer,256,stdin);
+     printf("Mensaje: ");
+     bzero(buffer,256);
+     fgets(buffer,256,stdin);
 
-  send(socketID,buffer,256,0);
+     send(socketID,buffer,256,0);
 
-  recv(socketID,buffer,256,0);
-  printf(buffer);
-
-  pthread_attr_destroy(&attr);
-
+     recv(socketID,buffer,256,0);
+     printf(buffer);
+    }
+  }
+  
+  pthread_attr_destroy(&attr1);
+  pthread_attr_destroy(&attr2);
   void * status;
-  pthread_join(thread,&status);
-
-  close(socketID);*/
+  pthread_join(thread_inv,&status);
+  pthread_join(thread_func,&status);
+  close(socketID);
   fclose(archivo);
   exit(EXIT_SUCCESS);
 }
