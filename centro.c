@@ -31,9 +31,9 @@ void procesarPeticion(int socket){
   };
   printf(buffer);
   if (busy == 0) {
+    *(&busy) = 1;
     sleep(3);
     strcpy(buffer,"Disponible");
-    *(&busy) = 1;
   }
   else
     strcpy(buffer,"No disponiblek");
