@@ -3,13 +3,13 @@ CC = gcc
 all: bomba centro
 
 bomba: bomba.o
-	$(CC) bomba.o -g -o bomba
+	$(CC) bomba.o -lpthread -g -o bomba
 
 bomba.o: bomba.c
 	$(CC) -c bomba.c
 
 centro: centro.o
-	$(CC) centro.o -g -o centro
+	$(CC) centro.o -lpthread -g -o centro
 
 centro.o:  centro.c
 	$(CC) -c centro.c
