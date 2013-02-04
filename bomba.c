@@ -15,7 +15,6 @@
 int inventario;
 int t_funcionamiento = 480;
 
-
 struct centro_servidor;
 typedef struct centro_servidor centro;
 
@@ -23,6 +22,8 @@ struct centro_servidor {
   char *nombre_centro;
   char *hostname;
   int puerto;
+  int send_t;
+  int busy;
   centro *next;
 };
 
@@ -39,9 +40,53 @@ void agregar_directorio(centro** directorio, char *nombre_centro, char *hostname
   strcpy(centro_->hostname,hostname);
   centro_->puerto = puerto;
   centro_->next = NULL;
+  {
+   int socketID = socket(AF_INET,SOCK_STREAM,0);
+   struct hostent *server = gethostbyname(hostname);
+   struct sockaddr_in dirServ;
 
-  centro_->next = *directorio;
-  *directorio = centro_;
+   bzero((char *) &dirServ, sizeof(dirServ));
+   dirServ.sin_family = AF_INET;
+   dirServ.sin_port = htons(puerto);
+
+   if(connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) == -1) {
+     printf("Error: no se pudo conectar al centro para obtener tiempo de respuesta.\n");
+     exit(EXIT_FAILURE);
+   }
+ 
+   send(socketID,"-\n",256,0);
+   char buffer[256];
+   bzero(buffer,256);
+   recv(socketID,buffer,256,0);
+   centro_->send_t = atoi(buffer);
+   close(socketID);
+  }
+  centro_->busy = 0; 
+  if(!*directorio)
+    *directorio = centro_;
+  else {
+    centro *tmp = *directorio, *ant = NULL;
+    while(tmp) {
+      if(centro_->send_t <= tmp->send_t && !ant) {
+        centro_->next = tmp;
+        *directorio = centro_;
+        break;
+      }
+      else if(centro_->send_t <= tmp->send_t && ant){
+        ant->next = centro_;
+        centro_->next = tmp;
+        break;
+      }
+      else if(centro_->send_t > tmp->send_t)  {
+        if(!tmp->next) {
+          tmp->next = centro_;
+          break;
+        }
+        ant = tmp;
+        tmp = tmp->next;
+      }
+    }
+  }    
 }
 
 static void print_use(){
@@ -112,7 +157,8 @@ void *print_inventario(void * tid) {
   int consumo = (int) tid;
   while (TRUE) {
     sleep(3);
-    inventario-=consumo;
+    if(inventario - consumo > 0)
+      inventario-=consumo;
   }
 }
 
@@ -124,7 +170,6 @@ void *tiempo(void * tid) {
 }
 
 int main(int argc, char **argv) {
-
   // Validacion y lectura de argumentos
 
   if(argc != 11){
@@ -148,16 +193,23 @@ int main(int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
 
-  char linea[80];
- 
+  char *linea;
   centro *directorio_centros = NULL;
-
+  
   while(fscanf(archivo,"%s",linea) != EOF) {
     char *nombre_centro = (char *) strtok(linea,"&");
     char *hostname =  (char *) strtok (NULL, "&");
     int puerto = atoi((char *) strtok (NULL, "&"));
     agregar_directorio(&directorio_centros,nombre_centro,hostname,puerto);
   }
+
+  /*{
+    centro *tmp;tmp = directorio_centros;
+    while (tmp) {
+      printf("%d\n",tmp->send_t);
+      tmp=tmp->next;
+    }
+  }*/
 
   pthread_t thread_inv, thread_func;
   pthread_attr_t attr1, attr2;
@@ -178,34 +230,40 @@ int main(int argc, char **argv) {
 
 
   int socketID;
+  centro c;
   while (t_funcionamiento > 0 ) { 
-    //printf("%d %d\n",inventario,t_funcionamiento);
-    //sleep(4);
-    if (capacidad - inventario >= 38000) {
+    printf("%d %d\n",inventario,480 - t_funcionamiento + 1);
+    if (capacidad - inventario >= 380) {
+     c = *directorio_centros;
+ 
      struct sockaddr_in dirServ;
      struct hostent *server;
-     char buffer[256];
   
      socketID = socket(AF_INET,SOCK_STREAM,0);
-     server = gethostbyname(directorio_centros->hostname);
+     server = gethostbyname(c.hostname);
 
      bzero((char *) &dirServ, sizeof(dirServ));
 
      dirServ.sin_family = AF_INET;
-     dirServ.sin_port = htons(directorio_centros->puerto);
-
+     dirServ.sin_port = htons(c.puerto);
      if(connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) == -1) {
        continue;
      }
-  
-     printf("Mensaje: ");
+ 
+     send(socketID,strcat(nombre_bomba,"\n"),256,0);
+     char buffer[256];
      bzero(buffer,256);
-     fgets(buffer,256,stdin);
-
-     send(socketID,buffer,256,0);
-
      recv(socketID,buffer,256,0);
-     printf(buffer);
+
+     if(buffer[0] == 'O') {
+       c.busy = 1;
+       c = *c.next;
+       continue;
+     }
+     else if (buffer[0] == 'D') {
+       inventario+=380;
+       c.busy = 0;
+     }
     }
   }
   
