@@ -230,6 +230,7 @@ int main(int argc, char **argv) {
  
   fprintf(log_file,"Inventario inicial: %d litros.\n",inventario);
 
+
   pthread_t thread_inv, thread_func;
   pthread_attr_t attr1, attr2;
 
@@ -246,8 +247,29 @@ int main(int argc, char **argv) {
     printf("Error: no se pudo crear el hilo para controlar el funcionamiento.");
     exit(EXIT_FAILURE);
   }
+>>>>>>> 1e7aa54e94425aeea2458745aaefb670663dcedd
 
 
+<<<<<<< HEAD
+  if(connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) < 0) {
+    error("Error en conexion");
+  }
+  
+  printf("Mensaje: ");
+  bzero(buffer,256);
+ 
+  fgets(buffer,256,stdin);
+ 
+  if (send(socketID,buffer,256,0) < 0) {
+    error("Error mandando datos C");
+  }
+ 
+  if (recv(socketID,buffer,256,0) < 0) {
+    error("Error recibiendo datos C");
+  }
+ 
+  //printf(buffer);
+=======
   int socketID;
   centro c;
   c = *directorio_centros;
@@ -277,6 +299,7 @@ int main(int argc, char **argv) {
      char buffer[256];
      bzero(buffer,256);
      recv(socketID,buffer,256,0);
+>>>>>>> 1e7aa54e94425aeea2458745aaefb670663dcedd
 
      if(buffer[0] == 'O') {
        if(c.next == NULL)
