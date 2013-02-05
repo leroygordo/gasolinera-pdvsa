@@ -12,6 +12,8 @@
 # define FALSE 0
 
 int busy = 0;
+int tiempo;
+
 static void print_use(){
   printf("uso: centro OPCIONES ...\n");
   printf("     OPCIONES:\n");
@@ -26,20 +28,30 @@ static void print_use(){
 void procesarPeticion(int socket){
   char buffer[256];
   bzero(buffer,256);
-  if (recv(socket, buffer,256,0) < 0){
+
+  if (recv(socket,buffer,256,0) < 0){
     error("Error recibiendo los datos");
   };
-  printf(buffer);
-  if (busy == 0) {
+ 
+  if (busy == 0) {  
     *(&busy) = 1;
-    sleep(3);
-    strcpy(buffer,"Disponible");
+    if(buffer[0] == '-') { 
+      bzero(buffer,256);
+      sprintf(buffer,"%d",tiempo);
+    }
+    else{
+      sleep(tiempo);
+      strcpy(buffer,"Disponible");
+    }
   }
   else
-    strcpy(buffer,"No disponiblek");
-  if (send(socket, buffer, 256,0) < 0) {
+    strcpy(buffer,"Ocupado");
+
+
+  if (send(socket,strcat(buffer,"\n"),256,0) < 0) {
     error("Error mandando los datos");
   }
+  //Hay que arreglar algo aca. Cuando el servidor esta ocupado, lo dice pero setea el flag busy a 0
   *(&busy) = 0;
   close(socket);
   pthread_exit(0);
@@ -55,7 +67,7 @@ int main(int argc, char **argv) {
   }
 
   char * nombre_centro;
-  int capacidad, inventario, tiempo, suministro, puerto;
+  int capacidad, inventario, suministro, puerto;
 
   // getopt no parsea argumentos cuyo flag es mas de un caracter
   int cp = FALSE;
