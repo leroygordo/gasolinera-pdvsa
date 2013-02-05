@@ -7,26 +7,35 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-void procesaPeticion(int socket){
+int busy = 0;
+void procesaPeticion(void *arg){
+
+  int socket = (int *)arg;
   char buffer[256];
   bzero(buffer,256);
-  // transfDatos = read(newSocketID, buffer, 255);
   recv(socket, buffer,256,0);
   printf(buffer);
-  //bzero(buffer,256);
-  //transfDatos = write(newSocketID, buffer, 255);
-  sleep(100);
+  sleep(10);
+  bzero(buffer,256);
+   if (busy == 1) 
+     strcpy(buffer, "ocupado");
+   else {
+     busy = 1;
+     strcpy(buffer, "descupado");
+   }
   send(socket, buffer, 256,0);
+  close(socket);
+  pthread_exit(0);
 } 
 
 int main(){
-
+ 
   int socketID, puerto, newSocketID, transfDatos;
   socklen_t addrlen;
   struct sockaddr_in dirServ, dirCli;
   char buffer[256];
   char *message = "Hola, soy tu Servidor\n";
-  pid_t hijo;
+  pthread_t h;
   socketID = socket(AF_INET, SOCK_STREAM, 0); //Creacion socket
   puerto = 10223;
   
@@ -45,17 +54,12 @@ int main(){
   // 5 es el numero maximo de conexiones en la cola de espera. Las conexiones quedan en estado de espera en la cola hasta que se aceptan.
   listen(socketID,5);
   addrlen = sizeof(dirCli);
+  
   while (1) {
-  newSocketID = accept (socketID, (struct sockaddr *) &dirCli, &addrlen); // accept() no retorna hasta que se produzca una conexion o sea interrumpida por una senial.
-  hijo = fork();
-  if (hijo == 0) {
-    //close(socketID);
-    procesaPeticion(newSocketID);
-    exit(0);
-  }
-  else
-    close(newSocketID);
+    newSocketID = accept (socketID, (struct sockaddr *) &dirCli, &addrlen); // accept() no retorna hasta que se produzca una conexion o sea interrumpida por una senial.
+    pthread_create(&h,NULL,procesaPeticion,(void *)newSocketID);
   }
   close(socketID);
  }
+
 

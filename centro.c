@@ -34,7 +34,7 @@ void procesarPeticion(int socket){
   if (send(socket, buffer, 256,0) < 0) {
     error("Error mandando los datos");
   }
-  busy = 0;
+  //busy = 0;
   close(socket);
   pthread_exit(0);
 } 
@@ -127,17 +127,16 @@ int main(int argc, char **argv) {
     if (newSocketID < 0) {
       error("Error aceptando la conexion");
     }
-    if (busy == 1) {
+    /* if (busy == 1) {
       bzero(buffer,256);
       strcpy(buffer, "No disponible");
       send(newSocketID, buffer, 256, 0);
     }
     else {
-      busy = 1;
+    busy = 1;*/
       pthread_create(&h,NULL,procesarPeticion, (void *)newSocketID);
-    }
+      // }
  }  
-  
   close(socketID);
   exit(EXIT_SUCCESS);
 }

@@ -6,6 +6,12 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#include <pthread.h>
+
+void actualiza(int inventario, int consumoXmin) {
+  
+  
+}
 
 int main() {
 

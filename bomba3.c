@@ -86,45 +86,40 @@ int main(int argc, char **argv) {
   }
   //printf("%s %s %d\n\n",nombre_centro,hostname,puerto);
   
-  int socketID; 
+  int socketID;
   struct sockaddr_in dirServ;
   struct hostent *server;
   char buffer[256];
-  //printf(puerto);
+  
   socketID = socket(AF_INET,SOCK_STREAM,0);
-  /*  if (socketID < 0) {
-    error("Error abriendo el socket C");
-    }*/
-
+ 
   server = gethostbyname(hostname);
-
-  /*if (server == NULL) {
-    error("No hay host");
-    }*/
+  if (server == NULL) {
+  fprintf(stderr,"Error no hay host");
+  exit(0);
+  }
   bzero((char *) &dirServ, sizeof(dirServ));
 
   dirServ.sin_family = AF_INET;
+  bcopy((char *)server->h_addr,(char*)&dirServ.sin_addr.s_addr,server->h_length);
   dirServ.sin_port = htons(puerto);
-
-  if(connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) < 0) {
-    error("Error en conexion");
-  }
   
+
+   if (connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) < 0)
+     error("Error enla conexion");
+   
   printf("Mensaje: ");
   bzero(buffer,256);
- 
   fgets(buffer,256,stdin);
- 
-  if (send(socketID,buffer,256,0) < 0) {
-    error("Error mandando datos C");
-  }
- 
-  if (recv(socketID,buffer,256,0) < 0) {
-    error("Error recibiendo datos C");
-  }
- 
-  //printf(buffer);
 
+  if (send(socketID,buffer,256,0) < 0)
+    error("Error mandando dato CLientes");
+  
+
+  if (recv(socketID,buffer,256,0) < 0)
+    error("Error recibiendo datos Cliente");
+
+  printf(buffer);
   close(socketID);
   fclose(archivo);
   exit(EXIT_SUCCESS);
