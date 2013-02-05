@@ -29,11 +29,11 @@ struct centro_servidor {
   centro *next;
 };
 
-void agregar_directorio(centro** directorio, char *nombre_centro, char *hostname, int puerto) {
+int agregar_directorio(centro** directorio, char *nombre_centro, char *hostname, int puerto) {
   centro *centro_;
   if(!(centro_ = (centro *) (malloc(sizeof(centro))))) {
     printf("Error: no se pudo reservar memoria para crear el directorio de centros.\n");
-    exit(EXIT_FAILURE);
+    return FALSE;
   }
   centro_->nombre_centro = (char *) malloc(strlen(nombre_centro));
   strcpy(centro_->nombre_centro,nombre_centro);
@@ -52,7 +52,7 @@ void agregar_directorio(centro** directorio, char *nombre_centro, char *hostname
 
    if(connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) == -1) {
      printf("Error: no se pudo conectar al centro para obtener tiempo de respuesta.\n");
-     exit(EXIT_FAILURE);
+     return FALSE;
    }
  
    send(socketID,"-\n",256,0);
@@ -87,8 +87,32 @@ void agregar_directorio(centro** directorio, char *nombre_centro, char *hostname
         tmp = tmp->next;
       }
     }
-  }    
+  }
+  return TRUE;
 }
+
+centro *crear_directorio(char *fichero_centros) {
+  FILE *archivo = fopen(fichero_centros,"r");
+  centro *directorio;
+  if (!archivo) {
+    printf("Error: no se puede abrir o no existe el archivo \"%s\".\n",fichero_centros);
+    return FALSE;
+  }
+ 
+  char linea[87];  
+  while(fscanf(archivo,"%s",linea) != EOF) {
+    char *nombre_centro = (char *) strtok(linea,"&");
+    char *hostname =  (char *) strtok (NULL, "&");
+    int puerto = atoi((char *) strtok (NULL, "&"));
+    if(!agregar_directorio(&directorio,nombre_centro,hostname,puerto)){
+      printf("Error: no se pudo crear el directorio de centros de distribucion.\n");
+      return FALSE;
+    }
+  }
+ fclose(archivo);
+ return directorio;
+}
+
 
 static void print_use(){
   printf("uso: bomba OPCIONES ...\n");
@@ -178,7 +202,6 @@ void *tiempo(void * tid) {
 }
 
 int main(int argc, char **argv) {
-  // Validacion y lectura de argumentos
 
   if(argc != 11){
     print_use();
@@ -188,36 +211,20 @@ int main(int argc, char **argv) {
   char *nombre_bomba, *fichero_centros;
   int capacidad, consumo;
   
+  // Lectura de argumentos
   read_arg(argv,&capacidad,&fichero_centros,&nombre_bomba,&inventario,&consumo);
   
+  // Validacion de argumentos
   if (!valid_arg(capacidad,fichero_centros,nombre_bomba,inventario,consumo))
     exit(EXIT_FAILURE);
 
-  // Lectura del archivo con los centros de distribucion
-
-  FILE *archivo = fopen(fichero_centros,"r");
-  if (!archivo) {
-    printf("Error: no se puede abrir o no existe el archivo \"%s\".\n",fichero_centros);
-    exit(EXIT_FAILURE);
-  }
-
-  char *linea;
   centro *directorio_centros = NULL;
-  
-  while(fscanf(archivo,"%s",linea) != EOF) {
-    char *nombre_centro = (char *) strtok(linea,"&");
-    char *hostname =  (char *) strtok (NULL, "&");
-    int puerto = atoi((char *) strtok (NULL, "&"));
-    agregar_directorio(&directorio_centros,nombre_centro,hostname,puerto);
-  }
 
-  /*{
-    centro *tmp;tmp = directorio_centros;
-    while (tmp) {
-      printf("%d\n",tmp->send_t);
-      tmp=tmp->next;
-    }
-  }*/
+  // Creacion del directorio con los centros de distribucion que se encuentran en 'fichero_centros' 
+  if (!(directorio_centros = crear_directorio(fichero_centros))) {
+    printf("Error: no se pudo crear el directorio de centros de distribucion.\n");
+    exit(EXIT_FAILURE); 
+  }
   
   log_file_name = (char *) malloc(strlen(nombre_bomba)+8);
   sprintf(log_file_name,"log_%s.txt",nombre_bomba);
@@ -302,8 +309,7 @@ int main(int argc, char **argv) {
   void * status;
   pthread_join(thread_inv,&status);
   pthread_join(thread_func,&status);
-  close(socketID);
-  fclose(archivo);
+  close(socketID); 
   fclose(log_file);
   exit(EXIT_SUCCESS);
 }
