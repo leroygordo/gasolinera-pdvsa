@@ -204,6 +204,15 @@ int main(int argc, char **argv) {
   char *linea;
   centro *directorio_centros = NULL;
   
+  int socketID; 
+  struct sockaddr_in dirServ;
+  struct hostent *server;
+  char buffer[256];
+  //printf(puerto);
+  socketID = socket(AF_INET,SOCK_STREAM,0);
+  /*  if (socketID < 0) {
+    error("Error abriendo el socket C");
+
   while(fscanf(archivo,"%s",linea) != EOF) {
     char *nombre_centro = (char *) strtok(linea,"&");
     char *hostname =  (char *) strtok (NULL, "&");
@@ -234,6 +243,12 @@ int main(int argc, char **argv) {
   pthread_t thread_inv, thread_func;
   pthread_attr_t attr1, attr2;
 
+
+  /*if (server == NULL) {
+    error("No hay host");
+    }*/
+  bzero((char *) &dirServ, sizeof(dirServ));
+
   pthread_attr_init(&attr1);
   pthread_attr_setdetachstate(&attr1,PTHREAD_CREATE_JOINABLE);
   if (pthread_create(&thread_inv, &attr1, print_inventario, (void *) consumo)) {
@@ -247,11 +262,8 @@ int main(int argc, char **argv) {
     printf("Error: no se pudo crear el hilo para controlar el funcionamiento.");
     exit(EXIT_FAILURE);
   }
->>>>>>> 1e7aa54e94425aeea2458745aaefb670663dcedd
 
-
-<<<<<<< HEAD
-  if(connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) < 0) {
+if(connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) < 0) {
     error("Error en conexion");
   }
   
@@ -269,7 +281,6 @@ int main(int argc, char **argv) {
   }
  
   //printf(buffer);
-=======
   int socketID;
   centro c;
   c = *directorio_centros;
@@ -299,7 +310,6 @@ int main(int argc, char **argv) {
      char buffer[256];
      bzero(buffer,256);
      recv(socketID,buffer,256,0);
->>>>>>> 1e7aa54e94425aeea2458745aaefb670663dcedd
 
      if(buffer[0] == 'O') {
        if(c.next == NULL)

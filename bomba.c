@@ -204,6 +204,15 @@ int main(int argc, char **argv) {
   char *linea;
   centro *directorio_centros = NULL;
   
+  int socketID; 
+  struct sockaddr_in dirServ;
+  struct hostent *server;
+  char buffer[256];
+  //printf(puerto);
+  socketID = socket(AF_INET,SOCK_STREAM,0);
+  /*  if (socketID < 0) {
+    error("Error abriendo el socket C");
+
   while(fscanf(archivo,"%s",linea) != EOF) {
     char *nombre_centro = (char *) strtok(linea,"&");
     char *hostname =  (char *) strtok (NULL, "&");
@@ -230,8 +239,15 @@ int main(int argc, char **argv) {
  
   fprintf(log_file,"Inventario inicial: %d litros.\n",inventario);
 
+
   pthread_t thread_inv, thread_func;
   pthread_attr_t attr1, attr2;
+
+
+  /*if (server == NULL) {
+    error("No hay host");
+    }*/
+  bzero((char *) &dirServ, sizeof(dirServ));
 
   pthread_attr_init(&attr1);
   pthread_attr_setdetachstate(&attr1,PTHREAD_CREATE_JOINABLE);
@@ -247,8 +263,24 @@ int main(int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
 
-
-  int socketID;
+if(connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) < 0) {
+    error("Error en conexion");
+  }
+  
+  printf("Mensaje: ");
+  bzero(buffer,256);
+ 
+  fgets(buffer,256,stdin);
+ 
+  if (send(socketID,buffer,256,0) < 0) {
+    error("Error mandando datos C");
+  }
+ 
+  if (recv(socketID,buffer,256,0) < 0) {
+    error("Error recibiendo datos C");
+  }
+ 
+  //printf(buffer);
   centro c;
   c = *directorio_centros;
   while (t_funcionamiento > 0 ) { 
