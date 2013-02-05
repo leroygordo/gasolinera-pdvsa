@@ -13,7 +13,9 @@
 # define FALSE 0
 
 int inventario;
-int t_funcionamiento = 480;
+int t_funcionamiento = 24;
+char *log_file_name;
+FILE *log_file;
 
 struct centro_servidor;
 typedef struct centro_servidor centro;
@@ -26,7 +28,6 @@ struct centro_servidor {
   int busy;
   centro *next;
 };
-
 
 void agregar_directorio(centro** directorio, char *nombre_centro, char *hostname, int puerto) {
   centro *centro_;
@@ -159,13 +160,20 @@ void *print_inventario(void * tid) {
     sleep(3);
     if(inventario - consumo > 0)
       inventario-=consumo;
+    else if(inventario - consumo <= 0)
+      inventario = 0;
+    if(!t_funcionamiento)
+      pthread_exit(EXIT_SUCCESS);
   }
+
 }
 
 void *tiempo(void * tid) {
   while (TRUE) {
     sleep(3);
     t_funcionamiento--;
+    if(!t_funcionamiento)
+      pthread_exit(EXIT_SUCCESS);
   }
 }
 
@@ -189,7 +197,7 @@ int main(int argc, char **argv) {
 
   FILE *archivo = fopen(fichero_centros,"r");
   if (!archivo) {
-    printf("Error: no se puede o no existe el archivo \"%s\".\n",fichero_centros);
+    printf("Error: no se puede abrir o no existe el archivo \"%s\".\n",fichero_centros);
     exit(EXIT_FAILURE);
   }
 
@@ -210,6 +218,17 @@ int main(int argc, char **argv) {
       tmp=tmp->next;
     }
   }*/
+  
+  log_file_name = (char *) malloc(strlen(nombre_bomba)+8);
+  sprintf(log_file_name,"log_%s.txt",nombre_bomba);
+
+  log_file = fopen(log_file_name,"w");
+  if(!log_file) {
+    printf("Error: no se pudo crear el archivo log el archivo\n.");
+    exit(EXIT_FAILURE);
+  }
+ 
+  fprintf(log_file,"Inventario inicial: %d litros.\n",inventario);
 
   pthread_t thread_inv, thread_func;
   pthread_attr_t attr1, attr2;
@@ -231,11 +250,15 @@ int main(int argc, char **argv) {
 
   int socketID;
   centro c;
+  c = *directorio_centros;
   while (t_funcionamiento > 0 ) { 
-    printf("%d %d\n",inventario,480 - t_funcionamiento + 1);
+    printf("%d %d\n",inventario,24 - t_funcionamiento + 1);
+    if(inventario == capacidad)
+      fprintf(log_file,"Tanque full: %d minutos.\n",24 - t_funcionamiento);
+    if(inventario == 0)
+      fprintf(log_file,"Tanque vacio: %d minutos.\n",24 - t_funcionamiento);
+
     if (capacidad - inventario >= 380) {
-     c = *directorio_centros;
- 
      struct sockaddr_in dirServ;
      struct hostent *server;
   
@@ -256,13 +279,20 @@ int main(int argc, char **argv) {
      recv(socketID,buffer,256,0);
 
      if(buffer[0] == 'O') {
-       c.busy = 1;
-       c = *c.next;
-       continue;
+       if(c.next == NULL)
+         c = *directorio_centros;
+       else
+         c = *c.next;
+       fprintf(log_file,"Peticion: %d minutos, %s, Fallido.\n",24 - t_funcionamiento,c.nombre_centro);
      }
      else if (buffer[0] == 'D') {
-       inventario+=380;
-       c.busy = 0;
+       if (inventario + 380 >= capacidad)
+         inventario = capacidad;
+       else
+         inventario+=380;
+       fprintf(log_file,"Peticion: %d minutos, %s, OK.\n",24 - t_funcionamiento,c.nombre_centro);
+       fprintf(log_file,"Llegada de la gandola: %d minutos, %d litros.\n",24 - t_funcionamiento,inventario);
+       c = *directorio_centros;
      }
     }
   }
@@ -274,5 +304,6 @@ int main(int argc, char **argv) {
   pthread_join(thread_func,&status);
   close(socketID);
   fclose(archivo);
+  fclose(log_file);
   exit(EXIT_SUCCESS);
 }
