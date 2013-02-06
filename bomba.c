@@ -102,8 +102,21 @@ centro *crear_directorio(char *fichero_centros) {
   char linea[87];  
   while(fscanf(archivo,"%s",linea) != EOF) {
     char *nombre_centro = (char *) strtok(linea,"&");
+    if(strlen(nombre_centro) > 40) {
+      printf("Error: Nombre del centro debe ser a lo sumo de 40 caracteres.\n");
+      return FALSE;
+    }
     char *hostname =  (char *) strtok (NULL, "&");
-    int puerto = atoi((char *) strtok (NULL, "&"));
+    if(strlen(hostname) > 40) {
+      printf("Error: Hostname debe ser a lo sumo de 40 caracteres.\n");
+      return FALSE;
+    }
+    char *port = (char *) strtok (NULL, "&");
+    if(strlen(port) != 5) {
+      printf("Error: El numero de puerto debe tener 5 digitos.\n");
+      return FALSE;
+    }
+    int puerto = atoi(port);
     if(!agregar_directorio(&directorio,nombre_centro,hostname,puerto)){
       printf("Error: no se pudo crear el directorio de centros de distribucion.\n");
       return FALSE;
@@ -178,9 +191,11 @@ int valid_arg(int capacidad, char *fichero_centros, char *nombre_bomba, int inve
   }
   return valid;
 }
-void *print_inventario(void * tid) {
+
+void *inventario_consumo(void * tid) {
   int consumo = (int) tid;
   while (TRUE) {
+    printf("%d lts. ",inventario);
     sleep(3);
     if(inventario - consumo > 0)
       inventario-=consumo;
@@ -194,6 +209,7 @@ void *print_inventario(void * tid) {
 
 void *tiempo(void * tid) {
   while (TRUE) {
+    printf("%d min.\n",t_funcionamiento);
     sleep(3);
     t_funcionamiento--;
     if(!t_funcionamiento)
@@ -231,7 +247,7 @@ int main(int argc, char **argv) {
 
   log_file = fopen(log_file_name,"w");
   if(!log_file) {
-    printf("Error: no se pudo crear el archivo log el archivo\n.");
+    printf("Error: no se pudo crear el archivo log\n.");
     exit(EXIT_FAILURE);
   }
  
@@ -242,7 +258,7 @@ int main(int argc, char **argv) {
 
   pthread_attr_init(&attr1);
   pthread_attr_setdetachstate(&attr1,PTHREAD_CREATE_JOINABLE);
-  if (pthread_create(&thread_inv, &attr1, print_inventario, (void *) consumo)) {
+  if (pthread_create(&thread_inv, &attr1, inventario_consumo, (void *) consumo)) {
     printf("Error: no se pudo crear el hilo para controlar el inventario.");
     exit(EXIT_FAILURE);
   }
@@ -259,7 +275,6 @@ int main(int argc, char **argv) {
   centro c;
   c = *directorio_centros;
   while (t_funcionamiento > 0 ) { 
-    printf("%d %d\n",inventario,24 - t_funcionamiento + 1);
     if(inventario == capacidad)
       fprintf(log_file,"Tanque full: %d minutos.\n",24 - t_funcionamiento);
     if(inventario == 0)
