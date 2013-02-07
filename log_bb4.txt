@@ -1,0 +1,3 @@
+Inventario inicial: 30000 litros.
+Peticion: 3 minutos, CD1, OK.
+Llegada de la gandola: 3 minutos, 65000 litros.

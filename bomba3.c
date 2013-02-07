@@ -110,9 +110,9 @@ int main(int argc, char **argv) {
    
   printf("Mensaje: ");
   bzero(buffer,256);
-  fgets(buffer,256,stdin);
+  //fgets(buffer,256,stdin);
 
-  if (send(socketID,buffer,256,0) < 0)
+  if (send(socketID,"-\n",256,0) < 0)
     error("Error mandando dato CLientes");
   
 
@@ -121,6 +121,44 @@ int main(int argc, char **argv) {
 
   printf(buffer);
   close(socketID);
+ 
+ 
+ socketID = socket(AF_INET,SOCK_STREAM,0);
+ server = gethostbyname(hostname);
+  
+  bzero((char *) &dirServ, sizeof(dirServ));
+
+  dirServ.sin_family = AF_INET;
+  bcopy((char *)server->h_addr,(char*)&dirServ.sin_addr.s_addr,server->h_length);
+  dirServ.sin_port = htons(puerto);
+  
+
+   if (connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) < 0)
+     error("Error enla conexion");
+   
+  printf("Mensaje: ");
+  bzero(buffer,256);
+  //fgets(buffer,256,stdin);
+
+  if (send(socketID,buffer,256,0) < 0)
+    error("Error mandando dato CLientes");
+  
+
+  if (recv(socketID,buffer,256,0) < 0)
+    error("Error recibiendo datos Cliente");
+
+  if (strncmp(buffer,"Toma tu gandola",strlen("Toma tu gandola")) == 0 ) {
+    inventario = inventario + 38000;
+    printf("Recibi gasolina");
+  }
+  else
+    printf("No tiene");
+  // Falta else
+  
+  printf(buffer);
+  close(socketID);
+  
+  
   fclose(archivo);
   exit(EXIT_SUCCESS);
 }
