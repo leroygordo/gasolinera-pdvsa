@@ -13,7 +13,7 @@
 # define FALSE 0
 
 int tiempo, inventario, capacidad, numConexion;
-int t_funcionamiento = 2;
+int t_funcionamiento = 24;
 char *log_file_name;
 FILE *log_file;
 pthread_mutex_t mtx;
@@ -138,15 +138,14 @@ void *procesarPeticion(void *tid){
       pthread_mutex_lock(&mtx);
       if (inventario >= 38000) {
 
-	//	fprintf(log_file, "Suministro:  %d minutos, %s, OK, %d.\n", 24 - t_funcionamiento, c.nombre_bomba, inventario );
+	fprintf(log_file, "Suministro:  %d minutos, %s, OK, %d.\n", 24 - t_funcionamiento, buffer, inventario );
 	sleep(tiempo);
 	inventario = inventario - 38000;
 	strcpy(buffer,"D");
       }
       else {
-	strcpy(buffer,"0");
-	//fprintf(log_file, "Suministro:  %d minutos, %s, Fallido, %d.\n", 24 - t_funcionamiento, c.nombre_bomba, inventario );
-      }
+	fprintf(log_file, "Suministro:  %d minutos, %s, Fallido, %d.\n", 24 - t_funcionamiento, buffer, inventario );      }
+      strcpy(buffer,"0");
       pthread_mutex_unlock(&mtx);
       numConexion--;
     }
@@ -158,7 +157,6 @@ void *procesarPeticion(void *tid){
   if (send(socket,strcat(buffer,"\n"),256,0) < 0) {
     error("Error mandando los datos");
   }
-  //Hay que arreglar algo aca. Cuando el servidor esta ocupado, lo dice pero setea el flag busy a 0
   
   close(socket);
   pthread_exit(0);
@@ -231,7 +229,7 @@ int main(int argc, char **argv) {
   if (pthread_create(&thread_func, &attr2, tiempo_funcionamiento,NULL)) {
     printf("Error: no se pudo crear el hilo para controlar el funcionamiento.");
     exit(EXIT_FAILURE);
-  }
+}
 
   int socketID;
   
@@ -276,11 +274,11 @@ int main(int argc, char **argv) {
   }
  }
 
-  pthread_attr_destroy(&attr1);
-  pthread_attr_destroy(&attr2);
-  void * status;
-  pthread_join(thread_inv,&status);
-  pthread_join(thread_func,&status);
+  //pthread_attr_destroy(&attr1);
+  //pthread_attr_destroy(&attr2);
+  //void * status;
+  //pthread_join(thread_inv,&status);
+  //pthread_join(thread_func,&status);
   close(socketID);
   fclose(log_file);
   exit(EXIT_SUCCESS);
