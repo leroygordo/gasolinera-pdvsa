@@ -58,7 +58,8 @@ void procesarPeticion(int socket){
 	  //pthread_mutex_unlock(&mtx);
 	}
       pthread_mutex_unlock(&mtx);
-      numConexion--;
+      numConexion--;Hancel González
+
       }
       else
 	strcpy(buffer,"No mas conexiones");

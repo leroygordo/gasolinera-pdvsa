@@ -12,6 +12,7 @@
 # define TRUE 1
 # define FALSE 0
 
+
 int tiempo, inventario, capacidad, numConexion;
 int t_funcionamiento = 24;
 char *log_file_name;
@@ -40,6 +41,7 @@ static void read_arg(char **argv,int argc, char **nombre_centro,int *capacidad,i
        *capacidad = atoi(argv[2*j+2]);
        break;
      }
+
   }
   
   if(!cp) {
@@ -160,7 +162,79 @@ void *procesarPeticion(void *tid){
   
   close(socket);
   pthread_exit(0);
-} 
+}  
+
+void *inventario_suministro(void * tid) {
+  int suministro = (int) tid;
+  while (TRUE) {
+    printf("%d lts. \n",inventario);
+    sleep(3);
+    if(inventario + suministro < capacidad)
+      inventario+=suministro;
+    else if(inventario + suministro >= capacidad)
+      inventario = capacidad;
+    if(!t_funcionamiento)
+      pthread_exit(EXIT_SUCCESS);
+  }
+
+}
+
+void *tiempo_funcionamiento(void * tid) {
+  while (TRUE) {
+    printf("%d min. ",t_funcionamiento);
+    sleep(3);
+    t_funcionamiento--;
+    if(!t_funcionamiento)
+      pthread_exit(EXIT_SUCCESS);
+  }
+}
+
+int main(int argc, char **argv) {
+
+  // Validacion y lectura de argumentos
+
+  if(argc != 13){
+    print_use();
+    exit(EXIT_FAILURE);
+  }
+
+  char * nombre_centro;
+  int suministro, puerto;
+
+  read_arg(argv,argc,&nombre_centro,&capacidad,&inventario,&suministro,&puerto,&tiempo);
+
+  if (!valid_arg(nombre_centro,capacidad,inventario,suministro,tiempo))
+   exit(EXIT_FAILURE); 
+
+  log_file_name = (char *) malloc(strlen(nombre_centro)+8);
+  sprintf(log_file_name,"log_%s.txt",nombre_centro);
+
+  log_file = fopen(log_file_name,"w");
+  if(!log_file) {
+    printf("Error: no se pudo crear el archivo log el archivo\n.");
+    exit(EXIT_FAILURE);
+  }
+
+  fprintf(log_file,"Inventario inicial: %d litros.\n",inventario);
+
+  pthread_t thread_inv, thread_func;
+  pthread_attr_t attr1, attr2;
+
+  pthread_attr_init(&attr1);
+  pthread_attr_setdetachstate(&attr1,PTHREAD_CREATE_JOINABLE);
+  if (pthread_create(&thread_inv, &attr1, inventario_suministro, (void *) suministro)) {
+    printf("Error: no se pudo crear el hilo para controlar el inventario.");
+    exit(EXIT_FAILURE);
+  }
+
+  pthread_attr_init(&attr2);
+  pthread_attr_setdetachstate(&attr2,PTHREAD_CREATE_JOINABLE);
+  if (pthread_create(&thread_func, &attr2, tiempo_funcionamiento,NULL)) {
+    printf("Error: no se pudo crear el hilo para controlar el funcionamiento.");
+    exit(EXIT_FAILURE);
+  }
+
+  while (t_funcionamiento > 0) {
 
 void *inventario_suministro(void * tid) {
   int suministro = (int) tid;
@@ -273,7 +347,7 @@ int main(int argc, char **argv) {
     pthread_create(&h,NULL,procesarPeticion, (void *)newSocketID);
   }
  }
-
+}
   //pthread_attr_destroy(&attr1);
   //pthread_attr_destroy(&attr2);
   //void * status;
