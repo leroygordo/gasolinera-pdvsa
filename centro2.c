@@ -12,9 +12,8 @@
 # define TRUE 1
 # define FALSE 0
 
-
-int tiempo, inventario, capacidad, numConexion, busy;
-int t_funcionamiento = 24;
+int tiempo, inventario, capacidad, numConexion = 0;
+int t_funcionamiento = 480;
 char *log_file_name;
 FILE *log_file;
 pthread_mutex_t mtx;
@@ -41,7 +40,6 @@ static void read_arg(char **argv,int argc, char **nombre_centro,int *capacidad,i
        *capacidad = atoi(argv[2*j+2]);
        break;
      }
-
   }
   
   if(!cp) {
@@ -121,8 +119,7 @@ int valid_arg(char *nombre_centro,int capacidad,int inventario,int suministro,in
 }
 
 void *procesarPeticion(void *tid){
- 
-  int socket = (int) tid;
+int socket = (int) tid;
   char buffer[256];
   bzero(buffer,256);
 
@@ -130,15 +127,9 @@ void *procesarPeticion(void *tid){
     error("Error recibiendo los datos");
   };
  
-  if (busy == 0) {  
-    *(&busy) = 1;
-    if(buffer[0] == '-') { 
-      bzero(buffer,256);
-      sprintf(buffer,"%d",tiempo);
-    }
-    else{
-      strcpy(buffer,"Disponible");
-    }
+  if(buffer[0] == '-') { 
+    bzero(buffer,256);
+    sprintf(buffer,"%d",tiempo);
   }
   else {
     if (numConexion < 10) {
@@ -146,41 +137,44 @@ void *procesarPeticion(void *tid){
       pthread_mutex_lock(&mtx);
       if (inventario >= 38000) {
 
-	fprintf(log_file, "Suministro:  %d minutos, %s, OK, %d.\n", 24 - t_funcionamiento, buffer, inventario );
-	sleep(tiempo);
+        fprintf(log_file, "Suministro:  %d minutos, %s, OK, %d.\n", 480 - t_funcionamiento, buffer, inventario - 38000 );
+	usleep(100000*tiempo);
 	inventario = inventario - 38000;
 	strcpy(buffer,"D");
       }
       else {
-	fprintf(log_file, "Suministro:  %d minutos, %s, Fallido, %d.\n", 24 - t_funcionamiento, buffer, inventario );      }
-      strcpy(buffer,"0");
+	fprintf(log_file, "Suministro:  %d minutos, %s, Fallido, %d.\n", 480 - t_funcionamiento, buffer, inventario );      
+      strcpy(buffer,"O");
       pthread_mutex_unlock(&mtx);
       numConexion--;
     }
-    else
-      strcpy(buffer,"0");
-  }
 
-  
+  }
+    else
+      strcpy(buffer, "O");
+
   if (send(socket,strcat(buffer,"\n"),256,0) < 0) {
     error("Error mandando los datos");
   }
-  
+ 
+  }
   close(socket);
   pthread_exit(0);
-}  
-
+ 
+ }
 void *inventario_suministro(void * tid) {
   int suministro = (int) tid;
   while (TRUE) {
     printf("%d lts. \n",inventario);
-    sleep(3);
+    usleep(100000);
     if(inventario + suministro < capacidad)
       inventario+=suministro;
     else if(inventario + suministro >= capacidad)
       inventario = capacidad;
-    if(!t_funcionamiento)
+    if(!t_funcionamiento) {
       pthread_exit(EXIT_SUCCESS);
+      exit(1);
+    }
   }
 
 }
@@ -188,10 +182,11 @@ void *inventario_suministro(void * tid) {
 void *tiempo_funcionamiento(void * tid) {
   while (TRUE) {
     printf("%d min. ",t_funcionamiento);
-    sleep(3);
+    usleep(100000); 
     t_funcionamiento--;
     if(!t_funcionamiento)
-      pthread_exit(EXIT_SUCCESS);
+      //pthread_exit(EXIT_SUCCESS);
+      exit(1);
   }
 }
 
@@ -220,10 +215,10 @@ int main(int argc, char **argv) {
     printf("Error: no se pudo crear el archivo log el archivo\n.");
     exit(EXIT_FAILURE);
   }
-
+  
   fprintf(log_file,"Inventario inicial: %d litros.\n",inventario);
 
-/*  pthread_t thread_inv, thread_func;
+  pthread_t thread_inv, thread_func;
   pthread_attr_t attr1, attr2;
 
   pthread_attr_init(&attr1);
@@ -235,27 +230,25 @@ int main(int argc, char **argv) {
 
   pthread_attr_init(&attr2);
   pthread_attr_setdetachstate(&attr2,PTHREAD_CREATE_JOINABLE);
-  if (pthread_create(&thread_func, &attr2, tiempo_funcionamiento,NULL)) {
+  if (pthread_create(&thread_func,&attr2 , tiempo_funcionamiento,NULL)) {
     printf("Error: no se pudo crear el hilo para controlar el funcionamiento.");
     exit(EXIT_FAILURE);
-  }*/
+  }
 
   int socketID;
- 
   while (t_funcionamiento > 0) {
-     if(inventario == capacidad)
-      fprintf(log_file,"Tanque full: %d minutos.\n",24 - t_funcionamiento);
+  
+    if(inventario == capacidad) 
+      fprintf(log_file,"Tanque full: %d minutos.\n",480 - t_funcionamiento);
     if(inventario == 0)
-      fprintf(log_file,"Tanque vacio: %d minutos.\n",24 - t_funcionamiento);
+      fprintf(log_file,"Tanque vacio: %d minutos.\n",480 - t_funcionamiento);
   int newSocketID;
   socklen_t addrlen;
   struct sockaddr_in dirServ, dirCli;
   char buffer[256];
+  pid_t son;
   pthread_t h;
 
-  if (pthread_mutex_init(&mtx, NULL) !=0) {
-    error("Error mutex");
-  }
   socketID = socket(AF_INET,SOCK_STREAM,0);
   if (socketID == 0) {
     error("Error abriendo el socket");
@@ -272,22 +265,22 @@ int main(int argc, char **argv) {
   }
   
   listen(socketID,5);
+
   addrlen = sizeof(dirCli);
 
   while (TRUE) {
-    newSocketID = accept(socketID,(struct sockaddr *)&dirCli,&addrlen);
-    if (newSocketID < 0) {
+    newSocketID = accept(socketID,(struct sockaddr *)&dirCli,&addrlen);    if (newSocketID < 0) {
       error("Error aceptando la conexion");
     }
     pthread_create(&h,NULL,procesarPeticion, (void *)newSocketID);
+   }  
   }
- }
-  //pthread_attr_destroy(&attr1);
-  //pthread_attr_destroy(&attr2);
-  //void * status;
-  //pthread_join(thread_inv,&status);
-  //pthread_join(thread_func,&status);
-  close(socketID);
+  pthread_attr_destroy(&attr1);
+  pthread_attr_destroy(&attr2);
+    close(socketID);
+  pthread_join(thread_inv,NULL);
+  pthread_join(thread_func,NULL);
+
   fclose(log_file);
   exit(EXIT_SUCCESS);
 }
