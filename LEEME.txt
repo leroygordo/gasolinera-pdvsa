@@ -1,0 +1,14 @@
+Hancel Gonzalez 07-40983
+Susana Charara  08-10223
+
+Archivos: bomba.c
+          centro.c
+          estructuras.h
+          estructuras.c
+
+qué archivos lo componen y qué tiene cada archivo 
+qué hace el programa, 
+cómo se ejecuta, 
+qué condiciones particulares tiene. Por ejemplo, limitaciones ("la entrada XX tiene maximo 50 caracteres" o "el máximo número de registros YY es 20") o errores 
+breve resumen de la estructura del programa
+si es una aplicación en red o distribuida, una explicación somera del protocolo de interacción entre los componentes
