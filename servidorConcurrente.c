@@ -15,7 +15,7 @@ void procesaPeticion(int socket){
   printf(buffer);
   //bzero(buffer,256);
   //transfDatos = write(newSocketID, buffer, 255);
-  sleep(100);
+  sleep(3);
   send(socket, buffer, 256,0);
 } 
 

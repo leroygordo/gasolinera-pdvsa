@@ -134,7 +134,6 @@ void *procesarPeticion(void *tid){
       sprintf(buffer,"%d",tiempo);
     }
     else{
-      sleep(tiempo);
       strcpy(buffer,"Disponible");
     }
   }
@@ -204,7 +203,7 @@ int main(int argc, char **argv) {
 
   fprintf(log_file,"Inventario inicial: %d litros.\n",inventario);
 
-  pthread_t thread_inv, thread_func;
+/*  pthread_t thread_inv, thread_func;
   pthread_attr_t attr1, attr2;
 
   pthread_attr_init(&attr1);
@@ -219,11 +218,11 @@ int main(int argc, char **argv) {
   if (pthread_create(&thread_func, &attr2, tiempo_funcionamiento,NULL)) {
     printf("Error: no se pudo crear el hilo para controlar el funcionamiento.");
     exit(EXIT_FAILURE);
-  }
+  }*/
 
-  while (t_funcionamiento > 0);
+  //while (t_funcionamiento > 0);
   
-  exit(1);
+  //exit(1);
 
   int socketID, newSocketID;
   socklen_t addrlen;
