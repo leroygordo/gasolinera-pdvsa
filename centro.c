@@ -160,7 +160,7 @@ void *procesarPeticion(void *tid){
     else
       strcpy(buffer,"O");
   }
-  printf(buffer);
+
   if (send(socket,strcat(buffer,"\n"),256,0) < 0) {
     error("Error mandando los datos");
   }
