@@ -169,7 +169,9 @@ void *procesarPeticion(void *tid){
   }
   
   close(socket);
-  pthread_exit(0);
+  pthread_exit(EXIT_SUCCESS);
+  printf("no deberia pasar por aca");
+
 }  
 
 void *inventario_suministro(void * tid) {
@@ -286,11 +288,14 @@ int main(int argc, char **argv) {
         error("Error aceptando la conexion");
       }
       pthread_create(&h,NULL,procesarPeticion, (void *)newSocketID);
-      if(t_funcionamiento == 0)
+      if(t_funcionamiento == 0){
+         void * status;
+         pthread_join(h,&status);
         break;
+      }
     }
  }
- printf("paso?"); 
+ 
  pthread_attr_destroy(&attr1);
  pthread_attr_destroy(&attr2);
  void * status;
