@@ -154,7 +154,7 @@ void *procesarPeticion(void *tid){
 void *inventario_suministro(void * tid) {
   int suministro = (int) tid;
   while (TRUE) {
-    printf("%d lts. \n",inventario);
+  //  printf("%d lts. \n",inventario);
     sleep(3);
     if(inventario + suministro < capacidad)
       inventario+=suministro;
@@ -168,7 +168,7 @@ void *inventario_suministro(void * tid) {
 
 void *tiempo_funcionamiento(void * tid) {
   while (TRUE) {
-    printf("%d min. ",t_funcionamiento);
+    //printf("%d min. ",t_funcionamiento);
     sleep(3);
     t_funcionamiento--;
     if(!t_funcionamiento)
@@ -221,9 +221,9 @@ int main(int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
 
-  while (t_funcionamiento > 0);
+  //while (t_funcionamiento > 0);
   
-  exit(1);
+  //exit(1);
 
   int socketID, newSocketID;
   socklen_t addrlen;
