@@ -13,7 +13,7 @@
 # define TRUE 1
 # define FALSE 0
 
-int inventario, tiempoSuministro;
+int inventario, capacidad,tiempoSuministro;
 int t_funcionamiento = 480;
 char *log_file_name;
 FILE *log_file;
@@ -86,27 +86,29 @@ int valid_arg(int capacidad, char *fichero_centros, char *nombre_bomba, int inve
 void *inventario_consumo(void * tid) {
   int consumo = (int) tid;
   while (TRUE) {
-    //printf("%d lts. ",inventario);
+    printf("%d lts. ",inventario);
     usleep(100000);
+    if(inventario == capacidad)
+      fprintf(log_file,"Tanque full: %d minutos.\n",480 - t_funcionamiento);
     if(inventario - consumo > 0)
       inventario-=consumo;
-    else if(inventario - consumo <= 0)
+    else if(inventario - consumo <= 0) {
       inventario = 0;
+      fprintf(log_file,"Tanque vacio: %d minutos.\n",480 - t_funcionamiento);
+    }
     if(!t_funcionamiento)
       pthread_exit(EXIT_SUCCESS);
-      //exit(1);
   }
 
 }
 
 void *tiempo(void * tid) {
   while (TRUE) {
-    //printf("%d min.\n",t_funcionamiento);
+    printf("%d min.\n",t_funcionamiento);
     usleep(100000);    
     t_funcionamiento--;
     if(!t_funcionamiento)
       pthread_exit(EXIT_SUCCESS);
-      //exit(1);
   }
 }
 
@@ -118,7 +120,7 @@ int main(int argc, char **argv) {
   }
  
   char *nombre_bomba, *fichero_centros;
-  int capacidad, consumo;
+  int consumo;
   
   // Lectura de argumentos
   read_arg(argv,&capacidad,&fichero_centros,&nombre_bomba,&inventario,&consumo);
@@ -168,11 +170,6 @@ int main(int argc, char **argv) {
   centro c;
   c = *directorio_centros;
   while (t_funcionamiento > 0 ) { 
-    if(inventario == capacidad)
-      fprintf(log_file,"Tanque full: %d minutos.\n",480 - t_funcionamiento);
-    if(inventario == 0)
-      fprintf(log_file,"Tanque vacio: %d minutos.\n",480 - t_funcionamiento);
-
     if (capacidad - inventario >= 38000) {
       struct sockaddr_in dirServ;
       struct hostent *server;
