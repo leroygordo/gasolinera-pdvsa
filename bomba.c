@@ -10,11 +10,11 @@
 #include <pthread.h>
 #include "estructuras.h"
 
-#define TRUE 1
-#define FALSE 0
+# define TRUE 1
+# define FALSE 0
 
-int inventario;
-int t_funcionamiento = 24;
+int inventario, tiempoSuministro;
+int t_funcionamiento = 480;
 char *log_file_name;
 FILE *log_file;
 
@@ -29,33 +29,33 @@ static void print_use(){
 }
 
 static void read_arg(char **argv, int *capacidad, char **fichero_centros, char **nombre_bomba, int *inventario, int *consumo) {
-   int j;
-   for(j = 0 ; j < 5 ; j++) {
-     if(!strcmp(argv[2 * j + 1],"-cp")) {
-       *capacidad = atoi(argv[2*j+2]);
-       continue;
-     }
-     else if(!strcmp(argv[2 * j + 1],"-fc")) {
-       *fichero_centros = argv[2 * j + 2];
-       continue;
-     }
-     else if(!strcmp(argv[2 * j + 1],"-n")) {
-       *nombre_bomba = argv[2 * j+2];
-       continue;
-     }
-     else if(!strcmp(argv[2 * j + 1],"-i")) {
-       *inventario = atoi(argv[2 * j+2]);
-       continue;
-     }
-     else if(!strcmp(argv[2 * j + 1],"-c")) {
-       *consumo = atoi(argv[2 * j + 2]);
-       continue;
-     }
-     else {
-        print_use();
-        exit(EXIT_FAILURE);
-     }
-   }
+  int j;
+  for(j = 0 ; j < 5 ; j++) {
+    if(!strcmp(argv[2 * j + 1],"-cp")) {
+      *capacidad = atoi(argv[2*j+2]);
+      continue;
+    }
+    else if(!strcmp(argv[2 * j + 1],"-fc")) {
+      *fichero_centros = argv[2 * j + 2];
+      continue;
+    }
+    else if(!strcmp(argv[2 * j + 1],"-n")) {
+      *nombre_bomba = argv[2 * j+2];
+      continue;
+    }
+    else if(!strcmp(argv[2 * j + 1],"-i")) {
+      *inventario = atoi(argv[2 * j+2]);
+      continue;
+    }
+    else if(!strcmp(argv[2 * j + 1],"-c")) {
+      *consumo = atoi(argv[2 * j + 2]);
+      continue;
+    }
+    else {
+      print_use();
+      exit(EXIT_FAILURE);
+    }
+  }
 }
 
 int valid_arg(int capacidad, char *fichero_centros, char *nombre_bomba, int inventario, int consumo) {
@@ -87,13 +87,14 @@ void *inventario_consumo(void * tid) {
   int consumo = (int) tid;
   while (TRUE) {
     printf("%d lts. ",inventario);
-    sleep(3);
+    usleep(100000);
     if(inventario - consumo > 0)
       inventario-=consumo;
     else if(inventario - consumo <= 0)
       inventario = 0;
     if(!t_funcionamiento)
       pthread_exit(EXIT_SUCCESS);
+      //exit(1);
   }
 
 }
@@ -101,16 +102,17 @@ void *inventario_consumo(void * tid) {
 void *tiempo(void * tid) {
   while (TRUE) {
     printf("%d min.\n",t_funcionamiento);
-    sleep(3);
+    usleep(100000);    
     t_funcionamiento--;
     if(!t_funcionamiento)
       pthread_exit(EXIT_SUCCESS);
+      //exit(1);
   }
 }
 
 int main(int argc, char **argv) {
 
-  if(argc != 11){
+  if(argc != 11) {
     print_use();
     exit(EXIT_FAILURE);
   }
@@ -167,47 +169,53 @@ int main(int argc, char **argv) {
   c = *directorio_centros;
   while (t_funcionamiento > 0 ) { 
     if(inventario == capacidad)
-      fprintf(log_file,"Tanque full: %d minutos.\n",24 - t_funcionamiento);
+      fprintf(log_file,"Tanque full: %d minutos.\n",480 - t_funcionamiento);
     if(inventario == 0)
-      fprintf(log_file,"Tanque vacio: %d minutos.\n",24 - t_funcionamiento);
+      fprintf(log_file,"Tanque vacio: %d minutos.\n",480 - t_funcionamiento);
 
     if (capacidad - inventario >= 38000) {
-     struct sockaddr_in dirServ;
-     struct hostent *server;
+      struct sockaddr_in dirServ;
+      struct hostent *server;
   
-     socketID = socket(AF_INET,SOCK_STREAM,0);
-     server = gethostbyname(c.hostname);
+      socketID = socket(AF_INET,SOCK_STREAM,0);
+      server = gethostbyname(c.hostname);
 
-     bzero((char *) &dirServ, sizeof(dirServ));
+      bzero((char *) &dirServ, sizeof(dirServ));
 
-     dirServ.sin_family = AF_INET;
-     dirServ.sin_port = htons(c.puerto);
-     if(connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) == -1) {
-       continue;
-     }
+      dirServ.sin_family = AF_INET;
+      dirServ.sin_port = htons(c.puerto);
+      if(connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) == -1) {
+	    continue;
+      }
  
-     send(socketID,strcat(nombre_bomba,"\n"),256,0);
-     char buffer[256];
-     bzero(buffer,256);
-     recv(socketID,buffer,256,0);
-
-     if(buffer[0] == 'O') {
-       if(c.next == NULL)
-         c = *directorio_centros;
-       else
-         c = *c.next;
-       fprintf(log_file,"Peticion: %d minutos, %s, Fallido.\n",24 - t_funcionamiento,c.nombre_centro);
-     }
-     else if (buffer[0] == 'D') {
-       if (inventario + 38000 >= capacidad)
-         inventario = capacidad;
-       else
-         inventario+=38000;
-       fprintf(log_file,"Peticion: %d minutos, %s, OK.\n",24 - t_funcionamiento,c.nombre_centro);
-       usleep(c.send_t * (100 * 1000));
-       fprintf(log_file,"Llegada de la gandola: %d minutos, %d litros.\n",24 - t_funcionamiento,inventario);
-       c = *directorio_centros;
-     }
+      //send(socketID,strcat(nombre_bomba),256,0);
+      char buffer[256];
+      bzero(buffer,256);
+      strcpy(buffer,nombre_bomba);
+      send(socketID,buffer,256,0);
+      bzero(buffer,256);
+      recv(socketID,buffer,256,0);
+      
+      if(buffer[0]== 'O') {
+        if(c.next == NULL)
+          c = *directorio_centros;
+         else
+          c = *c.next;
+         fprintf(log_file,"Peticion: %d minutos, %s, Fallido.\n",480 - t_funcionamiento,c.nombre_centro);
+      }
+      else if (buffer[0] == 'D') {
+        tiempoSuministro = c.send_t;
+        fprintf(log_file,"Peticion: %d minutos, %s, OK.\n",480 - t_funcionamiento,c.nombre_centro);
+        usleep(tiempoSuministro * 100000);
+        if (inventario + 38000 >= capacidad) {
+          inventario = capacidad;
+        }
+        else {
+          inventario+=38000;
+        }
+        fprintf(log_file,"Llegada de la gandola: %d minutos, %d litros.\n",480 - t_funcionamiento,inventario); 
+        c = *directorio_centros;
+      }
     }
   }
   
