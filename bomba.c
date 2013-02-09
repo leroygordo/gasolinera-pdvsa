@@ -86,7 +86,7 @@ int valid_arg(int capacidad, char *fichero_centros, char *nombre_bomba, int inve
 void *inventario_consumo(void * tid) {
   int consumo = (int) tid;
   while (TRUE) {
-    printf("%d lts. ",inventario);
+    //printf("%d lts. ",inventario);
     usleep(100000);
     if(inventario - consumo > 0)
       inventario-=consumo;
@@ -101,7 +101,7 @@ void *inventario_consumo(void * tid) {
 
 void *tiempo(void * tid) {
   while (TRUE) {
-    printf("%d min.\n",t_funcionamiento);
+    //printf("%d min.\n",t_funcionamiento);
     usleep(100000);    
     t_funcionamiento--;
     if(!t_funcionamiento)
@@ -218,7 +218,7 @@ int main(int argc, char **argv) {
       }
     }
   }
-  
+  destruir_directorio(&directorio_centros);  
   pthread_attr_destroy(&attr1);
   pthread_attr_destroy(&attr2);
   void * status;

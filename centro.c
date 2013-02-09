@@ -175,25 +175,29 @@ void *procesarPeticion(void *tid){
 void *inventario_suministro(void * tid) {
   int suministro = (int) tid;
   while (TRUE) {
-    //printf("%d lts. \n",inventario);
+    printf("%d lts. \n",inventario);
     usleep(100000);
     if(inventario + suministro < capacidad)
       inventario+=suministro;
     else if(inventario + suministro >= capacidad)
       inventario = capacidad;
-    if(!t_funcionamiento)
+    if(!t_funcionamiento){
       pthread_exit(EXIT_SUCCESS);
+      printf("no deberia pasar por aca");
+    }
   }
 
 }
 
 void *tiempo_funcionamiento(void * tid) {
   while (TRUE) {
-    //printf("%d min. ",t_funcionamiento);
+    printf("%d min. ",t_funcionamiento);
     usleep(100000);
     t_funcionamiento--;
-    if(!t_funcionamiento)
+    if(!t_funcionamiento){
       pthread_exit(EXIT_SUCCESS);
+      printf("no deberia pasar por aca");
+    }
   }
 }
 
