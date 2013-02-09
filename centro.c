@@ -8,6 +8,7 @@
 #include <netinet/in.h>
 #include <string.h>
 #include <pthread.h>
+#include <signal.h>
 
 # define TRUE 1
 # define FALSE 0
@@ -15,9 +16,13 @@
 
 int tiempo, inventario, capacidad, numConexion;
 int t_funcionamiento = 480;
+int socketID;
 char *log_file_name;
 FILE *log_file;
 pthread_mutex_t mtx;
+int started = 0;
+pthread_t thread_inv, thread_func, thread_exit;
+pthread_attr_t attr1, attr2, attr3;
 
 static void print_use(){
   printf("uso: centro OPCIONES ...\n");
@@ -121,7 +126,7 @@ int valid_arg(char *nombre_centro,int capacidad,int inventario,int suministro,in
 }
 
 void *procesarPeticion(void *tid){
- 
+  started = 1; 
   int socket = (int) tid;
   char buffer[256];
   bzero(buffer,256);
@@ -170,16 +175,17 @@ void *inventario_suministro(void * tid) {
   while (TRUE) {
     printf("%d lts. \n",inventario);
     usleep(100000);
+    if(inventario == 0)
+      fprintf(log_file,"Tanque vacio: %d minutos.\n",480 - t_funcionamiento);
     if(inventario + suministro < capacidad)
       inventario+=suministro;
-    else if(inventario + suministro >= capacidad)
+    else if(inventario + suministro >= capacidad) {
       inventario = capacidad;
-    if(!t_funcionamiento){
-      pthread_exit(EXIT_SUCCESS);
-      printf("no deberia pasar por aca");
+      fprintf(log_file,"Tanque full: %d minutos.\n",480 - t_funcionamiento);
     }
+    if(!t_funcionamiento)
+      pthread_exit(EXIT_SUCCESS);
   }
-
 }
 
 void *tiempo_funcionamiento(void * tid) {
@@ -187,12 +193,32 @@ void *tiempo_funcionamiento(void * tid) {
     printf("%d min. ",t_funcionamiento);
     usleep(100000);
     t_funcionamiento--;
-    if(!t_funcionamiento){
+    if(!t_funcionamiento)
       pthread_exit(EXIT_SUCCESS);
-      printf("no deberia pasar por aca");
-    }
   }
 }
+
+void *tiempo_exit(void *tid) {
+  while(TRUE)
+    if(t_funcionamiento == 0){
+      kill(getpid(),SIGUSR1);
+      pthread_exit(EXIT_SUCCESS);
+    }
+}
+
+void finish() {
+ pthread_attr_destroy(&attr1);
+ pthread_attr_destroy(&attr2);
+ pthread_attr_destroy(&attr3); 
+ void * status;
+ pthread_join(thread_inv,&status);
+ pthread_join(thread_func,&status);
+ pthread_join(thread_exit,&status);
+ close(socketID);
+ fclose(log_file);
+ exit(EXIT_SUCCESS);
+}
+
 
 int main(int argc, char **argv) {
 
@@ -222,9 +248,6 @@ int main(int argc, char **argv) {
 
   fprintf(log_file,"Inventario inicial: %d litros.\n",inventario);
 
-  pthread_t thread_inv, thread_func;
-  pthread_attr_t attr1, attr2;
-
   pthread_attr_init(&attr1);
   pthread_attr_setdetachstate(&attr1,PTHREAD_CREATE_JOINABLE);
   if (pthread_create(&thread_inv, &attr1, inventario_suministro, (void *) suministro)) {
@@ -239,68 +262,47 @@ int main(int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
 
-  int socketID;
+  signal(SIGUSR1,finish);
  
-  while (t_funcionamiento > 0) {
-    printf("%d %d\n",t_funcionamiento,inventario);    
-    if(inventario == capacidad)
-      fprintf(log_file,"Tanque full: %d minutos.\n",480 - t_funcionamiento);
-    if(inventario == 0)
-      fprintf(log_file,"Tanque vacio: %d minutos.\n",480 - t_funcionamiento);
-    int newSocketID;
-    socklen_t addrlen;
-    struct sockaddr_in dirServ, dirCli;
-    char buffer[256];
-    pthread_t h;
-
-    if (pthread_mutex_init(&mtx, NULL) !=0) {
-      error("Error mutex");
-    }
-    socketID = socket(AF_INET,SOCK_STREAM,0);
-    if (socketID == 0) {
-      error("Error abriendo el socket");
-    }
-
-    bzero((char*)&dirServ,sizeof(dirServ));
-
-    dirServ.sin_family = AF_INET;
-    dirServ.sin_port = htons(puerto);
-    dirServ.sin_addr.s_addr = htonl(INADDR_ANY);
-  
-    if (bind(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) < 0 ) {
-      error("Error en la conexion");
-    }
-  
-    listen(socketID,5);
-    addrlen = sizeof(dirCli);
-
-    while (TRUE) {
-      newSocketID = accept(socketID,(struct sockaddr *)&dirCli,&addrlen);
-      if (newSocketID < 0) {
-        error("Error aceptando la conexion");
-      }
-      pthread_create(&h,NULL,procesarPeticion, (void *)newSocketID);
-      if(t_funcionamiento == 0){
-        printf("termine");
-        void * status;
-        pthread_join(h,&status);
-        break;
-      }
-    }
-    if (t_funcionamiento > 0) {
-      printf("Ahora si termine");
-    }
- }
-  if (t_funcionamiento > 0) {
-    printf("Afuera");
+  pthread_attr_init(&attr3);
+  pthread_attr_setdetachstate(&attr3,PTHREAD_CREATE_JOINABLE);
+  if (pthread_create(&thread_exit, &attr3, tiempo_exit,NULL)) {
+    printf("Error: no se pudo crear el hilo para salida.");
+    exit(EXIT_FAILURE);
   }
- 
- pthread_attr_destroy(&attr1);
- pthread_attr_destroy(&attr2);
- void * status;
- pthread_join(thread_inv,&status);
- pthread_join(thread_func,&status);
- close(socketID);
- fclose(log_file);
- exit(EXIT_SUCCESS);
+
+  int newSocketID;
+  socklen_t addrlen;
+  struct sockaddr_in dirServ, dirCli;
+  char buffer[256];
+  pthread_t h;
+
+  if (pthread_mutex_init(&mtx, NULL) !=0) {
+    error("Error mutex");
+  }
+  socketID = socket(AF_INET,SOCK_STREAM,0);
+  if (socketID == 0) {
+    error("Error abriendo el socket");
+  }
+
+  bzero((char*)&dirServ,sizeof(dirServ));
+
+  dirServ.sin_family = AF_INET;
+  dirServ.sin_port = htons(puerto);
+  dirServ.sin_addr.s_addr = htonl(INADDR_ANY);
+  
+  if (bind(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) < 0 ) {
+    error("Error en la conexion");
+  }
+  
+  listen(socketID,5);
+  addrlen = sizeof(dirCli);
+
+  while (TRUE) {
+    newSocketID = accept(socketID,(struct sockaddr *)&dirCli,&addrlen);
+    if (newSocketID < 0) {
+      error("Error aceptando la conexion");
+    }
+    pthread_create(&h,NULL,procesarPeticion, (void *)newSocketID);
+  }
 }
