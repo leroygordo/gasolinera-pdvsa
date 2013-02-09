@@ -8,124 +8,15 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <pthread.h>
+#include "estructuras.h"
 
 # define TRUE 1
 # define FALSE 0
 
-int inventario;
-int t_funcionamiento = 24;
+int inventario, tiempoSuministro;
+int t_funcionamiento = 480;
 char *log_file_name;
 FILE *log_file;
-
-struct centro_servidor;
-typedef struct centro_servidor centro;
-
-struct centro_servidor {
-  char *nombre_centro;
-  char *hostname;
-  int puerto;
-  int send_t;
-  int busy;
-  centro *next;
-};
-
-int agregar_directorio(centro** directorio, char *nombre_centro, char *hostname, int puerto) {
-  centro *centro_;
-  if(!(centro_ = (centro *) (malloc(sizeof(centro))))) {
-    printf("Error: no se pudo reservar memoria para crear el directorio de centros.\n");
-    return FALSE;
-  }
-  centro_->nombre_centro = (char *) malloc(strlen(nombre_centro));
-  strcpy(centro_->nombre_centro,nombre_centro);
-  centro_->hostname = (char *) malloc(strlen(hostname));
-  strcpy(centro_->hostname,hostname);
-  centro_->puerto = puerto;
-  centro_->next = NULL;
-  {
-   int socketID = socket(AF_INET,SOCK_STREAM,0);
-   struct hostent *server = gethostbyname(hostname);
-   struct sockaddr_in dirServ;
-
-   bzero((char *) &dirServ, sizeof(dirServ));
-   dirServ.sin_family = AF_INET;
-   dirServ.sin_port = htons(puerto);
-
-   if(connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) == -1) {
-     printf("Error: no se pudo conectar al centro para obtener tiempo de respuesta.\n");
-     return FALSE;
-   }
- 
-   send(socketID,"-\n",256,0);
-   char buffer[256];
-   bzero(buffer,256);
-   recv(socketID,buffer,256,0);
-   centro_->send_t = atoi(buffer);
-   close(socketID);
-  }
-  centro_->busy = 0; 
-  if(!*directorio)
-    *directorio = centro_;
-  else {
-    centro *tmp = *directorio, *ant = NULL;
-    while(tmp) {
-      if(centro_->send_t <= tmp->send_t && !ant) {
-        centro_->next = tmp;
-        *directorio = centro_;
-        break;
-      }
-      else if(centro_->send_t <= tmp->send_t && ant){
-        ant->next = centro_;
-        centro_->next = tmp;
-        break;
-      }
-      else if(centro_->send_t > tmp->send_t)  {
-        if(!tmp->next) {
-          tmp->next = centro_;
-          break;
-        }
-        ant = tmp;
-        tmp = tmp->next;
-      }
-    }
-  }
-  return TRUE;
-}
-
-centro *crear_directorio(char *fichero_centros) {
-  FILE *archivo = fopen(fichero_centros,"r");
-  centro *directorio;
-  if (!archivo) {
-    printf("Error: no se puede abrir o no existe el archivo \"%s\".\n",fichero_centros);
-    return FALSE;
-  }
- 
-  char linea[87];  
-  while(fscanf(archivo,"%s",linea) != EOF) {
-    char *nombre_centro = (char *) strtok(linea,"&");
-    if(strlen(nombre_centro) > 40) {
-      printf("Error: Nombre del centro debe ser a lo sumo de 40 caracteres.\n");
-      return FALSE;
-    }
-    char *hostname =  (char *) strtok (NULL, "&");
-    if(strlen(hostname) > 40) {
-      printf("Error: Hostname debe ser a lo sumo de 40 caracteres.\n");
-      return FALSE;
-    }
-    char *port = (char *) strtok (NULL, "&");
-    if(strlen(port) != 5) {
-      printf("Error: El numero de puerto debe tener 5 digitos.\n");
-      return FALSE;
-    }
-    int puerto = atoi(port);
-    if(!agregar_directorio(&directorio,nombre_centro,hostname,puerto)){
-      printf("Error: no se pudo crear el directorio de centros de distribucion.\n");
-      return FALSE;
-    }
-  }
- fclose(archivo);
- return directorio;
-}
-
 
 static void print_use(){
   printf("uso: bomba OPCIONES ...\n");
@@ -138,33 +29,33 @@ static void print_use(){
 }
 
 static void read_arg(char **argv, int *capacidad, char **fichero_centros, char **nombre_bomba, int *inventario, int *consumo) {
-   int j;
-   for(j = 0 ; j < 5 ; j++) {
-     if(!strcmp(argv[2 * j + 1],"-cp")) {
-       *capacidad = atoi(argv[2*j+2]);
-       continue;
-     }
-     else if(!strcmp(argv[2 * j + 1],"-fc")) {
-       *fichero_centros = argv[2 * j + 2];
-       continue;
-     }
-     else if(!strcmp(argv[2 * j + 1],"-n")) {
-       *nombre_bomba = argv[2 * j+2];
-       continue;
-     }
-     else if(!strcmp(argv[2 * j + 1],"-i")) {
-       *inventario = atoi(argv[2 * j+2]);
-       continue;
-     }
-     else if(!strcmp(argv[2 * j + 1],"-c")) {
-       *consumo = atoi(argv[2 * j + 2]);
-       continue;
-     }
-     else {
-        print_use();
-        exit(EXIT_FAILURE);
-     }
-   }
+  int j;
+  for(j = 0 ; j < 5 ; j++) {
+    if(!strcmp(argv[2 * j + 1],"-cp")) {
+      *capacidad = atoi(argv[2*j+2]);
+      continue;
+    }
+    else if(!strcmp(argv[2 * j + 1],"-fc")) {
+      *fichero_centros = argv[2 * j + 2];
+      continue;
+    }
+    else if(!strcmp(argv[2 * j + 1],"-n")) {
+      *nombre_bomba = argv[2 * j+2];
+      continue;
+    }
+    else if(!strcmp(argv[2 * j + 1],"-i")) {
+      *inventario = atoi(argv[2 * j+2]);
+      continue;
+    }
+    else if(!strcmp(argv[2 * j + 1],"-c")) {
+      *consumo = atoi(argv[2 * j + 2]);
+      continue;
+    }
+    else {
+      print_use();
+      exit(EXIT_FAILURE);
+    }
+  }
 }
 
 int valid_arg(int capacidad, char *fichero_centros, char *nombre_bomba, int inventario, int consumo) {
@@ -195,31 +86,33 @@ int valid_arg(int capacidad, char *fichero_centros, char *nombre_bomba, int inve
 void *inventario_consumo(void * tid) {
   int consumo = (int) tid;
   while (TRUE) {
-    printf("%d lts. ",inventario);
-    sleep(3);
+    //printf("%d lts. ",inventario);
+    usleep(100000);
     if(inventario - consumo > 0)
       inventario-=consumo;
     else if(inventario - consumo <= 0)
       inventario = 0;
     if(!t_funcionamiento)
       pthread_exit(EXIT_SUCCESS);
+      //exit(1);
   }
 
 }
 
 void *tiempo(void * tid) {
   while (TRUE) {
-    printf("%d min.\n",t_funcionamiento);
-    sleep(3);
+    //printf("%d min.\n",t_funcionamiento);
+    usleep(100000);    
     t_funcionamiento--;
     if(!t_funcionamiento)
       pthread_exit(EXIT_SUCCESS);
+      //exit(1);
   }
 }
 
 int main(int argc, char **argv) {
 
-  if(argc != 11){
+  if(argc != 11) {
     print_use();
     exit(EXIT_FAILURE);
   }
@@ -276,49 +169,56 @@ int main(int argc, char **argv) {
   c = *directorio_centros;
   while (t_funcionamiento > 0 ) { 
     if(inventario == capacidad)
-      fprintf(log_file,"Tanque full: %d minutos.\n",24 - t_funcionamiento);
+      fprintf(log_file,"Tanque full: %d minutos.\n",480 - t_funcionamiento);
     if(inventario == 0)
-      fprintf(log_file,"Tanque vacio: %d minutos.\n",24 - t_funcionamiento);
+      fprintf(log_file,"Tanque vacio: %d minutos.\n",480 - t_funcionamiento);
 
-    if (capacidad - inventario >= 380) {
-     struct sockaddr_in dirServ;
-     struct hostent *server;
+    if (capacidad - inventario >= 38000) {
+      struct sockaddr_in dirServ;
+      struct hostent *server;
   
-     socketID = socket(AF_INET,SOCK_STREAM,0);
-     server = gethostbyname(c.hostname);
+      socketID = socket(AF_INET,SOCK_STREAM,0);
+      server = gethostbyname(c.hostname);
 
-     bzero((char *) &dirServ, sizeof(dirServ));
+      bzero((char *) &dirServ, sizeof(dirServ));
 
-     dirServ.sin_family = AF_INET;
-     dirServ.sin_port = htons(c.puerto);
-     if(connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) == -1) {
-       continue;
-     }
+      dirServ.sin_family = AF_INET;
+      dirServ.sin_port = htons(c.puerto);
+      if(connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) == -1) {
+	    continue;
+      }
  
-     send(socketID,strcat(nombre_bomba,"\n"),256,0);
-     char buffer[256];
-     bzero(buffer,256);
-     recv(socketID,buffer,256,0);
-
-     if(buffer[0] == 'O') {
-       if(c.next == NULL)
-         c = *directorio_centros;
-       else
-         c = *c.next;
-       fprintf(log_file,"Peticion: %d minutos, %s, Fallido.\n",24 - t_funcionamiento,c.nombre_centro);
-     }
-     else if (buffer[0] == 'D') {
-       if (inventario + 380 >= capacidad)
-         inventario = capacidad;
-       else
-         inventario+=380;
-       fprintf(log_file,"Peticion: %d minutos, %s, OK.\n",24 - t_funcionamiento,c.nombre_centro);
-       fprintf(log_file,"Llegada de la gandola: %d minutos, %d litros.\n",24 - t_funcionamiento,inventario);
-       c = *directorio_centros;
-     }
+      //send(socketID,strcat(nombre_bomba),256,0);
+      char buffer[256];
+      bzero(buffer,256);
+      strcpy(buffer,nombre_bomba);
+      send(socketID,buffer,256,0);
+      bzero(buffer,256);
+      recv(socketID,buffer,256,0);
+      
+      if(buffer[0]== 'O') {
+        if(c.next == NULL)
+          c = *directorio_centros;
+         else
+          c = *c.next;
+         fprintf(log_file,"Peticion: %d minutos, %s, Fallido.\n",480 - t_funcionamiento,c.nombre_centro);
+      }
+      else if (buffer[0] == 'D') {
+        tiempoSuministro = c.send_t;
+        fprintf(log_file,"Peticion: %d minutos, %s, OK.\n",480 - t_funcionamiento,c.nombre_centro);
+        usleep(tiempoSuministro * 100000);
+        if (inventario + 38000 >= capacidad) {
+          inventario = capacidad;
+        }
+        else {
+          inventario+=38000;
+        }
+        fprintf(log_file,"Llegada de la gandola: %d minutos, %d litros.\n",480 - t_funcionamiento,inventario); 
+        c = *directorio_centros;
+      }
     }
   }
-  
+  destruir_directorio(&directorio_centros);  
   pthread_attr_destroy(&attr1);
   pthread_attr_destroy(&attr2);
   void * status;

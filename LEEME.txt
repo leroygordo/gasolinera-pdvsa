@@ -1,0 +1,21 @@
+Hancel Gonzalez 07-40983
+Susana Charara  08-10223
+
+Archivos: bomba.c: simulador del funcionamiento de una bomba de gasolina: descenso de su inventario, peticiones a centros de distribucion.
+          centro.c: simulador de un centro de distribucion de gasolina: descenso y aumento de su inventario, envio de gandolas a bombas solicitantes.
+          estructuras.h: firma de las estructuras y metodos para manipular un directorio de centros de distribucion.
+          estructuras.c: implementacion de los metodos en estructuras.h.
+
+bomba y centro simulan por un tiempo de simulacion de 480 minutos, el funcionamiento de un sistema de abastecimiento/consumo de gasolina en la vida.
+Esto incluye comunicacion con algun centro para solicitar gandola o bomba para responder a la peticion. Suministro y consumo de gasolina. Paso del tiempo.
+
+Para ejecutar ambos programas:
+
+  bomba  -n <nombre_bomba> -cp <capacidad_maxima> -fc <archivo_centros> -c <consumo> -i <inventario_inicial>
+  centro -n <nombre_centro> -cp <capacidad_maxima> -i <inventario_inicial> -t <tiempo_gandola> -s <suministro> -p <puerto>
+
+  Nota: no importa el orden de los argumentos para ambos programas.
+
+Limitaciones: - <nombre_centro>, <nombre_bomba> no debe tener espacio.
+              - <puerto> debe ser un numero de 5 digitos.
+              - el resto de los parametros deben ser numeros enteros, los rangos se validas al ejecutar el programa. En caso de fallar, se orienta al usuario.
