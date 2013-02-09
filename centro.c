@@ -13,7 +13,7 @@
 # define FALSE 0
 
 
-int tiempo, inventario, capacidad, numConexion, busy = 0;
+int tiempo, inventario, capacidad, numConexion;
 int t_funcionamiento = 480;
 char *log_file_name;
 FILE *log_file;
@@ -130,20 +130,12 @@ void *procesarPeticion(void *tid){
     error("Error recibiendo los datos");
   };
  
-  if (busy == 0) {  
-    *(&busy) = 1;
-    if(buffer[0] == '-') { 
-      bzero(buffer,256);
-      sprintf(buffer,"%d",tiempo);
-    }
-    else{
-      strcpy(buffer,"D");
-    }
-    *(&busy) = 0;
+  if(buffer[0] == '-') { 
+    bzero(buffer,256);
+    sprintf(buffer,"%d",tiempo);
   }
   else {
     if (numConexion < 10) {
-      *(&busy) = 1;
       numConexion++;
       pthread_mutex_lock(&mtx);
       if (inventario >= 38000) {
@@ -158,7 +150,6 @@ void *procesarPeticion(void *tid){
         pthread_mutex_unlock(&mtx);
         numConexion--;
       }
-      *(&busy) = 0;
     }
     else
       strcpy(buffer,"O");
@@ -251,6 +242,7 @@ int main(int argc, char **argv) {
   int socketID;
  
   while (t_funcionamiento > 0) {
+    printf("%d %d\n",t_funcionamiento,inventario);    
     if(inventario == capacidad)
       fprintf(log_file,"Tanque full: %d minutos.\n",480 - t_funcionamiento);
     if(inventario == 0)
@@ -289,12 +281,19 @@ int main(int argc, char **argv) {
       }
       pthread_create(&h,NULL,procesarPeticion, (void *)newSocketID);
       if(t_funcionamiento == 0){
-         void * status;
-         pthread_join(h,&status);
+        printf("termine");
+        void * status;
+        pthread_join(h,&status);
         break;
       }
     }
+    if (t_funcionamiento > 0) {
+      printf("Ahora si termine");
+    }
  }
+  if (t_funcionamiento > 0) {
+    printf("Afuera");
+  }
  
  pthread_attr_destroy(&attr1);
  pthread_attr_destroy(&attr2);
