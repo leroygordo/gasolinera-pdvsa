@@ -17,4 +17,6 @@ centro *crear_directorio(char *fichero_centros);
 
 int agregar_directorio(centro** directorio, char *nombre_centro, char *hostname, int puerto);
 
+void destruir_directorio(centro **directorio);
+
 #endif

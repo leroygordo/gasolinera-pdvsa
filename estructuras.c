@@ -102,10 +102,23 @@ centro *crear_directorio(char *fichero_centros) {
     }
     int puerto = atoi(port);
     if(!agregar_directorio(&directorio,nombre_centro,hostname,puerto)){
-      printf("Error: no se pudo crear el directorio de centros de distribucion.\n");
-      return FALSE;
+      //printf("Error: no se pudo crear el directorio de centros de distribucion.\n");
+      //return FALSE;
+      continue;
     }
   }
  fclose(archivo);
  return directorio;
+}
+
+void destruir_directorio(centro **directorio) {
+  centro *tmp;
+  tmp = *directorio;
+
+  while(tmp) {
+    *directorio = tmp->next;
+    free(tmp);
+    tmp = *directorio;
+  }
+
 }
