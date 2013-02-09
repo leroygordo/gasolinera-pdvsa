@@ -290,7 +290,7 @@ int main(int argc, char **argv) {
         break;
     }
  }
-  
+ printf("paso?"); 
  pthread_attr_destroy(&attr1);
  pthread_attr_destroy(&attr2);
  void * status;
