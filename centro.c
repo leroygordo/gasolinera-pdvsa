@@ -143,6 +143,7 @@ void *procesarPeticion(void *tid){
     if (numConexion < 10) {
       numConexion++;
       pthread_mutex_lock(&mtx);
+      bzero(buffer,256);
       if (inventario >= 38000) {
 	fprintf(log_file, "Suministro:  %d minutos, %s, OK, %d.\n", 480 - t_funcionamiento, buffer, inventario );
 	//sleep(tiempo);
@@ -152,28 +153,27 @@ void *procesarPeticion(void *tid){
       else {
 	fprintf(log_file, "Suministro:  %d minutos, %s, Fallido, %d.\n", 480 - t_funcionamiento, buffer, inventario );
         strcpy(buffer,"O");
-        pthread_mutex_unlock(&mtx);
-        numConexion--;
       }
+      pthread_mutex_unlock(&mtx);
+      numConexion--;
     }
     else
       strcpy(buffer,"O");
   }
-
+  printf(buffer);
   if (send(socket,strcat(buffer,"\n"),256,0) < 0) {
     error("Error mandando los datos");
   }
   
   close(socket);
   pthread_exit(EXIT_SUCCESS);
-  printf("no deberia pasar por aca");
 
 }  
 
 void *inventario_suministro(void * tid) {
   int suministro = (int) tid;
   while (TRUE) {
-    printf("%d lts. \n",inventario);
+    //printf("%d lts. \n",inventario);
     usleep(100000);
     if(inventario == 0)
       fprintf(log_file,"Tanque vacio: %d minutos.\n",480 - t_funcionamiento);
@@ -190,7 +190,7 @@ void *inventario_suministro(void * tid) {
 
 void *tiempo_funcionamiento(void * tid) {
   while (TRUE) {
-    printf("%d min. ",t_funcionamiento);
+    //printf("%d min. ",t_funcionamiento);
     usleep(100000);
     t_funcionamiento--;
     if(!t_funcionamiento)
