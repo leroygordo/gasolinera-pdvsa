@@ -143,15 +143,16 @@ void *procesarPeticion(void *tid){
     if (numConexion < 10) {
       numConexion++;
       pthread_mutex_lock(&mtx);
-      bzero(buffer,256);
       if (inventario >= 38000) {
 	fprintf(log_file, "Suministro:  %d minutos, %s, OK, %d.\n", 480 - t_funcionamiento, buffer, inventario );
 	//sleep(tiempo);
+        bzero(buffer,256);
 	inventario = inventario - 38000;
 	strcpy(buffer,"D");
       } 
       else {
 	fprintf(log_file, "Suministro:  %d minutos, %s, Fallido, %d.\n", 480 - t_funcionamiento, buffer, inventario );
+        bzero(buffer,256);
         strcpy(buffer,"O");
       }
       pthread_mutex_unlock(&mtx);
