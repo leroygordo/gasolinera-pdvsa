@@ -184,7 +184,8 @@ int main(int argc, char **argv) {
       memcpy(&dirServ.sin_addr,server->h_addr_list[0],server->h_length);
       if(connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) == -1) {
         if(c.next == NULL)
-          c = *directorio_centros;
+          break;
+          //c = *directorio_centros;
          else
           c = *c.next;
 	continue;
