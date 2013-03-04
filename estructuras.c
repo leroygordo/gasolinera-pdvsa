@@ -32,10 +32,11 @@ int agregar_directorio(centro** directorio, char *nombre_centro, char *hostname,
 
    bzero((char *) &dirServ, sizeof(dirServ));
    dirServ.sin_family = AF_INET;
+   memcpy(&dirServ.sin_addr,server->h_addr_list[0],server->h_length);
    dirServ.sin_port = htons(puerto);
 
    if(connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) == -1) {
-     printf("Error: no se pudo conectar al centro para obtener tiempo de respuesta.\n");
+     printf("Error: no se pudo conectar al centro \"%s\" para obtener tiempo de respuesta.\n",centro_->nombre_centro);
      return FALSE;
    }
  

@@ -143,15 +143,16 @@ void *procesarPeticion(void *tid){
     if (numConexion < 10) {
       numConexion++;
       pthread_mutex_lock(&mtx);
-      bzero(buffer,256);
       if (inventario >= 38000) {
 	fprintf(log_file, "Suministro:  %d minutos, %s, OK, %d.\n", 480 - t_funcionamiento, buffer, inventario );
 	//sleep(tiempo);
+        bzero(buffer,256);
 	inventario = inventario - 38000;
 	strcpy(buffer,"D");
       } 
       else {
 	fprintf(log_file, "Suministro:  %d minutos, %s, Fallido, %d.\n", 480 - t_funcionamiento, buffer, inventario );
+        bzero(buffer,256);
         strcpy(buffer,"O");
       }
       pthread_mutex_unlock(&mtx);
@@ -160,7 +161,7 @@ void *procesarPeticion(void *tid){
     else
       strcpy(buffer,"O");
   }
-
+  
   if (send(socket,strcat(buffer,"\n"),256,0) < 0) {
     error("Error mandando los datos");
   }
@@ -239,7 +240,7 @@ int main(int argc, char **argv) {
 
   log_file_name = (char *) malloc(strlen(nombre_centro)+8);
   sprintf(log_file_name,"log_%s.txt",nombre_centro);
-
+  
   log_file = fopen(log_file_name,"w");
   if(!log_file) {
     printf("Error: no se pudo crear el archivo log el archivo\n.");
