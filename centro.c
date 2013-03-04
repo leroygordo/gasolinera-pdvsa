@@ -191,7 +191,7 @@ void *inventario_suministro(void * tid) {
 
 void *tiempo_funcionamiento(void * tid) {
   while (TRUE) {
-    printf("%d min. ",t_funcionamiento);
+    //printf("%d min. ",t_funcionamiento);
     usleep(100000);
     t_funcionamiento--;
     if(!t_funcionamiento)
