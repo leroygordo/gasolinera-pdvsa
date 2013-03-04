@@ -161,7 +161,7 @@ void *procesarPeticion(void *tid){
     else
       strcpy(buffer,"O");
   }
-
+  
   if (send(socket,strcat(buffer,"\n"),256,0) < 0) {
     error("Error mandando los datos");
   }
@@ -191,7 +191,7 @@ void *inventario_suministro(void * tid) {
 
 void *tiempo_funcionamiento(void * tid) {
   while (TRUE) {
-    //printf("%d min. ",t_funcionamiento);
+    printf("%d min. ",t_funcionamiento);
     usleep(100000);
     t_funcionamiento--;
     if(!t_funcionamiento)
@@ -240,7 +240,7 @@ int main(int argc, char **argv) {
 
   log_file_name = (char *) malloc(strlen(nombre_centro)+8);
   sprintf(log_file_name,"log_%s.txt",nombre_centro);
-
+  
   log_file = fopen(log_file_name,"w");
   if(!log_file) {
     printf("Error: no se pudo crear el archivo log el archivo\n.");

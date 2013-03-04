@@ -176,11 +176,12 @@ int main(int argc, char **argv) {
   
       socketID = socket(AF_INET,SOCK_STREAM,0);
       server = gethostbyname(c.hostname);
-
+     
       bzero((char *) &dirServ, sizeof(dirServ));
 
       dirServ.sin_family = AF_INET;
       dirServ.sin_port = htons(c.puerto);
+      memcpy(&dirServ.sin_addr,server->h_addr_list[0],server->h_length);
       if(connect(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) == -1) {
 	    continue;
       }
@@ -192,7 +193,7 @@ int main(int argc, char **argv) {
       send(socketID,buffer,256,0);
       bzero(buffer,256);
       recv(socketID,buffer,256,0);
-      
+ 
       if(buffer[0]== 'O') {
         if(c.next == NULL)
           c = *directorio_centros;
