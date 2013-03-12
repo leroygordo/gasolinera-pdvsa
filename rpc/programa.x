@@ -1,6 +1,6 @@
 struct estructura {
   int tiempo;
-  string gasolina<50>;
+  int inventario;
 };
 program CENTROPROG {
   version CENTRO_VER {
