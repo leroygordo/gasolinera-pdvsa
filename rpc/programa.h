@@ -15,8 +15,7 @@ extern "C" {
 
 
 struct estructura {
-	int tiempo;
-	int inventario;
+	char *nombre;
 };
 typedef struct estructura estructura;
 

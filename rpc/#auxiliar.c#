@@ -1,5 +1,3 @@
-#include "programa.h"
-#include "programa_svc.c"
 #include <unistd.h>
 #include <signal.h>
 #include <stdio.h>
@@ -122,6 +120,51 @@ int valid_arg(char *nombre_centro,int capacidad,int inventario,int suministro,in
   return valid;
 }
 
+void *procesarPeticion(void *tid){
+  started = 1; 
+  int socket = (int) tid;
+  char buffer[256];
+  bzero(buffer,256);
+
+  if (recv(socket,buffer,256,0) < 0){
+    error("Error recibiendo los datos");
+  };
+ 
+  if(buffer[0] == '-') { 
+    bzero(buffer,256);
+    sprintf(buffer,"%d",tiempo);
+  }
+  else {
+    if (numConexion < 10) {
+      numConexion++;
+      pthread_mutex_lock(&mtx);
+      if (inventario >= 38000) {
+	fprintf(log_file, "Suministro:  %d minutos, %s, OK, %d.\n", 480 - t_funcionamiento, buffer, inventario );
+	//sleep(tiempo);
+        bzero(buffer,256);
+	inventario = inventario - 38000;
+	strcpy(buffer,"D");
+      } 
+      else {
+	fprintf(log_file, "Suministro:  %d minutos, %s, Fallido, %d.\n", 480 - t_funcionamiento, buffer, inventario );
+        bzero(buffer,256);
+        strcpy(buffer,"O");
+      }
+      pthread_mutex_unlock(&mtx);
+      numConexion--;
+    }
+    else
+      strcpy(buffer,"O");
+  }
+  
+  if (send(socket,strcat(buffer,"\n"),256,0) < 0) {
+    error("Error mandando los datos");
+  }
+  
+  close(socket);
+  pthread_exit(EXIT_SUCCESS);
+
+}  
 
 void *inventario_suministro(void * tid) {
   int suministro = (int) tid;
@@ -167,41 +210,17 @@ void finish() {
  pthread_join(thread_inv,&status);
  pthread_join(thread_func,&status);
  pthread_join(thread_exit,&status);
+ close(socketID);
  fclose(log_file);
  exit(EXIT_SUCCESS);
 }
 
 
-int *
-pedir_gasolina_1_svc(estructura *argp, struct svc_req *rqstp)
-{
-  pthread_mutex_lock(&mtx);
-  static int  result;
+int main(int argc, char **argv) {
 
-	if (inventario < 38000)
-	  result = 0;
-	else {
-	  fprintf(log_file, "Suministro:  %d minutos, %s, OK, %d.\n", 480 - t_funcionamiento, argp->nombre, inventario );
-	  inventario = inventario - 38000;
-	  result = 1;
-	}
-	pthread_mutex_unlock(&mtx);
-	return &result;
-}
+  // Validacion y lectura de argumentos
 
-int *
-pedir_tiempo_1_svc(estructura *argp, struct svc_req *rqstp)
-{
-
-  static int  result;
-
-	result = tiempo;
-
-	return &result;
-}
-
-void auxiliar_main(int argc, char **argv) {
-    if(argc != 13){
+  if(argc != 13){
     print_use();
     exit(EXIT_FAILURE);
   }
@@ -225,7 +244,6 @@ void auxiliar_main(int argc, char **argv) {
 
   fprintf(log_file,"Inventario inicial: %d litros.\n",inventario);
 
-  
   pthread_attr_init(&attr1);
   pthread_attr_setdetachstate(&attr1,PTHREAD_CREATE_JOINABLE);
   if (pthread_create(&thread_inv, &attr1, inventario_suministro, (void *) suministro)) {
@@ -248,38 +266,39 @@ void auxiliar_main(int argc, char **argv) {
     printf("Error: no se pudo crear el hilo para salida.");
     exit(EXIT_FAILURE);
   }
-}
-int
-main (int argc, char **argv)
-{
-	register SVCXPRT *transp;
 
-	pmap_unset (CENTROPROG, CENTRO_VER);
+  int newSocketID;
+  socklen_t addrlen;
+  struct sockaddr_in dirServ, dirCli;
+  char buffer[256];
+  pthread_t h;
 
-	transp = svcudp_create(RPC_ANYSOCK);
-	if (transp == NULL) {
-		fprintf (stderr, "%s", "cannot create udp service.");
-		exit(1);
-	}
-	if (!svc_register(transp, CENTROPROG, CENTRO_VER, centroprog_1, IPPROTO_UDP)) {
-		fprintf (stderr, "%s", "unable to register (CENTROPROG, CENTRO_VER, udp).");
-		exit(1);
-	}
+  if (pthread_mutex_init(&mtx, NULL) !=0) {
+    error("Error mutex");
+  }
+  socketID = socket(AF_INET,SOCK_STREAM,0);
+  if (socketID == 0) {
+    error("Error abriendo el socket");
+  }
 
-	transp = svctcp_create(RPC_ANYSOCK, 0, 0);
-	if (transp == NULL) {
-		fprintf (stderr, "%s", "cannot create tcp service.");
-		exit(1);
-	}
-	if (!svc_register(transp, CENTROPROG, CENTRO_VER, centroprog_1, IPPROTO_TCP)) {
-		fprintf (stderr, "%s", "unable to register (CENTROPROG, CENTRO_VER, tcp).");
-		exit(1);
-	}
-	
-	// Aqui main
-	auxiliar_main(argc,argv);
-	svc_run ();
-	fprintf (stderr, "%s", "svc_run returned");
-	exit (1);
-	/* NOTREACHED */
+  bzero((char*)&dirServ,sizeof(dirServ));
+
+  dirServ.sin_family = AF_INET;
+  dirServ.sin_port = htons(puerto);
+  dirServ.sin_addr.s_addr = htonl(INADDR_ANY);
+  
+  if (bind(socketID,(struct sockaddr *)&dirServ,sizeof(dirServ)) < 0 ) {
+    error("Error en la conexion");
+  }
+  
+  listen(socketID,5);
+  addrlen = sizeof(dirCli);
+
+  while (TRUE) {
+    newSocketID = accept(socketID,(struct sockaddr *)&dirCli,&addrlen);
+    if (newSocketID < 0) {
+      error("Error aceptando la conexion");
+    }
+    pthread_create(&h,NULL,procesarPeticion, (void *)newSocketID);
+  }
 }

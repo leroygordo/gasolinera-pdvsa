@@ -16,8 +16,8 @@ TARGETS_SVC.c = programa_svc.c programa_server.c programa_xdr.c
 TARGETS_CLNT.c = programa_clnt.c programa_client.c programa_xdr.c 
 TARGETS = programa.h programa_xdr.c programa_clnt.c programa_svc.c programa_client.c programa_server.c
 
-OBJECTS_CLNT = $(SOURCES_CLNT.c:%.c=%.o) $(TARGETS_CLNT.c:%.c=%.o)
-OBJECTS_SVC = $(SOURCES_SVC.c:%.c=%.o) $(TARGETS_SVC.c:%.c=%.o)
+OBJECTS_CLNT = $(TARGETS_CLNT.c:%.c=%.o)
+OBJECTS_SVC = $(TARGETS_SVC.c:%.c=%.o)
 # Compiler flags 
 
 CFLAGS += -g 
@@ -28,15 +28,15 @@ RPCGENFLAGS =
 
 all : $(CLIENT) $(SERVER)
 
-$(TARGETS) : $(SOURCES.x) 
-	rpcgen $(RPCGENFLAGS) $(SOURCES.x)
+$(TARGETS) :  
+	rpcgen $(RPCGENFLAGS) 
 
-$(OBJECTS_CLNT) : $(SOURCES_CLNT.c) $(SOURCES_CLNT.h) $(TARGETS_CLNT.c) 
+$(OBJECTS_CLNT) : $(TARGETS_CLNT.c) 
 
-$(OBJECTS_SVC) : $(SOURCES_SVC.c) $(SOURCES_SVC.h) $(TARGETS_SVC.c) 
+$(OBJECTS_SVC) : $(TARGETS_SVC.c) 
 
 $(CLIENT) : $(OBJECTS_CLNT) 
-	$(LINK.c) -o $(CLIENT) $(OBJECTS_CLNT) $(LDLIBS) -lpthread
+	$(LINK.c) -o $(CLIENT) $(OBJECTS_CLNT) $(LDLIBS) 
 
 $(SERVER) : $(OBJECTS_SVC) 
 	$(LINK.c) -o $(SERVER) $(OBJECTS_SVC) $(LDLIBS) -lpthread

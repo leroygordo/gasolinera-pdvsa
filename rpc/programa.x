@@ -1,6 +1,5 @@
 struct estructura {
-  int tiempo;
-  int inventario;
+  string nombre<50>;
 };
 program CENTROPROG {
   version CENTRO_VER {
