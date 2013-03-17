@@ -25,7 +25,7 @@ preguntar_1(char **argp, CLIENT *clnt)
 }
 
 ticket *
-responder_1(char **argp, CLIENT *clnt)
+responder_1(desafio *argp, CLIENT *clnt)
 {
 	static ticket clnt_res;
 

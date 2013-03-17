@@ -22,6 +22,9 @@ pthread_mutex_t mtx;
 int started = 0;
 pthread_t thread_inv, thread_func, thread_exit;
 pthread_attr_t attr1, attr2, attr3;
+char * nombre_centro;
+int suministro, puerto;
+
 
 static void print_use(){
   printf("uso: centro OPCIONES ...\n");
@@ -187,6 +190,22 @@ ticket *
 responder_1_svc(desafio *argp, struct svc_req *rqstp)
 {
   static ticket result;
+  static char *pregunta, *media_respuesta, *respuesta;
+
+  pregunta = (char *) malloc(32);
+  media_respuesta = (char *) malloc(32);
+
+  MDString(*argp->pregunta,pregunta);
+  MDString(nombre_centro,media_respuesta);
+
+  respuesta = (char *) malloc(64);
+
+  respuesta = strcat(pregunta,media_respuesta);
+   
+  printf(respuesta);
+  printf("\n");
+  
+  //Falta comparar y crear el ticket de ser necesario
 
   return &result;
 }
@@ -234,8 +253,6 @@ void auxiliar_main(int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
 
-  char * nombre_centro;
-  int suministro, puerto;
 
   read_arg(argv,argc,&nombre_centro,&capacidad,&inventario,&suministro,&puerto,&tiempo);
 
