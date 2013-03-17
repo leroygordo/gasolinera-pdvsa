@@ -29,7 +29,7 @@ static void print_use(){
   printf("       -i  <inventario>\n");
   printf("       -t  <tiempo>\n");
   printf("       -s  <suministro>\n");
-  printf("       -p  <puerto>\n");
+  //printf("       -p  <puerto>\n");
 }
 
 static void read_arg(char **argv,int argc, char **nombre_centro,int *capacidad,int *inventario,int *suministro,int *puerto,int *tiempo) {
@@ -171,37 +171,69 @@ void finish() {
  exit(EXIT_SUCCESS);
 }
 
+int *
+preguntar_1_svc(char **argp, struct svc_req *rqstp)
+{
+	static int  result;
+
+	/*
+	 * insert server code here
+	 */
+
+	return &result;
+}
 
 int *
-pedir_gasolina_1_svc(estructura *argp, struct svc_req *rqstp)
+responder_1_svc(char **argp, struct svc_req *rqstp)
+{
+	static int  result;
+
+	/*
+	 * insert server code here
+	 */
+
+	return &result;
+}
+
+int *
+validar_1_svc(ticket *argp, struct svc_req *rqstp)
+{
+	static int  result;
+
+	/*
+	 * insert server code here
+	 */
+
+	return &result;
+}
+
+int *
+pedir_gasolina_1_svc(char **argp, struct svc_req *rqstp)
 {
   pthread_mutex_lock(&mtx);
   static int  result;
 
-	if (inventario < 38000)
-	  result = 0;
-	else {
-	  fprintf(log_file, "Suministro:  %d minutos, %s, OK, %d.\n", 480 - t_funcionamiento, argp->nombre, inventario );
-	  inventario = inventario - 38000;
-	  result = 1;
-	}
-	pthread_mutex_unlock(&mtx);
-	return &result;
+  if (inventario < 38000)
+    result = 0;
+  else {
+    fprintf(log_file, "Suministro:  %d minutos, %s, OK, %d.\n", 480 - t_funcionamiento, *argp, inventario );
+    inventario = inventario - 38000;
+    result = 1;
+  }
+  pthread_mutex_unlock(&mtx);
+  return &result;
 }
 
 int *
-pedir_tiempo_1_svc(estructura *argp, struct svc_req *rqstp)
+pedir_tiempo_1_svc(void *argp, struct svc_req *rqstp)
 {
-
   static int  result;
-
-	result = tiempo;
-
-	return &result;
+  result = tiempo;
+  return &result;
 }
 
 void auxiliar_main(int argc, char **argv) {
-    if(argc != 13){
+  if(argc != 13){
     print_use();
     exit(EXIT_FAILURE);
   }
@@ -224,7 +256,6 @@ void auxiliar_main(int argc, char **argv) {
   }
 
   fprintf(log_file,"Inventario inicial: %d litros.\n",inventario);
-
   
   pthread_attr_init(&attr1);
   pthread_attr_setdetachstate(&attr1,PTHREAD_CREATE_JOINABLE);
@@ -249,8 +280,8 @@ void auxiliar_main(int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
 }
-int
-main (int argc, char **argv)
+
+int main (int argc, char **argv)
 {
 	register SVCXPRT *transp;
 

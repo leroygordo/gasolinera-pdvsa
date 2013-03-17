@@ -4,12 +4,13 @@ struct ticket {
   string fecha<8>;
   string hora<6>;
 };
-program CENTROPROG {
-  version CENTRO_VER {
+
+program PDVSA_PROG {
+  version PDVSA_VER {
     int preguntar (string) = 1;
     int responder (string) = 2;
     int validar (ticket) = 3;
     int pedir_gasolina (string) = 4;
     int pedir_tiempo () = 5;
   }=1;
-}=0x31111111;
+}=0x20740983;

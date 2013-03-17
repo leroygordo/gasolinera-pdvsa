@@ -3,7 +3,7 @@
  * It was generated using rpcgen.
  */
 
-#include "programa.h"
+#include "pdvsa.h"
 
 bool_t
 xdr_ticket (XDR *xdrs, ticket *objp)
