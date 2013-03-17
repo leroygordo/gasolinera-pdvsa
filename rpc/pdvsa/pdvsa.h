@@ -27,11 +27,11 @@ typedef struct ticket ticket;
 
 #if defined(__STDC__) || defined(__cplusplus)
 #define preguntar 1
-extern  int * preguntar_1(char **, CLIENT *);
-extern  int * preguntar_1_svc(char **, struct svc_req *);
+extern  char ** preguntar_1(char **, CLIENT *);
+extern  char ** preguntar_1_svc(char **, struct svc_req *);
 #define responder 2
-extern  int * responder_1(char **, CLIENT *);
-extern  int * responder_1_svc(char **, struct svc_req *);
+extern  ticket * responder_1(char **, CLIENT *);
+extern  ticket * responder_1_svc(char **, struct svc_req *);
 #define validar 3
 extern  int * validar_1(ticket *, CLIENT *);
 extern  int * validar_1_svc(ticket *, struct svc_req *);
@@ -45,11 +45,11 @@ extern int pdvsa_prog_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
 
 #else /* K&R C */
 #define preguntar 1
-extern  int * preguntar_1();
-extern  int * preguntar_1_svc();
+extern  char ** preguntar_1();
+extern  char ** preguntar_1_svc();
 #define responder 2
-extern  int * responder_1();
-extern  int * responder_1_svc();
+extern  ticket * responder_1();
+extern  ticket * responder_1_svc();
 #define validar 3
 extern  int * validar_1();
 extern  int * validar_1_svc();

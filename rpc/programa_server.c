@@ -11,6 +11,7 @@
 #include <string.h>
 #include <pthread.h>
 #include <signal.h>
+#include "desafio.c"
 
 int tiempo, inventario, capacidad, numConexion;
 int t_funcionamiento = 480;
@@ -171,22 +172,22 @@ void finish() {
  exit(EXIT_SUCCESS);
 }
 
-int *
+char **
 preguntar_1_svc(char **argp, struct svc_req *rqstp)
 {
-	static int  result;
+	static char*  result;
 
-	/*
-	 * insert server code here
-	 */
+unsigned char res[32];
+
+MDString(*argp,res);
 
 	return &result;
 }
 
-int *
+ticket *
 responder_1_svc(char **argp, struct svc_req *rqstp)
 {
-	static int  result;
+	static ticket  result;
 
 	/*
 	 * insert server code here

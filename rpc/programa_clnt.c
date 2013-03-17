@@ -9,10 +9,10 @@
 /* Default timeout can be changed using clnt_control() */
 static struct timeval TIMEOUT = { 25, 0 };
 
-int *
+char **
 preguntar_1(char **argp, CLIENT *clnt)
 {
-	static int clnt_res;
+	static char* clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
 	if (clnt_call (clnt, preguntar,
@@ -24,10 +24,10 @@ preguntar_1(char **argp, CLIENT *clnt)
 	return (&clnt_res);
 }
 
-int *
+ticket *
 responder_1(char **argp, CLIENT *clnt)
 {
-	static int clnt_res;
+	static ticket clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
 	if (clnt_call (clnt, responder,

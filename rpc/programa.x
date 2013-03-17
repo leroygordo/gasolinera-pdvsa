@@ -6,8 +6,8 @@ struct ticket {
 };
 program CENTROPROG {
   version CENTRO_VER {
-    int preguntar (string) = 1;
-    int responder (string) = 2;
+    string preguntar (string) = 1;
+    ticket responder (string) = 2;
     int validar (ticket) = 3;
     int pedir_gasolina (string) = 4;
     int pedir_tiempo () = 5;

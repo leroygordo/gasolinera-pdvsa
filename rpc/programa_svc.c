@@ -36,13 +36,13 @@ centroprog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 
 	case preguntar:
 		_xdr_argument = (xdrproc_t) xdr_wrapstring;
-		_xdr_result = (xdrproc_t) xdr_int;
+		_xdr_result = (xdrproc_t) xdr_wrapstring;
 		local = (char *(*)(char *, struct svc_req *)) preguntar_1_svc;
 		break;
 
 	case responder:
 		_xdr_argument = (xdrproc_t) xdr_wrapstring;
-		_xdr_result = (xdrproc_t) xdr_int;
+		_xdr_result = (xdrproc_t) xdr_ticket;
 		local = (char *(*)(char *, struct svc_req *)) responder_1_svc;
 		break;
 

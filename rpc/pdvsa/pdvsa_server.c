@@ -6,10 +6,10 @@
 
 #include "pdvsa.h"
 
-int *
+char **
 preguntar_1_svc(char **argp, struct svc_req *rqstp)
 {
-	static int  result;
+	static char * result;
 
 	/*
 	 * insert server code here
@@ -18,10 +18,10 @@ preguntar_1_svc(char **argp, struct svc_req *rqstp)
 	return &result;
 }
 
-int *
+ticket *
 responder_1_svc(char **argp, struct svc_req *rqstp)
 {
-	static int  result;
+	static ticket  result;
 
 	/*
 	 * insert server code here

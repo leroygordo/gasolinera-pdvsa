@@ -11,9 +11,9 @@ void
 centroprog_1(char *host)
 {
 	CLIENT *clnt;
-	int  *result_1;
+	char * *result_1;
 	char * preguntar_1_arg;
-	int  *result_2;
+	ticket  *result_2;
 	char * responder_1_arg;
 	int  *result_3;
 	ticket  validar_1_arg;
@@ -31,11 +31,11 @@ centroprog_1(char *host)
 #endif	/* DEBUG */
 
 	result_1 = preguntar_1(&preguntar_1_arg, clnt);
-	if (result_1 == (int *) NULL) {
+	if (result_1 == (char **) NULL) {
 		clnt_perror (clnt, "call failed");
 	}
 	result_2 = responder_1(&responder_1_arg, clnt);
-	if (result_2 == (int *) NULL) {
+	if (result_2 == (ticket *) NULL) {
 		clnt_perror (clnt, "call failed");
 	}
 	result_3 = validar_1(&validar_1_arg, clnt);
