@@ -27,12 +27,18 @@ $(OBJECTS_CLNT) : $(TARGETS_CLNT.c)
 
 $(OBJECTS_SVC) : $(TARGETS_SVC.c)
 
-$(CLIENT) : $(OBJECTS_CLNT) 
-	$(LINK.c) -o $(CLIENT) $(OBJECTS_CLNT) $(LDLIBS) 
+$(CLIENT) : $(OBJECTS_CLNT) md5c.o desafio.o global.h  
+	$(LINK.c) -o $(CLIENT) $(OBJECTS_CLNT) md5c.o desafio.o $(LDLIBS) 
 
-$(SERVER) : $(OBJECTS_SVC) 
-	$(LINK.c) -o $(SERVER) $(OBJECTS_SVC) $(LDLIBS) -lpthread
+$(SERVER) : $(OBJECTS_SVC) md5c.o desafio.o global.h 
+	$(LINK.c) -o $(SERVER) $(OBJECTS_SVC) md5c.o desafio.o $(LDLIBS) -lpthread
+
+md5c.o  : md5c.c md5.h global.h
+	$(LINK.c) -c md5c.c
+
+desafio.o: desafio.c md5.h global.h
+	$(LINK.c) -c desafio.c
 
 clean:
-	$(RM) core $(OBJECTS_CLNT) $(OBJECTS_SVC) $(CLIENT) $(SERVER)
+	$(RM) core $(OBJECTS_CLNT) $(OBJECTS_SVC) $(CLIENT) $(SERVER) md5c.o desafio.o
 
