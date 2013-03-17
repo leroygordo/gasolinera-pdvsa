@@ -31,7 +31,7 @@ responder_1_svc(desafio *argp, struct svc_req *rqstp)
 }
 
 int *
-validar_1_svc(ticket *argp, struct svc_req *rqstp)
+pedir_gasolina_1_svc(pase *argp, struct svc_req *rqstp)
 {
 	static int  result;
 
@@ -43,19 +43,7 @@ validar_1_svc(ticket *argp, struct svc_req *rqstp)
 }
 
 int *
-pedir_gasolina_1_svc(char **argp, struct svc_req *rqstp)
-{
-	static int  result;
-
-	/*
-	 * insert server code here
-	 */
-
-	return &result;
-}
-
-int *
-pedir_tiempo_1_svc(void *argp, struct svc_req *rqstp)
+pedir_tiempo_1_svc(pase *argp, struct svc_req *rqstp)
 {
 	static int  result;
 

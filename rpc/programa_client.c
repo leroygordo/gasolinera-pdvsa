@@ -16,11 +16,9 @@ centroprog_1(char *host)
 	ticket  *result_2;
 	desafio responder_1_arg;
 	int  *result_3;
-	ticket  validar_1_arg;
+	pase pedir_gasolina_1_arg;
 	int  *result_4;
-	char * pedir_gasolina_1_arg;
-	int  *result_5;
-	char *pedir_tiempo_1_arg;
+	pase pedir_tiempo_1_arg;
 
 #ifndef	DEBUG
 	clnt = clnt_create (host, CENTROPROG, CENTRO_VER, "udp");
@@ -38,16 +36,12 @@ centroprog_1(char *host)
 	if (result_2 == (ticket *) NULL) {
 		clnt_perror (clnt, "call failed");
 	}
-	result_3 = validar_1(&validar_1_arg, clnt);
+	result_3 = pedir_gasolina_1(&pedir_gasolina_1_arg, clnt);
 	if (result_3 == (int *) NULL) {
 		clnt_perror (clnt, "call failed");
 	}
-	result_4 = pedir_gasolina_1(&pedir_gasolina_1_arg, clnt);
+	result_4 = pedir_tiempo_1(&pedir_tiempo_1_arg, clnt);
 	if (result_4 == (int *) NULL) {
-		clnt_perror (clnt, "call failed");
-	}
-	result_5 = pedir_tiempo_1((void*)&pedir_tiempo_1_arg, clnt);
-	if (result_5 == (int *) NULL) {
 		clnt_perror (clnt, "call failed");
 	}
 #ifndef	DEBUG

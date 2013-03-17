@@ -27,6 +27,12 @@ struct desafio {
 };
 typedef struct desafio desafio;
 
+struct pase {
+	char *nombre_bomba;
+	ticket ticket_;
+};
+typedef struct pase pase;
+
 #define CENTROPROG 0x31111111
 #define CENTRO_VER 1
 
@@ -37,15 +43,12 @@ extern  char ** preguntar_1_svc(char **, struct svc_req *);
 #define responder 2
 extern  ticket * responder_1(desafio *, CLIENT *);
 extern  ticket * responder_1_svc(desafio *, struct svc_req *);
-#define validar 3
-extern  int * validar_1(ticket *, CLIENT *);
-extern  int * validar_1_svc(ticket *, struct svc_req *);
-#define pedir_gasolina 4
-extern  int * pedir_gasolina_1(char **, CLIENT *);
-extern  int * pedir_gasolina_1_svc(char **, struct svc_req *);
-#define pedir_tiempo 5
-extern  int * pedir_tiempo_1(void *, CLIENT *);
-extern  int * pedir_tiempo_1_svc(void *, struct svc_req *);
+#define pedir_gasolina 3
+extern  int * pedir_gasolina_1(pase *, CLIENT *);
+extern  int * pedir_gasolina_1_svc(pase *, struct svc_req *);
+#define pedir_tiempo 4
+extern  int * pedir_tiempo_1(pase *, CLIENT *);
+extern  int * pedir_tiempo_1_svc(pase *, struct svc_req *);
 extern int pdvsa_prog_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
 	
 #else /* K&R C */
@@ -72,10 +75,12 @@ extern int pdvsa_prog_1_freeresult ();
 #if defined(__STDC__) || defined(__cplusplus)
 extern  bool_t xdr_ticket (XDR *, ticket*);
 extern  bool_t xdr_desafio (XDR *, desafio*);
+extern  bool_t xdr_pase (XDR *, pase*);
 
 #else /* K&R C */
 extern bool_t xdr_ticket ();
 extern bool_t xdr_desafio ();
+extern bool_t xdr_pase ();
 
 #endif /* K&R C */
 

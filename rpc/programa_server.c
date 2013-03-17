@@ -205,25 +205,26 @@ responder_1_svc(desafio *argp, struct svc_req *rqstp)
   printf(respuesta);
   printf("\n");
   
-  //Falta comparar y crear el ticket de ser necesario
+  //crear ticket
 
-  return &result;
+  if(!strcmp(respuesta,argp->respuesta))
+    return &result;
+  else
+    return NULL;
 }
 
-int *
-validar_1_svc(ticket *argp, struct svc_req *rqstp)
-{
-	static int  result;
+static int * validar(ticket *arg) {
+  static int  result;
 
 	/*
 	 * insert server code here
 	 */
 
-	return &result;
+  return &result;
 }
 
 int *
-pedir_gasolina_1_svc(char **argp, struct svc_req *rqstp)
+pedir_gasolina_1_svc(pase *argp, struct svc_req *rqstp)
 {
   pthread_mutex_lock(&mtx);
   static int  result;
@@ -240,7 +241,7 @@ pedir_gasolina_1_svc(char **argp, struct svc_req *rqstp)
 }
 
 int *
-pedir_tiempo_1_svc(void *argp, struct svc_req *rqstp)
+pedir_tiempo_1_svc(pase *argp, struct svc_req *rqstp)
 {
   static int  result;
   result = tiempo;

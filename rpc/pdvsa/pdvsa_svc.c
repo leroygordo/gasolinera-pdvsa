@@ -22,8 +22,8 @@ pdvsa_prog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 	union {
 		char *preguntar_1_arg;
 		desafio responder_1_arg;
-		ticket validar_1_arg;
-		char *pedir_gasolina_1_arg;
+		pase pedir_gasolina_1_arg;
+		pase pedir_tiempo_1_arg;
 	} argument;
 	char *result;
 	xdrproc_t _xdr_argument, _xdr_result;
@@ -46,20 +46,14 @@ pdvsa_prog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 		local = (char *(*)(char *, struct svc_req *)) responder_1_svc;
 		break;
 
-	case validar:
-		_xdr_argument = (xdrproc_t) xdr_ticket;
-		_xdr_result = (xdrproc_t) xdr_int;
-		local = (char *(*)(char *, struct svc_req *)) validar_1_svc;
-		break;
-
 	case pedir_gasolina:
-		_xdr_argument = (xdrproc_t) xdr_wrapstring;
+		_xdr_argument = (xdrproc_t) xdr_pase;
 		_xdr_result = (xdrproc_t) xdr_int;
 		local = (char *(*)(char *, struct svc_req *)) pedir_gasolina_1_svc;
 		break;
 
 	case pedir_tiempo:
-		_xdr_argument = (xdrproc_t) xdr_void;
+		_xdr_argument = (xdrproc_t) xdr_pase;
 		_xdr_result = (xdrproc_t) xdr_int;
 		local = (char *(*)(char *, struct svc_req *)) pedir_tiempo_1_svc;
 		break;

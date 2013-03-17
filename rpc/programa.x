@@ -10,13 +10,17 @@ struct desafio {
   string respuesta<64>;
 };
 
+struct pase {
+  string nombre_bomba<100>;
+  ticket ticket_;
+};
+
 
 program CENTROPROG {
   version CENTRO_VER {
-    string<32> preguntar (string) = 1;
+    string preguntar (string) = 1;
     ticket responder (desafio) = 2;
-    int validar (ticket) = 3;
-    int pedir_gasolina (string) = 4;
-    int pedir_tiempo () = 5;
+    int pedir_gasolina (pase) = 3;
+    int pedir_tiempo (pase) = 4;
   }=1;
 }=0x31111111;

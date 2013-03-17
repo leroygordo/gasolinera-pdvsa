@@ -32,3 +32,16 @@ xdr_desafio (XDR *xdrs, desafio *objp)
 		 return FALSE;
 	return TRUE;
 }
+
+bool_t
+xdr_pase (XDR *xdrs, pase *objp)
+{
+        register int32_t *buf;
+
+         if (!xdr_string (xdrs, &objp->nombre_bomba, 100))
+                 return FALSE;
+         if (!xdr_ticket (xdrs, &objp->ticket_))
+                 return FALSE;
+        return TRUE;
+}
+
