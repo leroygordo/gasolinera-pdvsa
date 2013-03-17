@@ -30,12 +30,24 @@ centroprog_1(char *host)
 	}
 #endif	/* DEBUG */
 
-	result_1 = pedir_gasolina_1(&pedir_gasolina_1_arg, clnt);
+	result_1 = preguntar_1(&preguntar_1_arg, clnt);
 	if (result_1 == (int *) NULL) {
 		clnt_perror (clnt, "call failed");
 	}
-	result_2 = pedir_tiempo_1(&pedir_tiempo_1_arg, clnt);
+	result_2 = responder_1(&responder_1_arg, clnt);
 	if (result_2 == (int *) NULL) {
+		clnt_perror (clnt, "call failed");
+	}
+	result_3 = validar_1(&validar_1_arg, clnt);
+	if (result_3 == (int *) NULL) {
+		clnt_perror (clnt, "call failed");
+	}
+	result_4 = pedir_gasolina_1(&pedir_gasolina_1_arg, clnt);
+	if (result_4 == (int *) NULL) {
+		clnt_perror (clnt, "call failed");
+	}
+	result_5 = pedir_tiempo_1((void*)&pedir_tiempo_1_arg, clnt);
+	if (result_5 == (int *) NULL) {
 		clnt_perror (clnt, "call failed");
 	}
 #ifndef	DEBUG
