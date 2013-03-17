@@ -12,9 +12,15 @@ centroprog_1(char *host)
 {
 	CLIENT *clnt;
 	int  *result_1;
-	estructura  pedir_gasolina_1_arg;
+	char * preguntar_1_arg;
 	int  *result_2;
-	estructura  pedir_tiempo_1_arg;
+	char * responder_1_arg;
+	int  *result_3;
+	ticket  validar_1_arg;
+	int  *result_4;
+	char * pedir_gasolina_1_arg;
+	int  *result_5;
+	char *pedir_tiempo_1_arg;
 
 #ifndef	DEBUG
 	clnt = clnt_create (host, CENTROPROG, CENTRO_VER, "udp");

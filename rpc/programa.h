@@ -13,41 +13,61 @@
 extern "C" {
 #endif
 
-
-struct estructura {
-	char *nombre;
+struct ticket {
+	int nro_ticket;
+	int ip_centro;
+	char *fecha;
+	char *hora;
 };
-typedef struct estructura estructura;
+typedef struct ticket ticket;
 
 #define CENTROPROG 0x31111111
 #define CENTRO_VER 1
 
 #if defined(__STDC__) || defined(__cplusplus)
-#define pedir_gasolina 1
-extern  int * pedir_gasolina_1(estructura *, CLIENT *);
-extern  int * pedir_gasolina_1_svc(estructura *, struct svc_req *);
-#define pedir_tiempo 2
-extern  int * pedir_tiempo_1(estructura *, CLIENT *);
-extern  int * pedir_tiempo_1_svc(estructura *, struct svc_req *);
-extern int centroprog_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
-
+#define preguntar 1
+extern  int * preguntar_1(char **, CLIENT *);
+extern  int * preguntar_1_svc(char **, struct svc_req *);
+#define responder 2
+extern  int * responder_1(char **, CLIENT *);
+extern  int * responder_1_svc(char **, struct svc_req *);
+#define validar 3
+extern  int * validar_1(ticket *, CLIENT *);
+extern  int * validar_1_svc(ticket *, struct svc_req *);
+#define pedir_gasolina 4
+extern  int * pedir_gasolina_1(char **, CLIENT *);
+extern  int * pedir_gasolina_1_svc(char **, struct svc_req *);
+#define pedir_tiempo 5
+extern  int * pedir_tiempo_1(void *, CLIENT *);
+extern  int * pedir_tiempo_1_svc(void *, struct svc_req *);
+extern int pdvsa_prog_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
+	
 #else /* K&R C */
-#define pedir_gasolina 1
+#define preguntar 1
+extern  int * preguntar_1();
+extern  int * preguntar_1_svc();
+#define responder 2
+extern  int * responder_1();
+extern  int * responder_1_svc();
+#define validar 3
+extern  int * validar_1();
+extern  int * validar_1_svc();
+#define pedir_gasolina 4
 extern  int * pedir_gasolina_1();
 extern  int * pedir_gasolina_1_svc();
-#define pedir_tiempo 2
+#define pedir_tiempo 5
 extern  int * pedir_tiempo_1();
 extern  int * pedir_tiempo_1_svc();
-extern int centroprog_1_freeresult ();
+extern int pdvsa_prog_1_freeresult ();
 #endif /* K&R C */
 
 /* the xdr functions */
 
 #if defined(__STDC__) || defined(__cplusplus)
-extern  bool_t xdr_estructura (XDR *, estructura*);
+extern  bool_t xdr_ticket (XDR *, ticket*);
 
 #else /* K&R C */
-extern bool_t xdr_estructura ();
+extern bool_t xdr_ticket ();
 
 #endif /* K&R C */
 
