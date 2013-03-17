@@ -21,6 +21,12 @@ struct ticket {
 };
 typedef struct ticket ticket;
 
+struct desafio {
+	char *pregunta;
+	char *respuesta;
+};
+typedef struct desafio desafio;
+
 #define CENTROPROG 0x31111111
 #define CENTRO_VER 1
 
@@ -29,8 +35,8 @@ typedef struct ticket ticket;
 extern  char ** preguntar_1(char **, CLIENT *);
 extern  char ** preguntar_1_svc(char **, struct svc_req *);
 #define responder 2
-extern  ticket * responder_1(char **, CLIENT *);
-extern  ticket * responder_1_svc(char **, struct svc_req *);
+extern  ticket * responder_1(desafio *, CLIENT *);
+extern  ticket * responder_1_svc(desafio *, struct svc_req *);
 #define validar 3
 extern  int * validar_1(ticket *, CLIENT *);
 extern  int * validar_1_svc(ticket *, struct svc_req *);
@@ -65,9 +71,11 @@ extern int pdvsa_prog_1_freeresult ();
 
 #if defined(__STDC__) || defined(__cplusplus)
 extern  bool_t xdr_ticket (XDR *, ticket*);
+extern  bool_t xdr_desafio (XDR *, desafio*);
 
 #else /* K&R C */
 extern bool_t xdr_ticket ();
+extern bool_t xdr_desafio ();
 
 #endif /* K&R C */
 

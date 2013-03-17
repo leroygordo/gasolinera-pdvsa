@@ -15,6 +15,7 @@
 
 int tiempo, inventario, capacidad, numConexion;
 int t_funcionamiento = 480;
+int nro_ticket = 0;
 char *log_file_name;
 FILE *log_file;
 pthread_mutex_t mtx;
@@ -175,25 +176,19 @@ void finish() {
 char **
 preguntar_1_svc(char **argp, struct svc_req *rqstp)
 {
-	static char*  result;
-
-unsigned char res[32];
-
-MDString(*argp,res);
-
-	return &result;
+  static char *result;
+  result = (char *) malloc(32);
+  MDString(*argp,result);
+  
+  return &result;
 }
 
 ticket *
-responder_1_svc(char **argp, struct svc_req *rqstp)
+responder_1_svc(desafio *argp, struct svc_req *rqstp)
 {
-	static ticket  result;
+  static ticket result;
 
-	/*
-	 * insert server code here
-	 */
-
-	return &result;
+  return &result;
 }
 
 int *

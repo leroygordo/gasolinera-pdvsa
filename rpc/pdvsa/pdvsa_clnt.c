@@ -25,13 +25,13 @@ preguntar_1(char **argp, CLIENT *clnt)
 }
 
 ticket *
-responder_1(char **argp, CLIENT *clnt)
+responder_1(desafio *argp, CLIENT *clnt)
 {
 	static ticket clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
 	if (clnt_call (clnt, responder,
-		(xdrproc_t) xdr_wrapstring, (caddr_t) argp,
+		(xdrproc_t) xdr_desafio, (caddr_t) argp,
 		(xdrproc_t) xdr_ticket, (caddr_t) &clnt_res,
 		TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);

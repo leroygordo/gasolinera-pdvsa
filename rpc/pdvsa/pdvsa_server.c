@@ -19,7 +19,7 @@ preguntar_1_svc(char **argp, struct svc_req *rqstp)
 }
 
 ticket *
-responder_1_svc(char **argp, struct svc_req *rqstp)
+responder_1_svc(desafio *argp, struct svc_req *rqstp)
 {
 	static ticket  result;
 

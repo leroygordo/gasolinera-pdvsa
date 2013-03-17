@@ -20,3 +20,15 @@ xdr_ticket (XDR *xdrs, ticket *objp)
 		 return FALSE;
 	return TRUE;
 }
+
+bool_t
+xdr_desafio (XDR *xdrs, desafio *objp)
+{
+	register int32_t *buf;
+
+	 if (!xdr_string (xdrs, &objp->pregunta, 32))
+		 return FALSE;
+	 if (!xdr_string (xdrs, &objp->respuesta, 64))
+		 return FALSE;
+	return TRUE;
+}

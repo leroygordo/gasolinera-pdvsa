@@ -14,7 +14,7 @@ pdvsa_prog_1(char *host)
 	char * *result_1;
 	char * preguntar_1_arg;
 	ticket  *result_2;
-	char * responder_1_arg;
+	desafio  responder_1_arg;
 	int  *result_3;
 	ticket  validar_1_arg;
 	int  *result_4;
