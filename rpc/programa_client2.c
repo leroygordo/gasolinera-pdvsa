@@ -21,7 +21,6 @@ int t_funcionamiento = 480;
 char *log_file_name;
 FILE *log_file;
 
-
 static void print_use(){
 printf("uso: bomba OPCIONES ...\n");
 printf("     OPCIONES:\n");
