@@ -3,8 +3,8 @@
  * It was generated using rpcgen.
  */
 
-#ifndef _PROGRAMA_H_RPCGEN
-#define _PROGRAMA_H_RPCGEN
+#ifndef _PDVSA_H_RPCGEN
+#define _PDVSA_H_RPCGEN
 
 #include <rpc/rpc.h>
 
@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
 
 struct ticket {
 	int nro_ticket;
@@ -33,8 +34,8 @@ struct pase {
 };
 typedef struct pase pase;
 
-#define CENTROPROG 0x31111111
-#define CENTRO_VER 1
+#define PDVSA_PROG 0x31111111
+#define PDVSA_VER 1
 
 #if defined(__STDC__) || defined(__cplusplus)
 #define preguntar 1
@@ -50,7 +51,7 @@ extern  int * pedir_gasolina_1_svc(pase *, struct svc_req *);
 extern  int * pedir_tiempo_1(pase *, CLIENT *);
 extern  int * pedir_tiempo_1_svc(pase *, struct svc_req *);
 extern int pdvsa_prog_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
-	
+
 #else /* K&R C */
 #define preguntar 1
 extern  char ** preguntar_1();
@@ -58,13 +59,10 @@ extern  char ** preguntar_1_svc();
 #define responder 2
 extern  ticket * responder_1();
 extern  ticket * responder_1_svc();
-#define validar 3
-extern  int * validar_1();
-extern  int * validar_1_svc();
-#define pedir_gasolina 4
+#define pedir_gasolina 3
 extern  int * pedir_gasolina_1();
 extern  int * pedir_gasolina_1_svc();
-#define pedir_tiempo 5
+#define pedir_tiempo 4
 extern  int * pedir_tiempo_1();
 extern  int * pedir_tiempo_1_svc();
 extern int pdvsa_prog_1_freeresult ();
@@ -88,4 +86,4 @@ extern bool_t xdr_pase ();
 }
 #endif
 
-#endif /* !_PROGRAMA_H_RPCGEN */
+#endif /* !_PDVSA_H_RPCGEN */

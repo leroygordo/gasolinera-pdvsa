@@ -16,8 +16,8 @@ struct pase {
 };
 
 
-program CENTROPROG {
-  version CENTRO_VER {
+program PDVSA_PROG {
+  version PDVSA_VER {
     string preguntar (string) = 1;
     ticket responder (desafio) = 2;
     int pedir_gasolina (pase) = 3;

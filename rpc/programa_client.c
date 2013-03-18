@@ -21,7 +21,6 @@ int t_funcionamiento = 480;
 char *log_file_name;
 FILE *log_file;
 
-
 static void print_use(){
 printf("uso: bomba OPCIONES ...\n");
 printf("     OPCIONES:\n");
@@ -114,37 +113,49 @@ t_funcionamiento--;
 if(!t_funcionamiento)
   pthread_exit(EXIT_SUCCESS);
 }
+void
+centroprog_1(char *host)
+{
+	CLIENT *clnt;
+	char * *result_1;
+	char * preguntar_1_arg;
+	ticket  *result_2;
+	desafio responder_1_arg;
+	int  *result_3;
+	pase pedir_gasolina_1_arg;
+	int  *result_4;
+	pase pedir_tiempo_1_arg;
+
+#ifndef	DEBUG
+	clnt = clnt_create (host, CENTROPROG, CENTRO_VER, "udp");
+	if (clnt == NULL) {
+		clnt_pcreateerror (host);
+		exit (1);
+	}
+#endif	/* DEBUG */
+
+	result_1 = preguntar_1(&preguntar_1_arg, clnt);
+	if (result_1 == (char **) NULL) {
+		clnt_perror (clnt, "call failed");
+	}
+	result_2 = responder_1(&responder_1_arg, clnt);
+	if (result_2 == (ticket *) NULL) {
+		clnt_perror (clnt, "call failed");
+	}
+	result_3 = pedir_gasolina_1(&pedir_gasolina_1_arg, clnt);
+	if (result_3 == (int *) NULL) {
+		clnt_perror (clnt, "call failed");
+	}
+	result_4 = pedir_tiempo_1(&pedir_tiempo_1_arg, clnt);
+	if (result_4 == (int *) NULL) {
+		clnt_perror (clnt, "call failed");
+	}
+#ifndef	DEBUG
+	clnt_destroy (clnt);
+#endif	 /* DEBUG */
+
 }
-/*
-  void
-  centroprog_1(char *host)
-  {
-  CLIENT *clnt;
-  int  *result_1;
-  estructura  pedir_gasolina_1_arg;
-  int  *result_2;
-  estructura  pedir_tiempo_1_arg;
 
-  #ifndef	DEBUG
-  clnt = clnt_create (host, CENTROPROG, CENTRO_VER, "udp");
-  if (clnt == NULL) {
-  clnt_pcreateerror (host);
-  exit (1);
-  }
-  #endif	/* DEBUG 
-
-  result_1 = pedir_gasolina_1(&pedir_gasolina_1_arg, clnt);
-  if (result_1 == (int *) NULL) {
-  clnt_perror (clnt, "call failed");
-  }
-  result_2 = pedir_tiempo_1(&pedir_tiempo_1_arg, clnt);
-  if (result_2 == (int *) NULL) {
-  clnt_perror (clnt, "call failed");
-  }
-  #ifndef	DEBUG
-  clnt_destroy (clnt);
-  #endif	 /* DEBUG 
-  } */
 
 int
 main (int argc, char *argv[])

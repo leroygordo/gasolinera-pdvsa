@@ -3,18 +3,18 @@
 
 # Parameters
 
-CLIENT = centro_client
-SERVER = centro_server
+CLIENT = pdvsa_client
+SERVER = pdvsa_server
 
 SOURCES_CLNT.c = 
 SOURCES_CLNT.h = 
 SOURCES_SVC.c = 
 SOURCES_SVC.h = 
-SOURCES.x = centro.x
+SOURCES.x = pdvsa.x
 
-TARGETS_SVC.c = centro_svc.c centro_server.c centro_xdr.c 
-TARGETS_CLNT.c = centro_clnt.c centro_client.c centro_xdr.c 
-TARGETS = centro.h centro_xdr.c centro_clnt.c centro_svc.c centro_client.c centro_server.c
+TARGETS_SVC.c = pdvsa_svc.c pdvsa_server.c pdvsa_xdr.c 
+TARGETS_CLNT.c = pdvsa_clnt.c pdvsa_client.c pdvsa_xdr.c 
+TARGETS = pdvsa.h pdvsa_xdr.c pdvsa_clnt.c pdvsa_svc.c pdvsa_client.c pdvsa_server.c
 
 OBJECTS_CLNT = $(SOURCES_CLNT.c:%.c=%.o) $(TARGETS_CLNT.c:%.c=%.o)
 OBJECTS_SVC = $(SOURCES_SVC.c:%.c=%.o) $(TARGETS_SVC.c:%.c=%.o)

@@ -11,15 +11,20 @@
 #include <string.h>
 #include <pthread.h>
 #include <signal.h>
+#include "desafio.c"
 
 int tiempo, inventario, capacidad, numConexion;
 int t_funcionamiento = 480;
+int nro_ticket = 0;
 char *log_file_name;
 FILE *log_file;
 pthread_mutex_t mtx;
 int started = 0;
 pthread_t thread_inv, thread_func, thread_exit;
 pthread_attr_t attr1, attr2, attr3;
+char * nombre_centro;
+int suministro, puerto;
+
 
 static void print_use(){
   printf("uso: centro OPCIONES ...\n");
@@ -29,7 +34,7 @@ static void print_use(){
   printf("       -i  <inventario>\n");
   printf("       -t  <tiempo>\n");
   printf("       -s  <suministro>\n");
-  printf("       -p  <puerto>\n");
+  //printf("       -p  <puerto>\n");
 }
 
 static void read_arg(char **argv,int argc, char **nombre_centro,int *capacidad,int *inventario,int *suministro,int *puerto,int *tiempo) {
@@ -171,43 +176,84 @@ void finish() {
  exit(EXIT_SUCCESS);
 }
 
+char **
+preguntar_1_svc(char **argp, struct svc_req *rqstp)
+{
+  static char *result;
+  result = (char *) malloc(32);
+  MDString(*argp,result);
+  
+  return &result;
+}
+
+ticket *
+responder_1_svc(desafio *argp, struct svc_req *rqstp)
+{
+  static ticket result;
+  static char *pregunta, *media_respuesta, *respuesta;
+
+  pregunta = (char *) malloc(32);
+  media_respuesta = (char *) malloc(32);
+
+  MDString(*argp->pregunta,pregunta);
+  MDString(nombre_centro,media_respuesta);
+
+  respuesta = (char *) malloc(64);
+
+  respuesta = strcat(pregunta,media_respuesta);
+   
+  printf(respuesta);
+  printf("\n");
+  
+  //crear ticket
+
+  if(!strcmp(respuesta,argp->respuesta))
+    return &result;
+  else
+    return NULL;
+}
+
+static int * validar(ticket *arg) {
+  static int  result;
+
+	/*
+	 * insert server code here
+	 */
+
+  return &result;
+}
 
 int *
-pedir_gasolina_1_svc(estructura *argp, struct svc_req *rqstp)
+pedir_gasolina_1_svc(pase *argp, struct svc_req *rqstp)
 {
   pthread_mutex_lock(&mtx);
   static int  result;
 
-	if (inventario < 38000)
-	  result = 0;
-	else {
-	  fprintf(log_file, "Suministro:  %d minutos, %s, OK, %d.\n", 480 - t_funcionamiento, argp->nombre, inventario );
-	  inventario = inventario - 38000;
-	  result = 1;
-	}
-	pthread_mutex_unlock(&mtx);
-	return &result;
+  if (inventario < 38000)
+    result = 0;
+  else {
+    fprintf(log_file, "Suministro:  %d minutos, %s, OK, %d.\n", 480 - t_funcionamiento, *argp, inventario );
+    inventario = inventario - 38000;
+    result = 1;
+  }
+  pthread_mutex_unlock(&mtx);
+  return &result;
 }
 
 int *
-pedir_tiempo_1_svc(estructura *argp, struct svc_req *rqstp)
+pedir_tiempo_1_svc(pase *argp, struct svc_req *rqstp)
 {
-
   static int  result;
-
-	result = tiempo;
-
-	return &result;
+  result = tiempo;
+  return &result;
 }
 
 void auxiliar_main(int argc, char **argv) {
-    if(argc != 13){
+  if(argc != 13){
     print_use();
     exit(EXIT_FAILURE);
   }
 
-  char * nombre_centro;
-  int suministro, puerto;
 
   read_arg(argv,argc,&nombre_centro,&capacidad,&inventario,&suministro,&puerto,&tiempo);
 
@@ -224,7 +270,6 @@ void auxiliar_main(int argc, char **argv) {
   }
 
   fprintf(log_file,"Inventario inicial: %d litros.\n",inventario);
-
   
   pthread_attr_init(&attr1);
   pthread_attr_setdetachstate(&attr1,PTHREAD_CREATE_JOINABLE);
@@ -249,8 +294,8 @@ void auxiliar_main(int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
 }
-int
-main (int argc, char **argv)
+
+int main (int argc, char **argv)
 {
 	register SVCXPRT *transp;
 

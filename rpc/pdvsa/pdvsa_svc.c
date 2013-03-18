@@ -3,7 +3,7 @@
  * It was generated using rpcgen.
  */
 
-#include "programa.h"
+#include "pdvsa.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <rpc/pmap_clnt.h>
@@ -17,13 +17,13 @@
 #endif
 
 static void
-centroprog_1(struct svc_req *rqstp, register SVCXPRT *transp)
+pdvsa_prog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 {
 	union {
 		char *preguntar_1_arg;
 		desafio responder_1_arg;
 		pase pedir_gasolina_1_arg;
-                pase pedir_tiempo_1_arg;
+		pase pedir_tiempo_1_arg;
 	} argument;
 	char *result;
 	xdrproc_t _xdr_argument, _xdr_result;
@@ -41,19 +41,19 @@ centroprog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 		break;
 
 	case responder:
-		_xdr_argument = (xdrproc_t) xdr_wrapstring;
+		_xdr_argument = (xdrproc_t) xdr_desafio;
 		_xdr_result = (xdrproc_t) xdr_ticket;
 		local = (char *(*)(char *, struct svc_req *)) responder_1_svc;
 		break;
 
 	case pedir_gasolina:
-		_xdr_argument = (xdrproc_t) xdr_wrapstring;
+		_xdr_argument = (xdrproc_t) xdr_pase;
 		_xdr_result = (xdrproc_t) xdr_int;
 		local = (char *(*)(char *, struct svc_req *)) pedir_gasolina_1_svc;
 		break;
 
 	case pedir_tiempo:
-		_xdr_argument = (xdrproc_t) xdr_void;
+		_xdr_argument = (xdrproc_t) xdr_pase;
 		_xdr_result = (xdrproc_t) xdr_int;
 		local = (char *(*)(char *, struct svc_req *)) pedir_tiempo_1_svc;
 		break;
@@ -78,3 +78,35 @@ centroprog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 	return;
 }
 
+int
+main (int argc, char **argv)
+{
+	register SVCXPRT *transp;
+
+	pmap_unset (PDVSA_PROG, PDVSA_VER);
+
+	transp = svcudp_create(RPC_ANYSOCK);
+	if (transp == NULL) {
+		fprintf (stderr, "%s", "cannot create udp service.");
+		exit(1);
+	}
+	if (!svc_register(transp, PDVSA_PROG, PDVSA_VER, pdvsa_prog_1, IPPROTO_UDP)) {
+		fprintf (stderr, "%s", "unable to register (PDVSA_PROG, PDVSA_VER, udp).");
+		exit(1);
+	}
+
+	transp = svctcp_create(RPC_ANYSOCK, 0, 0);
+	if (transp == NULL) {
+		fprintf (stderr, "%s", "cannot create tcp service.");
+		exit(1);
+	}
+	if (!svc_register(transp, PDVSA_PROG, PDVSA_VER, pdvsa_prog_1, IPPROTO_TCP)) {
+		fprintf (stderr, "%s", "unable to register (PDVSA_PROG, PDVSA_VER, tcp).");
+		exit(1);
+	}
+
+	svc_run ();
+	fprintf (stderr, "%s", "svc_run returned");
+	exit (1);
+	/* NOTREACHED */
+}
