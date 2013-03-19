@@ -127,43 +127,7 @@ int valid_arg(char *nombre_centro,int capacidad,int inventario,int suministro,in
   return valid;
 }
 
-void *procesarPeticion(void *tid){
 
-  if(buffer[0] == '-') { 
-    bzero(buffer,256);
-    sprintf(buffer,"%d",tiempo);
-  }
-  else {
-    if (numConexion < 10) {
-      numConexion++;
-      pthread_mutex_lock(&mtx);
-      if (inventario >= 38000) {
-	fprintf(log_file, "Suministro:  %d minutos, %s, OK, %d.\n", 480 - t_funcionamiento, buffer, inventario );
-	//sleep(tiempo);
-        bzero(buffer,256);
-	inventario = inventario - 38000;
-	strcpy(buffer,"D");
-      } 
-      else {
-	fprintf(log_file, "Suministro:  %d minutos, %s, Fallido, %d.\n", 480 - t_funcionamiento, buffer, inventario );
-        bzero(buffer,256);
-        strcpy(buffer,"O");
-      }
-      pthread_mutex_unlock(&mtx);
-      numConexion--;
-    }
-    else
-      strcpy(buffer,"O");
-  }
-  
-  if (send(socket,strcat(buffer,"\n"),256,0) < 0) {
-    error("Error mandando los datos");
-  }
-  
-  close(socket);
-  pthread_exit(EXIT_SUCCESS);
-
-}  
 void *inventario_suministro(void * tid) {
   int suministro = (int) tid;
   while (TRUE) {
@@ -212,7 +176,7 @@ void finish() {
  exit(EXIT_SUCCESS);
 }
 
-void crear_ticket (ticket ticket, int numero, int ip, string fecha_ticket, string hora_ticket) {
+void crear_ticket (ticket ticket, int numero, int ip, char *fecha_ticket, char *hora_ticket) {
   ticket.nro_ticket = numero;
   ticket.ip_centro = ip;
   ticket.fecha = fecha_ticket;
@@ -233,7 +197,8 @@ ticket *
 responder_1_svc(desafio *argp, struct svc_req *rqstp)
 {
   static ticket result;
-  static char *pregunta, *media_respuesta, *respuesta;
+  static char *pregunta, *media_respuesta, *respuesta, fecha_ticket, hora_ticket;
+  static int numero_ticket, ip;
 
   pregunta = (char *) malloc(32);
   media_respuesta = (char *) malloc(32);
@@ -249,6 +214,9 @@ responder_1_svc(desafio *argp, struct svc_req *rqstp)
   printf("\n");
   
   //crear ticket
+
+  /*numero_ticket = atoi(argp->respuesta);
+    crear_ticket (result,numero_ticket, ip, fecha_ticket, hora_ticket)*/
 
   if(!strcmp(respuesta,argp->respuesta))
     return &result;
@@ -287,6 +255,7 @@ int *
 pedir_tiempo_1_svc(pase *argp, struct svc_req *rqstp)
 {
   static int  result;
+  ticket ticket;
   result = tiempo;
   return &result;
 }

@@ -11,9 +11,9 @@
 #include "estructuras.h"
 #include "programa.h"
 
-void crear_pase (pase pase, string nombre, ticket ticket) {
+void crear_pase (pase pase, char *nombre, ticket ticket) {
   pase.nombre_bomba = nombre;
-  pase.ticket = ticket;
+  pase.ticket_ = ticket;
 }
 
 int agregar_directorio(centro** directorio, char *nombre_centro, char *hostname, int puerto) {
@@ -38,7 +38,7 @@ int agregar_directorio(centro** directorio, char *nombre_centro, char *hostname,
       clnt_pcreateerror (centro_->hostname);
       exit (1);
     }
-    crear_pase(pedir_tiempo_1_arg,NULL);
+    //crear_pase(pedir_tiempo_1_arg,NULL);
     result_1 = pedir_tiempo_1(&pedir_tiempo_1_arg, clnt);
     if (result_1 == (int *) NULL) {
       clnt_perror (clnt, "call failed");

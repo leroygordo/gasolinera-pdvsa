@@ -157,11 +157,6 @@ centroprog_1(char *host)
 
 }
 
-void crear_pase (pase pase, string nombre, ticket ticket) {
-  pase.nombre_bomba = nombre;
-  pase.ticket = ticket;
-}
-
 int
 main (int argc, char *argv[]) {
 
