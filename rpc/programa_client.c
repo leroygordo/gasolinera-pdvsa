@@ -157,6 +157,10 @@ centroprog_1(char *host)
 
 }
 
+void crear_pase (pase pase, string nombre, ticket ticket) {
+  pase.nombre_bomba = nombre;
+  pase.ticket = ticket;
+}
 
 int
 main (int argc, char *argv[]) {
@@ -170,7 +174,8 @@ main (int argc, char *argv[]) {
   pase pedir_gasolina_1_arg;
   int  *result_4;
   pase pedir_tiempo_1_arg;
-
+  ticket ticket;
+  
   if(argc != 11) {
     print_use();
     exit(EXIT_FAILURE);
@@ -236,6 +241,7 @@ main (int argc, char *argv[]) {
 	  clnt_pcreateerror (c.hostname);
 	  exit (1);
 	}
+	crear_pase (pedir_gasolina_1_arg, nombre_bomba, ticket);
       result_1 = pedir_gasolina_1(&pedir_gasolina_1_arg, clnt);
       if (result_1 == (int *) NULL) {
 	clnt_perror (clnt, "call failed");

@@ -11,11 +11,15 @@
 #include "estructuras.h"
 #include "programa.h"
 
+void crear_pase (pase pase, string nombre, ticket ticket) {
+  pase.nombre_bomba = nombre;
+  pase.ticket = ticket;
+}
 
 int agregar_directorio(centro** directorio, char *nombre_centro, char *hostname, int puerto) {
   CLIENT *clnt;
-int  *result_1;
-estructura  pedir_gasolina_1_arg;
+  int  *result_1;
+  pase  pedir_tiempo_1_arg;
 
   centro *centro_;
   if(!(centro_ = (centro *) (malloc(sizeof(centro))))) {
@@ -29,11 +33,12 @@ estructura  pedir_gasolina_1_arg;
   centro_->puerto = puerto;
   centro_->next = NULL;
   {
-    clnt = clnt_create (centro_->nombre_centro, CENTROPROG, CENTRO_VER, "udp");
+    clnt = clnt_create (centro_->hostname, CENTROPROG, CENTRO_VER, "udp");
     if (clnt == NULL) {
-      clnt_pcreateerror (centro_->nombre_centro);
+      clnt_pcreateerror (centro_->hostname);
       exit (1);
     }
+    crear_pase(pedir_tiempo_1_arg,NULL);
     result_1 = pedir_tiempo_1(&pedir_tiempo_1_arg, clnt);
     if (result_1 == (int *) NULL) {
       clnt_perror (clnt, "call failed");
