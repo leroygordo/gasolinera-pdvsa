@@ -56,7 +56,7 @@ pedir_gasolina_1_svc(ticket *argp, struct svc_req *rqstp)
   if (inventario < 38000)
     result = 0;
   else {
-    fprintf(log_file, "Suministro:  %d minutos, %s, OK, %d.\n", 480 - t_funcionamiento, *argp->nombre_bomba, inventario );
+    fprintf(log_file, "Suministro:  %d minutos, %s, OK, %d.\n", 480 - t_funcionamiento, argp->nombre_bomba, inventario);
     inventario = inventario - 38000;
     result = 1;
   }
@@ -87,16 +87,18 @@ void crear_ticket(ticket *t,char *bomba) {
 void *inventario_suministro(void * tid) {
   int suministro = (int) tid;
   while (TRUE) {
-    printf("%d\n",inventario);
+    printf("%d lts.\n",inventario);
     usleep(100000);
     if(inventario == 0)
       fprintf(log_file,"Tanque vacio: %d minutos.\n",480 - t_funcionamiento);
+    
     if(inventario + suministro < capacidad)
       inventario+=suministro;
     else if(inventario + suministro >= capacidad) {
       inventario = capacidad;
       fprintf(log_file,"Tanque full: %d minutos.\n",480 - t_funcionamiento);
     }
+
     if(!t_funcionamiento)
       pthread_exit(EXIT_SUCCESS);
   }
@@ -245,13 +247,13 @@ void auxiliar_main(int argc, char **argv) {
   }
 
   fprintf(log_file,"Inventario inicial: %d litros.\n",inventario);
-  /*
+  
   pthread_attr_init(&attr1);
   pthread_attr_setdetachstate(&attr1,PTHREAD_CREATE_JOINABLE);
   if (pthread_create(&thread_inv, &attr1, inventario_suministro, (void *) suministro)) {
     printf("Error: no se pudo crear el hilo para controlar el inventario.");
     exit(EXIT_FAILURE);
-  }*/
+  }
 
   pthread_attr_init(&attr2);
   pthread_attr_setdetachstate(&attr2,PTHREAD_CREATE_JOINABLE);
@@ -260,14 +262,14 @@ void auxiliar_main(int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
 
-/*  signal(SIGUSR1,finish);
+  signal(SIGUSR1,finish);
  
   pthread_attr_init(&attr3);
   pthread_attr_setdetachstate(&attr3,PTHREAD_CREATE_JOINABLE);
   if (pthread_create(&thread_exit, &attr3, tiempo_exit,NULL)) {
     printf("Error: no se pudo crear el hilo para salida.");
     exit(EXIT_FAILURE);
-  }*/
+  }
 }
 
 int

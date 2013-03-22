@@ -208,7 +208,7 @@ main (int argc, char *argv[])
           c = *directorio_centros;
          else
           c = *c.next;
-         fprintf(log_file,"Peticion: %d minutos, %s, Fallido.\n",480 - t_funcionamiento,c.nombre_centro);
+          fprintf(log_file,"Peticion: %d minutos, %s, Fallido.\n",480 - t_funcionamiento,c.nombre_centro);
       }
       else if (respuesta == 1) {
         fprintf(log_file,"Peticion: %d minutos, %s, OK.\n",480 - t_funcionamiento,c.nombre_centro);
