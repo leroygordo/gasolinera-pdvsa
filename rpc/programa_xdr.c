@@ -12,11 +12,11 @@ xdr_ticket (XDR *xdrs, ticket *objp)
 
 	 if (!xdr_int (xdrs, &objp->nro_ticket))
 		 return FALSE;
-	 if (!xdr_int (xdrs, &objp->ip_centro))
+	 if (!xdr_string (xdrs, &objp->nombre_centro, 50))
 		 return FALSE;
-	 if (!xdr_string (xdrs, &objp->fecha, 8))
+	 if (!xdr_int (xdrs, &objp->hora))
 		 return FALSE;
-	 if (!xdr_string (xdrs, &objp->hora, 6))
+	 if (!xdr_string (xdrs, &objp->nombre_bomba, 50))
 		 return FALSE;
 	return TRUE;
 }
@@ -30,18 +30,7 @@ xdr_desafio (XDR *xdrs, desafio *objp)
 		 return FALSE;
 	 if (!xdr_string (xdrs, &objp->respuesta, 64))
 		 return FALSE;
+	 if (!xdr_string (xdrs, &objp->nombre_bomba, 50))
+		 return FALSE;
 	return TRUE;
 }
-
-bool_t
-xdr_pase (XDR *xdrs, pase *objp)
-{
-        register int32_t *buf;
-
-         if (!xdr_string (xdrs, &objp->nombre_bomba, 100))
-                 return FALSE;
-         if (!xdr_ticket (xdrs, &objp->ticket_))
-                 return FALSE;
-        return TRUE;
-}
-

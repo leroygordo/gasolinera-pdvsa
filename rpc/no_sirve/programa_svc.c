@@ -17,13 +17,13 @@
 #endif
 
 static void
-programa_prog_1(struct svc_req *rqstp, register SVCXPRT *transp)
+centroprog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 {
 	union {
 		char *preguntar_1_arg;
 		desafio responder_1_arg;
 		ticket pedir_gasolina_1_arg;
-		ticket pedir_tiempo_1_arg;
+                ticket pedir_tiempo_1_arg;
 	} argument;
 	char *result;
 	xdrproc_t _xdr_argument, _xdr_result;
@@ -41,19 +41,19 @@ programa_prog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 		break;
 
 	case responder:
-		_xdr_argument = (xdrproc_t) xdr_desafio;
+		_xdr_argument = (xdrproc_t) xdr_wrapstring;
 		_xdr_result = (xdrproc_t) xdr_ticket;
 		local = (char *(*)(char *, struct svc_req *)) responder_1_svc;
 		break;
 
 	case pedir_gasolina:
-		_xdr_argument = (xdrproc_t) xdr_ticket;
+		_xdr_argument = (xdrproc_t) xdr_wrapstring;
 		_xdr_result = (xdrproc_t) xdr_int;
 		local = (char *(*)(char *, struct svc_req *)) pedir_gasolina_1_svc;
 		break;
 
 	case pedir_tiempo:
-		_xdr_argument = (xdrproc_t) xdr_ticket;
+		_xdr_argument = (xdrproc_t) xdr_void;
 		_xdr_result = (xdrproc_t) xdr_int;
 		local = (char *(*)(char *, struct svc_req *)) pedir_tiempo_1_svc;
 		break;

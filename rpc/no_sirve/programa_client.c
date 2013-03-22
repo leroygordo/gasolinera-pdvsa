@@ -3,15 +3,21 @@
  * These are only templates and you can use them
  * as a guideline for developing your own functions.
  */
-
+#include <unistd.h>
+#include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <pthread.h>
 #include "programa.h"
 #include "estructuras.h"
-#include "desafio.c"
-#include <pthread.h>
 
-int inventario, capacidad;
+int inventario, capacidad,tiempoSuministro;
 int t_funcionamiento = 480;
-
 char *log_file_name;
 FILE *log_file;
 
@@ -81,45 +87,98 @@ int valid_arg(int capacidad, char *fichero_centros, char *nombre_bomba, int inve
 }
 
 void *inventario_consumo(void * tid) {
-  int consumo = (int) tid;
-  while (TRUE) {
-    printf("%d lts. \n",inventario);
-    usleep(100000);
-    if(inventario == capacidad)
-      fprintf(log_file,"Tanque full: %d minutos.\n",480 - t_funcionamiento);
-    if(inventario - consumo > 0)
-      inventario-=consumo;
-    else if(inventario - consumo <= 0) {
-      inventario = 0;
-      fprintf(log_file,"Tanque vacio: %d minutos.\n",480 - t_funcionamiento);
-    }
-    if(!t_funcionamiento)
-      pthread_exit(EXIT_SUCCESS);
-  }
+int consumo = (int) tid;
+while (TRUE) {
+//printf("%d lts. ",inventario);
+usleep(100000);
+if(inventario == capacidad)
+  fprintf(log_file,"Tanque full: %d minutos.\n",480 - t_funcionamiento);
+if(inventario - consumo > 0)
+  inventario-=consumo;
+ else if(inventario - consumo <= 0) {
+inventario = 0;
+fprintf(log_file,"Tanque vacio: %d minutos.\n",480 - t_funcionamiento);
+}
+if(!t_funcionamiento)
+  pthread_exit(EXIT_SUCCESS);
+}
+
 }
 
 void *tiempo(void * tid) {
   while (TRUE) {
-    printf("%d min.\n",t_funcionamiento);
-    usleep(100000);
+    //printf("%d min.\n",t_funcionamiento);
+    usleep(100000);    
     t_funcionamiento--;
     if(!t_funcionamiento)
       pthread_exit(EXIT_SUCCESS);
   }
 }
+void
+centroprog_1(char *host)
+{
+  CLIENT *clnt;
+  char * *result_1;
+  char * preguntar_1_arg;
+  ticket  *result_2;
+  desafio responder_1_arg;
+  int  *result_3;
+  ticket pedir_gasolina_1_arg;
+  int  *result_4;
+  ticket pedir_tiempo_1_arg;
+
+#ifndef	DEBUG
+  clnt = clnt_create (host, CENTROPROG, CENTRO_VER, "udp");
+  if (clnt == NULL) {
+    clnt_pcreateerror (host);
+    exit (1);
+  }
+#endif	/* DEBUG */
+
+  result_1 = preguntar_1(&preguntar_1_arg, clnt);
+  if (result_1 == (char **) NULL) {
+    clnt_perror (clnt, "call failed");
+  }
+  result_2 = responder_1(&responder_1_arg, clnt);
+  if (result_2 == (ticket *) NULL) {
+    clnt_perror (clnt, "call failed");
+  }
+  result_3 = pedir_gasolina_1(&pedir_gasolina_1_arg, clnt);
+  if (result_3 == (int *) NULL) {
+    clnt_perror (clnt, "call failed");
+  }
+  result_4 = pedir_tiempo_1(&pedir_tiempo_1_arg, clnt);
+  if (result_4 == (int *) NULL) {
+    clnt_perror (clnt, "call failed");
+  }
+#ifndef	DEBUG
+  clnt_destroy (clnt);
+#endif	 /* DEBUG */
+
+}
 
 int
-main (int argc, char *argv[])
-{
+main (int argc, char *argv[]) {
+
+  CLIENT *clnt;
+  char * *result_1;
+  char * preguntar_1_arg;
+  ticket  *result_2;
+  desafio responder_1_arg;
+  int  *result_3;
+  ticket pedir_gasolina_1_arg;
+  int  *result_4;
+  ticket pedir_tiempo_1_arg;
+  //ticket ticket;
+  
   if(argc != 11) {
     print_use();
     exit(EXIT_FAILURE);
   }
-
+ 
   char *nombre_bomba, *fichero_centros;
   int consumo;
-  CLIENT *clnt;
-
+  
   // Lectura de argumentos
   read_arg(argv,&capacidad,&fichero_centros,&nombre_bomba,&inventario,&consumo);
 
@@ -127,14 +186,25 @@ main (int argc, char *argv[])
   if (!valid_arg(capacidad,fichero_centros,nombre_bomba,inventario,consumo))
     exit(EXIT_FAILURE);
 
-  centro *directorio_centros = NULL;
+    //CLIENT *clnt;
+    clnt = clnt_create ("localhost", CENTROPROG, CENTRO_VER, "udp");
+    if (clnt == NULL) {
+      clnt_pcreateerror ("localhost");
+      exit (EXIT_FAILURE);
+    }
+
+  //printf(nombre_bomba);
+  //char **p = preguntar_1(&nombre_bomba,clnt);
+  int *t = pedir_tiempo_1(NULL,clnt);
+
+  /*centro *directorio_centros = NULL;
  
   // Creacion del directorio con los centros de distribucion que se encuentran en 'fichero_centros' 
   if (!(directorio_centros = crear_directorio(fichero_centros,nombre_bomba))) {
     printf("Error: no se pudo crear el directorio de centros de distribucion.\n");
     exit(EXIT_FAILURE); 
   }
-
+ 
   log_file_name = (char *) malloc(strlen(nombre_bomba)+8);
   sprintf(log_file_name,"log_%s.txt",nombre_bomba);
 
@@ -162,101 +232,57 @@ main (int argc, char *argv[])
     printf("Error: no se pudo crear el hilo para controlar el funcionamiento.");
     exit(EXIT_FAILURE);
   }
-  exit(EXIT_SUCCESS);
   centro c;
   c = *directorio_centros;
-  clnt = clnt_create (c.hostname, PROGRAMA_PROG, PROGRAMA_VER, "udp");
-  desafio *d;
-  d = (desafio *) malloc(sizeof(desafio));
-  d->pregunta = (char *) malloc(32);
-
-  char **p = preguntar_1(&nombre_bomba,clnt);
-  if (p == (char **) NULL) {
-    clnt_perror (clnt, "call failed");
-  }
-  strcpy(d->pregunta,*p);
-  printf("%s\n",d->pregunta);
-
-  char *centro_enc  = (char *) malloc(32);
-  MDString(c.nombre_centro,centro_enc);
- 
-  d->respuesta = (char *) malloc(64);
-  sprintf(d->respuesta,"%s%s",d->pregunta,centro_enc);
-  printf("%s\n",d->respuesta);
-
-  d->nombre_bomba = (char *) malloc(sizeof(strlen(nombre_bomba)));
-  strcpy(d->nombre_bomba,nombre_bomba);
-  printf("%s\n",d->nombre_bomba);
-
-//  ticket *t = responder_1(d,clnt);
-
-  exit(EXIT_SUCCESS);
-  while (t_funcionamiento > 0 ) {  
+  while (t_funcionamiento > 0 ) {
+  
     if (capacidad - inventario >= 38000) {
-      clnt = clnt_create (c.hostname, PROGRAMA_PROG, PROGRAMA_VER, "udp");
-      if (clnt == NULL) {
-        if(c.next == NULL)
-          break;
-          //c = *directorio_centros;
-        else
-          c = *c.next;
-        continue;
-
+      // Si no tiene ticket
+      
+      // No se pudo hacerla conexion
+   
+      // Pudo conectarse
+      	clnt = clnt_create (c.hostname, CENTROPROG, CENTRO_VER, "udp");
+	if (clnt == NULL) {
+	  clnt_pcreateerror (c.hostname);
+	  exit (1);
+	}
+	crear_pase (nombre_bomba,pedir_gasolina_1_arg);
+      result_1 = pedir_gasolina_1(&pedir_gasolina_1_arg, clnt);
+      if (result_1 == (int *) NULL) {
+	clnt_perror (clnt, "call failed");
       }
-
-      desafio *d;
-      d = (desafio *) malloc(sizeof(desafio));
-      d->pregunta = (char *) malloc(32);
-
-      char **p = preguntar_1(&nombre_bomba,clnt);
-      if (p == (char **) NULL) {
-  	  clnt_perror (clnt, "call failed");
-      }
-      strcpy(d->pregunta,*p);
-
-      char *centro_enc  = (char *) malloc(32);
-      MDString(c.nombre_centro,centro_enc);
  
-      d->respuesta = (char *) malloc(64);
-      sprintf(d->respuesta,"%s%s",d->pregunta,centro_enc);
+      if(*result_1 == 0) {
+	if(c.next == NULL)
+	  c = *directorio_centros;
+	else
+	  c = *c.next;
 
-      d->nombre_bomba = (char *) malloc(sizeof(strlen(nombre_bomba)));
-      strcpy(d->nombre_bomba,nombre_bomba);
-
-      ticket *t = responder_1(d,clnt);
-
-      int respuesta;
-      respuesta = *pedir_gasolina_1(c.ticket_,clnt);
-      printf("%d\n",respuesta);
-      if(respuesta == 0) {
-        if(c.next == NULL)
-          c = *directorio_centros;
-         else
-          c = *c.next;
-         fprintf(log_file,"Peticion: %d minutos, %s, Fallido.\n",480 - t_funcionamiento,c.nombre_centro);
+	fprintf(log_file,"Peticion: %d minutos, %s, Fallido.\n",480 - t_funcionamiento,c.nombre_centro);
       }
-      else if (respuesta == 1) {
-        fprintf(log_file,"Peticion: %d minutos, %s, OK.\n",480 - t_funcionamiento,c.nombre_centro);
-        usleep(c.send_t * 100000);
-        if (inventario + 38000 >= capacidad) {
-          inventario = capacidad;
-        }
-        else {
-          inventario+=38000;
-        }
-        fprintf(log_file,"Llegada de la gandola: %d minutos, %d litros.\n",480 - t_funcionamiento,inventario);
-        c = *directorio_centros;
-      }         
+      else if (*result_1 == 1) {
+	tiempoSuministro = c.send_t;
+	fprintf(log_file,"Peticion: %d minutos, %s, OK.\n",480 - t_funcionamiento,c.nombre_centro);
+	usleep(tiempoSuministro * 100000);
+	if (inventario + 38000 >= capacidad) {
+	  inventario = capacidad;
+	}
+	else {
+	  inventario+=38000;
+	}
+	fprintf(log_file,"Llegada de la gandola: %d minutos, %d litros.\n",480 - t_funcionamiento,inventario); 
+	c = *directorio_centros;
+      }
     }
   }
-
   destruir_directorio(&directorio_centros);  
   pthread_attr_destroy(&attr1);
   pthread_attr_destroy(&attr2);
   void * status;
   pthread_join(thread_inv,&status);
   pthread_join(thread_func,&status);
-  fclose(log_file);
-
+  fclose(log_file);*/
+   
   exit(EXIT_SUCCESS);
 }

@@ -13,24 +13,24 @@
 extern "C" {
 #endif
 
-
 struct ticket {
-	int nro_ticket;
-	char *nombre_centro;
-	int hora;
-	char *nombre_bomba;
-};
+        int nro_ticket; 
+        char *nombre_centro;
+        char *fecha;
+        char *hora;
+        char *nombre_bomba;
+};      
 typedef struct ticket ticket;
 
 struct desafio {
-	char *pregunta;
-	char *respuesta;
-	char *nombre_bomba;
+        char *pregunta; 
+        char *respuesta;
+        char *nombre_bomba;
 };
-typedef struct desafio desafio;
+typedef struct desafio desafio; 
 
-#define PROGRAMA_PROG 0x31111111
-#define PROGRAMA_VER 1
+#define CENTROPROG 0x31111111
+#define CENTRO_VER 1
 
 #if defined(__STDC__) || defined(__cplusplus)
 #define preguntar 1
@@ -45,8 +45,8 @@ extern  int * pedir_gasolina_1_svc(ticket *, struct svc_req *);
 #define pedir_tiempo 4
 extern  int * pedir_tiempo_1(ticket *, CLIENT *);
 extern  int * pedir_tiempo_1_svc(ticket *, struct svc_req *);
-extern int programa_prog_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
-
+extern int pdvsa_prog_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
+	
 #else /* K&R C */
 #define preguntar 1
 extern  char ** preguntar_1();
@@ -54,13 +54,16 @@ extern  char ** preguntar_1_svc();
 #define responder 2
 extern  ticket * responder_1();
 extern  ticket * responder_1_svc();
-#define pedir_gasolina 3
+#define validar 3
+extern  int * validar_1();
+extern  int * validar_1_svc();
+#define pedir_gasolina 4
 extern  int * pedir_gasolina_1();
 extern  int * pedir_gasolina_1_svc();
-#define pedir_tiempo 4
+#define pedir_tiempo 5
 extern  int * pedir_tiempo_1();
 extern  int * pedir_tiempo_1_svc();
-extern int programa_prog_1_freeresult ();
+extern int pdvsa_prog_1_freeresult ();
 #endif /* K&R C */
 
 /* the xdr functions */

@@ -1,6 +1,0 @@
-prueba	: prueba.c md5c.o desafio.c global.h
-	gcc -o prueba prueba.c md5c.o
-
-md5c.o	: md5c.c md5.h global.h
-	gcc -c md5c.c
-

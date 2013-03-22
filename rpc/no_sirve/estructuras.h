@@ -20,4 +20,5 @@ int agregar_directorio(centro** directorio, char *nombre_centro, char *hostname,
 
 void destruir_directorio(centro **directorio);
 
+void crear_pase (char *nombre, ticket ticket);
 #endif

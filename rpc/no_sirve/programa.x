@@ -1,18 +1,19 @@
 struct ticket {
   int nro_ticket;
-  string nombre_centro<50>;
+  string hostname<50>;
+  string fecha<8>;
   string hora<6>;
-  string nombre_bomba<50>;
+  string nombre_bomba<100>;
 };
 
 struct desafio {
   string pregunta<32>;
   string respuesta<64>;
-  string nombre_bomba<50>;
+  string nombre_bomba<100>;
 };
 
-program PROGRAMA_PROG {
-  version PROGRAMA_VER {
+program PDVSA_PROG {
+  version PDVSA_VER {
     string preguntar (string) = 1;
     ticket responder (desafio) = 2;
     int pedir_gasolina (ticket) = 3;
