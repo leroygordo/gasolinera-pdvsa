@@ -87,7 +87,7 @@ void crear_ticket(ticket *t,char *bomba) {
 void *inventario_suministro(void * tid) {
   int suministro = (int) tid;
   while (TRUE) {
-    printf("%d lts.\n",inventario);
+    //printf("%d lts.\n",inventario);
     usleep(100000);
     if(inventario == 0)
       fprintf(log_file,"Tanque vacio: %d minutos.\n",480 - t_funcionamiento);
@@ -106,7 +106,7 @@ void *inventario_suministro(void * tid) {
 
 void *tiempo_funcionamiento(void * tid) {
   while (TRUE) {
-    printf("%d min. \n",t_funcionamiento);
+    //printf("%d min. \n",t_funcionamiento);
     usleep(100000);
     t_funcionamiento--;
     if(!t_funcionamiento)
