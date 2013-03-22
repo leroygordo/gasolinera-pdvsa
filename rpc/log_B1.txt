@@ -1,0 +1,1481 @@
+Inventario inicial: 20000 litros.
+Peticion: 18 minutos, CD1, Fallido.
+Peticion: 18 minutos, CD1, Fallido.
+Peticion: 18 minutos, CD1, Fallido.
+Peticion: 18 minutos, CD1, Fallido.
+Peticion: 18 minutos, CD1, Fallido.
+Peticion: 18 minutos, CD1, Fallido.
+Peticion: 18 minutos, CD1, Fallido.
+Peticion: 18 minutos, CD1, Fallido.
+Peticion: 18 minutos, CD1, Fallido.
+Peticion: 18 minutos, CD1, Fallido.
+Peticion: 19 minutos, CD1, Fallido.
+Peticion: 19 minutos, CD1, Fallido.
+Peticion: 19 minutos, CD1, Fallido.
+Peticion: 19 minutos, CD1, Fallido.
+Peticion: 19 minutos, CD1, Fallido.
+Peticion: 19 minutos, CD1, Fallido.
+Peticion: 19 minutos, CD1, Fallido.
+Peticion: 19 minutos, CD1, Fallido.
+Peticion: 19 minutos, CD1, Fallido.
+Peticion: 19 minutos, CD1, Fallido.
+Tanque vacio: 20 minutos.
+Peticion: 20 minutos, CD1, Fallido.
+Peticion: 20 minutos, CD1, Fallido.
+Peticion: 20 minutos, CD1, Fallido.
+Peticion: 20 minutos, CD1, Fallido.
+Peticion: 20 minutos, CD1, Fallido.
+Peticion: 20 minutos, CD1, Fallido.
+Peticion: 20 minutos, CD1, Fallido.
+Peticion: 20 minutos, CD1, Fallido.
+Peticion: 20 minutos, CD1, Fallido.
+Peticion: 20 minutos, CD1, Fallido.
+Tanque vacio: 21 minutos.
+Peticion: 21 minutos, CD1, Fallido.
+Peticion: 21 minutos, CD1, Fallido.
+Peticion: 21 minutos, CD1, Fallido.
+Peticion: 21 minutos, CD1, Fallido.
+Peticion: 21 minutos, CD1, Fallido.
+Peticion: 21 minutos, CD1, Fallido.
+Peticion: 21 minutos, CD1, Fallido.
+Peticion: 21 minutos, CD1, Fallido.
+Peticion: 21 minutos, CD1, Fallido.
+Peticion: 21 minutos, CD1, Fallido.
+Peticion: 21 minutos, CD1, Fallido.
+Tanque vacio: 22 minutos.
+Peticion: 22 minutos, CD1, Fallido.
+Peticion: 22 minutos, CD1, Fallido.
+Peticion: 22 minutos, CD1, Fallido.
+Peticion: 22 minutos, CD1, Fallido.
+Peticion: 22 minutos, CD1, Fallido.
+Peticion: 22 minutos, CD1, Fallido.
+Peticion: 22 minutos, CD1, Fallido.
+Peticion: 22 minutos, CD1, Fallido.
+Peticion: 22 minutos, CD1, Fallido.
+Peticion: 22 minutos, CD1, Fallido.
+Tanque vacio: 23 minutos.
+Peticion: 23 minutos, CD1, Fallido.
+Peticion: 23 minutos, CD1, Fallido.
+Peticion: 23 minutos, CD1, Fallido.
+Peticion: 23 minutos, CD1, Fallido.
+Peticion: 23 minutos, CD1, Fallido.
+Peticion: 23 minutos, CD1, Fallido.
+Peticion: 23 minutos, CD1, Fallido.
+Peticion: 23 minutos, CD1, Fallido.
+Peticion: 23 minutos, CD1, Fallido.
+Peticion: 23 minutos, CD1, Fallido.
+Peticion: 23 minutos, CD1, Fallido.
+Tanque vacio: 24 minutos.
+Peticion: 24 minutos, CD1, Fallido.
+Peticion: 24 minutos, CD1, Fallido.
+Peticion: 24 minutos, CD1, Fallido.
+Peticion: 24 minutos, CD1, Fallido.
+Peticion: 24 minutos, CD1, Fallido.
+Peticion: 24 minutos, CD1, Fallido.
+Peticion: 24 minutos, CD1, Fallido.
+Peticion: 24 minutos, CD1, Fallido.
+Peticion: 24 minutos, CD1, Fallido.
+Peticion: 24 minutos, CD1, Fallido.
+Tanque vacio: 25 minutos.
+Peticion: 25 minutos, CD1, Fallido.
+Peticion: 25 minutos, CD1, Fallido.
+Peticion: 25 minutos, CD1, Fallido.
+Peticion: 25 minutos, CD1, Fallido.
+Peticion: 25 minutos, CD1, Fallido.
+Peticion: 25 minutos, CD1, Fallido.
+Peticion: 25 minutos, CD1, Fallido.
+Peticion: 25 minutos, CD1, Fallido.
+Peticion: 25 minutos, CD1, Fallido.
+Peticion: 25 minutos, CD1, Fallido.
+Peticion: 25 minutos, CD1, Fallido.
+Tanque vacio: 26 minutos.
+Peticion: 26 minutos, CD1, Fallido.
+Peticion: 26 minutos, CD1, Fallido.
+Peticion: 26 minutos, CD1, Fallido.
+Peticion: 26 minutos, CD1, Fallido.
+Peticion: 26 minutos, CD1, Fallido.
+Peticion: 26 minutos, CD1, Fallido.
+Peticion: 26 minutos, CD1, Fallido.
+Peticion: 26 minutos, CD1, Fallido.
+Peticion: 26 minutos, CD1, Fallido.
+Peticion: 26 minutos, CD1, Fallido.
+Tanque vacio: 27 minutos.
+Peticion: 27 minutos, CD1, Fallido.
+Peticion: 27 minutos, CD1, Fallido.
+Peticion: 27 minutos, CD1, Fallido.
+Peticion: 27 minutos, CD1, Fallido.
+Peticion: 27 minutos, CD1, Fallido.
+Peticion: 27 minutos, CD1, Fallido.
+Peticion: 27 minutos, CD1, Fallido.
+Peticion: 27 minutos, CD1, Fallido.
+Peticion: 27 minutos, CD1, Fallido.
+Peticion: 27 minutos, CD1, Fallido.
+Tanque vacio: 28 minutos.
+Peticion: 28 minutos, CD1, Fallido.
+Peticion: 28 minutos, CD1, Fallido.
+Peticion: 28 minutos, CD1, Fallido.
+Peticion: 28 minutos, CD1, Fallido.
+Peticion: 28 minutos, CD1, Fallido.
+Peticion: 28 minutos, CD1, Fallido.
+Peticion: 28 minutos, CD1, Fallido.
+Peticion: 28 minutos, CD1, Fallido.
+Peticion: 28 minutos, CD1, Fallido.
+Peticion: 28 minutos, CD1, Fallido.
+Tanque vacio: 29 minutos.
+Peticion: 29 minutos, CD1, Fallido.
+Peticion: 29 minutos, CD1, Fallido.
+Peticion: 29 minutos, CD1, Fallido.
+Peticion: 29 minutos, CD1, Fallido.
+Peticion: 29 minutos, CD1, Fallido.
+Peticion: 29 minutos, CD1, Fallido.
+Peticion: 29 minutos, CD1, Fallido.
+Peticion: 29 minutos, CD1, Fallido.
+Peticion: 29 minutos, CD1, Fallido.
+Peticion: 29 minutos, CD1, Fallido.
+Tanque vacio: 30 minutos.
+Peticion: 30 minutos, CD1, Fallido.
+Peticion: 30 minutos, CD1, Fallido.
+Peticion: 30 minutos, CD1, Fallido.
+Peticion: 30 minutos, CD1, Fallido.
+Peticion: 30 minutos, CD1, Fallido.
+Peticion: 30 minutos, CD1, Fallido.
+Peticion: 30 minutos, CD1, Fallido.
+Peticion: 30 minutos, CD1, Fallido.
+Peticion: 30 minutos, CD1, Fallido.
+Peticion: 30 minutos, CD1, Fallido.
+Tanque vacio: 31 minutos.
+Peticion: 31 minutos, CD1, Fallido.
+Peticion: 31 minutos, CD1, Fallido.
+Peticion: 31 minutos, CD1, Fallido.
+Peticion: 31 minutos, CD1, Fallido.
+Peticion: 31 minutos, CD1, Fallido.
+Peticion: 31 minutos, CD1, Fallido.
+Peticion: 31 minutos, CD1, Fallido.
+Peticion: 31 minutos, CD1, Fallido.
+Peticion: 31 minutos, CD1, Fallido.
+Peticion: 31 minutos, CD1, Fallido.
+Peticion: 31 minutos, CD1, Fallido.
+Tanque vacio: 32 minutos.
+Peticion: 32 minutos, CD1, Fallido.
+Peticion: 32 minutos, CD1, Fallido.
+Peticion: 32 minutos, CD1, Fallido.
+Peticion: 32 minutos, CD1, Fallido.
+Peticion: 32 minutos, CD1, Fallido.
+Peticion: 32 minutos, CD1, Fallido.
+Peticion: 32 minutos, CD1, Fallido.
+Peticion: 32 minutos, CD1, Fallido.
+Peticion: 32 minutos, CD1, Fallido.
+Peticion: 32 minutos, CD1, Fallido.
+Tanque vacio: 33 minutos.
+Peticion: 33 minutos, CD1, Fallido.
+Peticion: 33 minutos, CD1, Fallido.
+Peticion: 33 minutos, CD1, Fallido.
+Peticion: 33 minutos, CD1, Fallido.
+Peticion: 33 minutos, CD1, Fallido.
+Peticion: 33 minutos, CD1, Fallido.
+Peticion: 33 minutos, CD1, Fallido.
+Peticion: 33 minutos, CD1, Fallido.
+Peticion: 33 minutos, CD1, Fallido.
+Peticion: 33 minutos, CD1, Fallido.
+Tanque vacio: 34 minutos.
+Peticion: 34 minutos, CD1, Fallido.
+Peticion: 34 minutos, CD1, Fallido.
+Peticion: 34 minutos, CD1, Fallido.
+Peticion: 34 minutos, CD1, Fallido.
+Peticion: 34 minutos, CD1, Fallido.
+Peticion: 34 minutos, CD1, Fallido.
+Peticion: 34 minutos, CD1, Fallido.
+Peticion: 34 minutos, CD1, Fallido.
+Peticion: 34 minutos, CD1, Fallido.
+Peticion: 34 minutos, CD1, Fallido.
+Peticion: 34 minutos, CD1, Fallido.
+Tanque vacio: 35 minutos.
+Peticion: 35 minutos, CD1, Fallido.
+Peticion: 35 minutos, CD1, Fallido.
+Peticion: 35 minutos, CD1, Fallido.
+Peticion: 35 minutos, CD1, Fallido.
+Peticion: 35 minutos, CD1, Fallido.
+Peticion: 35 minutos, CD1, Fallido.
+Peticion: 35 minutos, CD1, Fallido.
+Peticion: 35 minutos, CD1, Fallido.
+Peticion: 35 minutos, CD1, Fallido.
+Peticion: 35 minutos, CD1, Fallido.
+Tanque vacio: 36 minutos.
+Peticion: 36 minutos, CD1, Fallido.
+Peticion: 36 minutos, CD1, Fallido.
+Peticion: 36 minutos, CD1, Fallido.
+Peticion: 36 minutos, CD1, Fallido.
+Peticion: 36 minutos, CD1, Fallido.
+Peticion: 36 minutos, CD1, Fallido.
+Peticion: 36 minutos, CD1, Fallido.
+Peticion: 36 minutos, CD1, Fallido.
+Peticion: 36 minutos, CD1, Fallido.
+Peticion: 36 minutos, CD1, Fallido.
+Tanque vacio: 37 minutos.
+Peticion: 37 minutos, CD1, Fallido.
+Peticion: 37 minutos, CD1, Fallido.
+Peticion: 37 minutos, CD1, Fallido.
+Peticion: 37 minutos, CD1, Fallido.
+Peticion: 37 minutos, CD1, Fallido.
+Peticion: 37 minutos, CD1, Fallido.
+Peticion: 37 minutos, CD1, Fallido.
+Peticion: 37 minutos, CD1, Fallido.
+Peticion: 37 minutos, CD1, Fallido.
+Peticion: 37 minutos, CD1, Fallido.
+Tanque vacio: 38 minutos.
+Peticion: 38 minutos, CD1, Fallido.
+Peticion: 38 minutos, CD1, Fallido.
+Peticion: 38 minutos, CD1, Fallido.
+Peticion: 38 minutos, CD1, Fallido.
+Peticion: 38 minutos, CD1, Fallido.
+Peticion: 38 minutos, CD1, Fallido.
+Peticion: 38 minutos, CD1, Fallido.
+Peticion: 38 minutos, CD1, Fallido.
+Peticion: 38 minutos, CD1, Fallido.
+Peticion: 38 minutos, CD1, Fallido.
+Tanque vacio: 39 minutos.
+Peticion: 39 minutos, CD1, Fallido.
+Peticion: 39 minutos, CD1, Fallido.
+Peticion: 39 minutos, CD1, Fallido.
+Peticion: 39 minutos, CD1, Fallido.
+Peticion: 39 minutos, CD1, Fallido.
+Peticion: 39 minutos, CD1, Fallido.
+Peticion: 39 minutos, CD1, Fallido.
+Peticion: 39 minutos, CD1, Fallido.
+Peticion: 39 minutos, CD1, Fallido.
+Peticion: 39 minutos, CD1, Fallido.
+Peticion: 39 minutos, CD1, Fallido.
+Tanque vacio: 40 minutos.
+Peticion: 40 minutos, CD1, Fallido.
+Peticion: 40 minutos, CD1, Fallido.
+Peticion: 40 minutos, CD1, Fallido.
+Peticion: 40 minutos, CD1, Fallido.
+Peticion: 40 minutos, CD1, Fallido.
+Peticion: 40 minutos, CD1, Fallido.
+Peticion: 40 minutos, CD1, Fallido.
+Peticion: 40 minutos, CD1, Fallido.
+Peticion: 40 minutos, CD1, Fallido.
+Peticion: 40 minutos, CD1, Fallido.
+Tanque vacio: 41 minutos.
+Peticion: 41 minutos, CD1, Fallido.
+Peticion: 41 minutos, CD1, Fallido.
+Peticion: 41 minutos, CD1, Fallido.
+Peticion: 41 minutos, CD1, Fallido.
+Peticion: 41 minutos, CD1, Fallido.
+Peticion: 41 minutos, CD1, Fallido.
+Peticion: 41 minutos, CD1, Fallido.
+Peticion: 41 minutos, CD1, Fallido.
+Peticion: 41 minutos, CD1, Fallido.
+Peticion: 41 minutos, CD1, Fallido.
+Tanque vacio: 42 minutos.
+Peticion: 42 minutos, CD1, Fallido.
+Peticion: 42 minutos, CD1, Fallido.
+Peticion: 42 minutos, CD1, Fallido.
+Peticion: 42 minutos, CD1, Fallido.
+Peticion: 42 minutos, CD1, Fallido.
+Peticion: 42 minutos, CD1, Fallido.
+Peticion: 42 minutos, CD1, Fallido.
+Peticion: 42 minutos, CD1, Fallido.
+Peticion: 42 minutos, CD1, Fallido.
+Peticion: 42 minutos, CD1, Fallido.
+Tanque vacio: 43 minutos.
+Peticion: 43 minutos, CD1, Fallido.
+Peticion: 43 minutos, CD1, Fallido.
+Peticion: 43 minutos, CD1, Fallido.
+Peticion: 43 minutos, CD1, Fallido.
+Peticion: 43 minutos, CD1, Fallido.
+Peticion: 43 minutos, CD1, Fallido.
+Peticion: 43 minutos, CD1, Fallido.
+Peticion: 43 minutos, CD1, Fallido.
+Peticion: 43 minutos, CD1, Fallido.
+Peticion: 43 minutos, CD1, Fallido.
+Tanque vacio: 44 minutos.
+Peticion: 44 minutos, CD1, Fallido.
+Peticion: 44 minutos, CD1, Fallido.
+Peticion: 44 minutos, CD1, Fallido.
+Peticion: 44 minutos, CD1, Fallido.
+Peticion: 44 minutos, CD1, Fallido.
+Peticion: 44 minutos, CD1, Fallido.
+Peticion: 44 minutos, CD1, Fallido.
+Peticion: 44 minutos, CD1, Fallido.
+Peticion: 44 minutos, CD1, Fallido.
+Peticion: 44 minutos, CD1, Fallido.
+Tanque vacio: 45 minutos.
+Peticion: 45 minutos, CD1, Fallido.
+Peticion: 45 minutos, CD1, Fallido.
+Peticion: 45 minutos, CD1, Fallido.
+Peticion: 45 minutos, CD1, Fallido.
+Peticion: 45 minutos, CD1, Fallido.
+Peticion: 45 minutos, CD1, Fallido.
+Peticion: 45 minutos, CD1, Fallido.
+Peticion: 45 minutos, CD1, Fallido.
+Peticion: 45 minutos, CD1, Fallido.
+Peticion: 45 minutos, CD1, Fallido.
+Peticion: 45 minutos, CD1, Fallido.
+Tanque vacio: 46 minutos.
+Peticion: 46 minutos, CD1, Fallido.
+Peticion: 46 minutos, CD1, Fallido.
+Peticion: 46 minutos, CD1, Fallido.
+Peticion: 46 minutos, CD1, Fallido.
+Peticion: 46 minutos, CD1, Fallido.
+Peticion: 46 minutos, CD1, Fallido.
+Peticion: 46 minutos, CD1, Fallido.
+Peticion: 46 minutos, CD1, Fallido.
+Peticion: 46 minutos, CD1, Fallido.
+Peticion: 46 minutos, CD1, Fallido.
+Tanque vacio: 47 minutos.
+Peticion: 47 minutos, CD1, Fallido.
+Peticion: 47 minutos, CD1, Fallido.
+Peticion: 47 minutos, CD1, Fallido.
+Peticion: 47 minutos, CD1, Fallido.
+Peticion: 47 minutos, CD1, Fallido.
+Peticion: 47 minutos, CD1, Fallido.
+Peticion: 47 minutos, CD1, Fallido.
+Peticion: 47 minutos, CD1, Fallido.
+Peticion: 47 minutos, CD1, Fallido.
+Peticion: 47 minutos, CD1, Fallido.
+Tanque vacio: 48 minutos.
+Peticion: 48 minutos, CD1, Fallido.
+Peticion: 48 minutos, CD1, Fallido.
+Peticion: 48 minutos, CD1, Fallido.
+Peticion: 48 minutos, CD1, Fallido.
+Peticion: 48 minutos, CD1, Fallido.
+Peticion: 48 minutos, CD1, Fallido.
+Peticion: 48 minutos, CD1, Fallido.
+Peticion: 48 minutos, CD1, Fallido.
+Peticion: 48 minutos, CD1, Fallido.
+Peticion: 48 minutos, CD1, Fallido.
+Peticion: 48 minutos, CD1, Fallido.
+Tanque vacio: 49 minutos.
+Peticion: 49 minutos, CD1, Fallido.
+Peticion: 49 minutos, CD1, Fallido.
+Peticion: 49 minutos, CD1, Fallido.
+Peticion: 49 minutos, CD1, Fallido.
+Peticion: 49 minutos, CD1, Fallido.
+Peticion: 49 minutos, CD1, Fallido.
+Peticion: 49 minutos, CD1, Fallido.
+Peticion: 49 minutos, CD1, Fallido.
+Peticion: 49 minutos, CD1, Fallido.
+Peticion: 49 minutos, CD1, Fallido.
+Tanque vacio: 50 minutos.
+Peticion: 50 minutos, CD1, Fallido.
+Peticion: 50 minutos, CD1, Fallido.
+Peticion: 50 minutos, CD1, Fallido.
+Peticion: 50 minutos, CD1, Fallido.
+Peticion: 50 minutos, CD1, Fallido.
+Peticion: 50 minutos, CD1, Fallido.
+Peticion: 50 minutos, CD1, Fallido.
+Peticion: 50 minutos, CD1, Fallido.
+Peticion: 50 minutos, CD1, Fallido.
+Peticion: 50 minutos, CD1, Fallido.
+Tanque vacio: 51 minutos.
+Peticion: 51 minutos, CD1, Fallido.
+Peticion: 51 minutos, CD1, Fallido.
+Peticion: 51 minutos, CD1, Fallido.
+Peticion: 51 minutos, CD1, Fallido.
+Peticion: 51 minutos, CD1, Fallido.
+Peticion: 51 minutos, CD1, Fallido.
+Peticion: 51 minutos, CD1, Fallido.
+Peticion: 51 minutos, CD1, Fallido.
+Peticion: 51 minutos, CD1, Fallido.
+Peticion: 51 minutos, CD1, Fallido.
+Tanque vacio: 52 minutos.
+Peticion: 52 minutos, CD1, Fallido.
+Peticion: 52 minutos, CD1, Fallido.
+Peticion: 52 minutos, CD1, Fallido.
+Peticion: 52 minutos, CD1, Fallido.
+Peticion: 52 minutos, CD1, Fallido.
+Peticion: 52 minutos, CD1, Fallido.
+Peticion: 52 minutos, CD1, Fallido.
+Peticion: 52 minutos, CD1, Fallido.
+Peticion: 52 minutos, CD1, Fallido.
+Peticion: 52 minutos, CD1, Fallido.
+Peticion: 52 minutos, CD1, Fallido.
+Tanque vacio: 53 minutos.
+Peticion: 53 minutos, CD1, Fallido.
+Peticion: 53 minutos, CD1, Fallido.
+Peticion: 53 minutos, CD1, Fallido.
+Peticion: 53 minutos, CD1, Fallido.
+Peticion: 53 minutos, CD1, Fallido.
+Peticion: 53 minutos, CD1, Fallido.
+Peticion: 53 minutos, CD1, Fallido.
+Peticion: 53 minutos, CD1, Fallido.
+Peticion: 53 minutos, CD1, Fallido.
+Peticion: 53 minutos, CD1, Fallido.
+Tanque vacio: 54 minutos.
+Peticion: 54 minutos, CD1, Fallido.
+Peticion: 54 minutos, CD1, Fallido.
+Peticion: 54 minutos, CD1, Fallido.
+Peticion: 54 minutos, CD1, Fallido.
+Peticion: 54 minutos, CD1, Fallido.
+Peticion: 54 minutos, CD1, Fallido.
+Peticion: 54 minutos, CD1, Fallido.
+Peticion: 54 minutos, CD1, Fallido.
+Peticion: 54 minutos, CD1, Fallido.
+Peticion: 54 minutos, CD1, Fallido.
+Peticion: 54 minutos, CD1, Fallido.
+Tanque vacio: 55 minutos.
+Peticion: 55 minutos, CD1, Fallido.
+Peticion: 55 minutos, CD1, Fallido.
+Peticion: 55 minutos, CD1, Fallido.
+Peticion: 55 minutos, CD1, Fallido.
+Peticion: 55 minutos, CD1, Fallido.
+Peticion: 55 minutos, CD1, Fallido.
+Peticion: 55 minutos, CD1, Fallido.
+Peticion: 55 minutos, CD1, Fallido.
+Peticion: 55 minutos, CD1, Fallido.
+Peticion: 55 minutos, CD1, Fallido.
+Peticion: 55 minutos, CD1, Fallido.
+Tanque vacio: 56 minutos.
+Peticion: 56 minutos, CD1, Fallido.
+Peticion: 56 minutos, CD1, Fallido.
+Peticion: 56 minutos, CD1, Fallido.
+Peticion: 56 minutos, CD1, Fallido.
+Peticion: 56 minutos, CD1, Fallido.
+Peticion: 56 minutos, CD1, Fallido.
+Peticion: 56 minutos, CD1, Fallido.
+Peticion: 56 minutos, CD1, Fallido.
+Peticion: 56 minutos, CD1, Fallido.
+Peticion: 56 minutos, CD1, Fallido.
+Tanque vacio: 57 minutos.
+Peticion: 57 minutos, CD1, Fallido.
+Peticion: 57 minutos, CD1, Fallido.
+Peticion: 57 minutos, CD1, Fallido.
+Peticion: 57 minutos, CD1, Fallido.
+Peticion: 57 minutos, CD1, Fallido.
+Peticion: 57 minutos, CD1, Fallido.
+Peticion: 57 minutos, CD1, Fallido.
+Peticion: 57 minutos, CD1, Fallido.
+Peticion: 57 minutos, CD1, Fallido.
+Peticion: 57 minutos, CD1, Fallido.
+Tanque vacio: 58 minutos.
+Peticion: 58 minutos, CD1, Fallido.
+Peticion: 58 minutos, CD1, Fallido.
+Peticion: 58 minutos, CD1, Fallido.
+Peticion: 58 minutos, CD1, Fallido.
+Peticion: 58 minutos, CD1, Fallido.
+Peticion: 58 minutos, CD1, Fallido.
+Peticion: 58 minutos, CD1, Fallido.
+Peticion: 58 minutos, CD1, Fallido.
+Peticion: 58 minutos, CD1, Fallido.
+Peticion: 58 minutos, CD1, Fallido.
+Tanque vacio: 59 minutos.
+Peticion: 59 minutos, CD1, Fallido.
+Peticion: 59 minutos, CD1, Fallido.
+Peticion: 59 minutos, CD1, Fallido.
+Peticion: 59 minutos, CD1, Fallido.
+Peticion: 59 minutos, CD1, Fallido.
+Peticion: 59 minutos, CD1, Fallido.
+Peticion: 59 minutos, CD1, Fallido.
+Peticion: 59 minutos, CD1, Fallido.
+Peticion: 59 minutos, CD1, Fallido.
+Peticion: 59 minutos, CD1, Fallido.
+Peticion: 59 minutos, CD1, Fallido.
+Tanque vacio: 60 minutos.
+Peticion: 60 minutos, CD1, Fallido.
+Peticion: 60 minutos, CD1, Fallido.
+Peticion: 60 minutos, CD1, Fallido.
+Peticion: 60 minutos, CD1, Fallido.
+Peticion: 60 minutos, CD1, Fallido.
+Peticion: 60 minutos, CD1, Fallido.
+Peticion: 60 minutos, CD1, Fallido.
+Peticion: 60 minutos, CD1, Fallido.
+Peticion: 60 minutos, CD1, Fallido.
+Peticion: 60 minutos, CD1, Fallido.
+Tanque vacio: 61 minutos.
+Peticion: 61 minutos, CD1, Fallido.
+Peticion: 61 minutos, CD1, Fallido.
+Peticion: 61 minutos, CD1, Fallido.
+Peticion: 61 minutos, CD1, Fallido.
+Peticion: 61 minutos, CD1, Fallido.
+Peticion: 61 minutos, CD1, Fallido.
+Peticion: 61 minutos, CD1, Fallido.
+Peticion: 61 minutos, CD1, Fallido.
+Peticion: 61 minutos, CD1, Fallido.
+Peticion: 61 minutos, CD1, Fallido.
+Tanque vacio: 62 minutos.
+Peticion: 62 minutos, CD1, Fallido.
+Peticion: 62 minutos, CD1, Fallido.
+Peticion: 62 minutos, CD1, Fallido.
+Peticion: 62 minutos, CD1, Fallido.
+Peticion: 62 minutos, CD1, Fallido.
+Peticion: 62 minutos, CD1, Fallido.
+Peticion: 62 minutos, CD1, Fallido.
+Peticion: 62 minutos, CD1, Fallido.
+Peticion: 62 minutos, CD1, Fallido.
+Peticion: 62 minutos, CD1, Fallido.
+Tanque vacio: 63 minutos.
+Peticion: 63 minutos, CD1, Fallido.
+Peticion: 63 minutos, CD1, Fallido.
+Peticion: 63 minutos, CD1, Fallido.
+Peticion: 63 minutos, CD1, Fallido.
+Peticion: 63 minutos, CD1, Fallido.
+Peticion: 63 minutos, CD1, Fallido.
+Peticion: 63 minutos, CD1, Fallido.
+Peticion: 63 minutos, CD1, Fallido.
+Peticion: 63 minutos, CD1, Fallido.
+Peticion: 63 minutos, CD1, Fallido.
+Tanque vacio: 64 minutos.
+Peticion: 64 minutos, CD1, Fallido.
+Peticion: 64 minutos, CD1, Fallido.
+Peticion: 64 minutos, CD1, Fallido.
+Peticion: 64 minutos, CD1, Fallido.
+Peticion: 64 minutos, CD1, Fallido.
+Peticion: 64 minutos, CD1, Fallido.
+Peticion: 64 minutos, CD1, Fallido.
+Peticion: 64 minutos, CD1, Fallido.
+Peticion: 64 minutos, CD1, Fallido.
+Peticion: 64 minutos, CD1, Fallido.
+Tanque vacio: 65 minutos.
+Peticion: 65 minutos, CD1, Fallido.
+Peticion: 65 minutos, CD1, Fallido.
+Peticion: 65 minutos, CD1, Fallido.
+Peticion: 65 minutos, CD1, Fallido.
+Peticion: 65 minutos, CD1, Fallido.
+Peticion: 65 minutos, CD1, Fallido.
+Peticion: 65 minutos, CD1, Fallido.
+Peticion: 65 minutos, CD1, Fallido.
+Peticion: 65 minutos, CD1, Fallido.
+Peticion: 65 minutos, CD1, Fallido.
+Peticion: 65 minutos, CD1, Fallido.
+Tanque vacio: 66 minutos.
+Peticion: 66 minutos, CD1, Fallido.
+Peticion: 66 minutos, CD1, Fallido.
+Peticion: 66 minutos, CD1, Fallido.
+Peticion: 66 minutos, CD1, Fallido.
+Peticion: 66 minutos, CD1, Fallido.
+Peticion: 66 minutos, CD1, Fallido.
+Peticion: 66 minutos, CD1, Fallido.
+Peticion: 66 minutos, CD1, Fallido.
+Peticion: 66 minutos, CD1, Fallido.
+Peticion: 66 minutos, CD1, Fallido.
+Tanque vacio: 67 minutos.
+Peticion: 67 minutos, CD1, Fallido.
+Peticion: 67 minutos, CD1, Fallido.
+Peticion: 67 minutos, CD1, Fallido.
+Peticion: 67 minutos, CD1, Fallido.
+Peticion: 67 minutos, CD1, Fallido.
+Peticion: 67 minutos, CD1, Fallido.
+Peticion: 67 minutos, CD1, Fallido.
+Peticion: 67 minutos, CD1, Fallido.
+Peticion: 67 minutos, CD1, Fallido.
+Peticion: 67 minutos, CD1, Fallido.
+Tanque vacio: 68 minutos.
+Peticion: 68 minutos, CD1, Fallido.
+Peticion: 68 minutos, CD1, Fallido.
+Peticion: 68 minutos, CD1, Fallido.
+Peticion: 68 minutos, CD1, Fallido.
+Peticion: 68 minutos, CD1, Fallido.
+Peticion: 68 minutos, CD1, Fallido.
+Peticion: 68 minutos, CD1, Fallido.
+Peticion: 68 minutos, CD1, Fallido.
+Peticion: 68 minutos, CD1, Fallido.
+Peticion: 68 minutos, CD1, Fallido.
+Peticion: 68 minutos, CD1, Fallido.
+Tanque vacio: 69 minutos.
+Peticion: 69 minutos, CD1, Fallido.
+Peticion: 69 minutos, CD1, Fallido.
+Peticion: 69 minutos, CD1, Fallido.
+Peticion: 69 minutos, CD1, Fallido.
+Peticion: 69 minutos, CD1, Fallido.
+Peticion: 69 minutos, CD1, Fallido.
+Peticion: 69 minutos, CD1, Fallido.
+Peticion: 69 minutos, CD1, Fallido.
+Peticion: 69 minutos, CD1, Fallido.
+Peticion: 69 minutos, CD1, Fallido.
+Tanque vacio: 70 minutos.
+Peticion: 70 minutos, CD1, Fallido.
+Peticion: 70 minutos, CD1, Fallido.
+Peticion: 70 minutos, CD1, Fallido.
+Peticion: 70 minutos, CD1, Fallido.
+Peticion: 70 minutos, CD1, Fallido.
+Peticion: 70 minutos, CD1, Fallido.
+Peticion: 70 minutos, CD1, Fallido.
+Peticion: 70 minutos, CD1, Fallido.
+Peticion: 70 minutos, CD1, Fallido.
+Peticion: 70 minutos, CD1, Fallido.
+Tanque vacio: 71 minutos.
+Peticion: 71 minutos, CD1, Fallido.
+Peticion: 71 minutos, CD1, Fallido.
+Peticion: 71 minutos, CD1, Fallido.
+Peticion: 71 minutos, CD1, Fallido.
+Peticion: 71 minutos, CD1, Fallido.
+Peticion: 71 minutos, CD1, Fallido.
+Peticion: 71 minutos, CD1, Fallido.
+Peticion: 71 minutos, CD1, Fallido.
+Peticion: 71 minutos, CD1, Fallido.
+Peticion: 71 minutos, CD1, Fallido.
+Tanque vacio: 72 minutos.
+Peticion: 72 minutos, CD1, Fallido.
+Peticion: 72 minutos, CD1, Fallido.
+Peticion: 72 minutos, CD1, Fallido.
+Peticion: 72 minutos, CD1, Fallido.
+Peticion: 72 minutos, CD1, Fallido.
+Peticion: 72 minutos, CD1, Fallido.
+Peticion: 72 minutos, CD1, Fallido.
+Peticion: 72 minutos, CD1, Fallido.
+Peticion: 72 minutos, CD1, Fallido.
+Peticion: 72 minutos, CD1, Fallido.
+Peticion: 72 minutos, CD1, Fallido.
+Tanque vacio: 73 minutos.
+Peticion: 73 minutos, CD1, Fallido.
+Peticion: 73 minutos, CD1, Fallido.
+Peticion: 73 minutos, CD1, Fallido.
+Peticion: 73 minutos, CD1, Fallido.
+Peticion: 73 minutos, CD1, Fallido.
+Peticion: 73 minutos, CD1, Fallido.
+Peticion: 73 minutos, CD1, Fallido.
+Peticion: 73 minutos, CD1, Fallido.
+Peticion: 73 minutos, CD1, Fallido.
+Peticion: 73 minutos, CD1, Fallido.
+Tanque vacio: 74 minutos.
+Peticion: 74 minutos, CD1, Fallido.
+Peticion: 74 minutos, CD1, Fallido.
+Peticion: 74 minutos, CD1, Fallido.
+Peticion: 74 minutos, CD1, Fallido.
+Peticion: 74 minutos, CD1, Fallido.
+Peticion: 74 minutos, CD1, Fallido.
+Peticion: 74 minutos, CD1, Fallido.
+Peticion: 74 minutos, CD1, Fallido.
+Peticion: 74 minutos, CD1, Fallido.
+Peticion: 74 minutos, CD1, Fallido.
+Tanque vacio: 75 minutos.
+Peticion: 75 minutos, CD1, Fallido.
+Peticion: 75 minutos, CD1, Fallido.
+Peticion: 75 minutos, CD1, Fallido.
+Peticion: 75 minutos, CD1, Fallido.
+Peticion: 75 minutos, CD1, Fallido.
+Peticion: 75 minutos, CD1, Fallido.
+Peticion: 75 minutos, CD1, Fallido.
+Peticion: 75 minutos, CD1, Fallido.
+Peticion: 75 minutos, CD1, Fallido.
+Peticion: 75 minutos, CD1, Fallido.
+Peticion: 75 minutos, CD1, Fallido.
+Tanque vacio: 76 minutos.
+Peticion: 76 minutos, CD1, Fallido.
+Peticion: 76 minutos, CD1, Fallido.
+Peticion: 76 minutos, CD1, Fallido.
+Peticion: 76 minutos, CD1, Fallido.
+Peticion: 76 minutos, CD1, Fallido.
+Peticion: 76 minutos, CD1, Fallido.
+Peticion: 76 minutos, CD1, Fallido.
+Peticion: 76 minutos, CD1, Fallido.
+Peticion: 76 minutos, CD1, Fallido.
+Peticion: 76 minutos, CD1, Fallido.
+Tanque vacio: 77 minutos.
+Peticion: 77 minutos, CD1, Fallido.
+Peticion: 77 minutos, CD1, Fallido.
+Peticion: 77 minutos, CD1, Fallido.
+Peticion: 77 minutos, CD1, Fallido.
+Peticion: 77 minutos, CD1, Fallido.
+Peticion: 77 minutos, CD1, Fallido.
+Peticion: 77 minutos, CD1, Fallido.
+Peticion: 77 minutos, CD1, Fallido.
+Peticion: 77 minutos, CD1, Fallido.
+Peticion: 77 minutos, CD1, Fallido.
+Tanque vacio: 78 minutos.
+Peticion: 78 minutos, CD1, Fallido.
+Peticion: 78 minutos, CD1, Fallido.
+Peticion: 78 minutos, CD1, Fallido.
+Peticion: 78 minutos, CD1, Fallido.
+Peticion: 78 minutos, CD1, Fallido.
+Peticion: 78 minutos, CD1, Fallido.
+Peticion: 78 minutos, CD1, Fallido.
+Peticion: 78 minutos, CD1, Fallido.
+Peticion: 78 minutos, CD1, Fallido.
+Peticion: 78 minutos, CD1, Fallido.
+Peticion: 78 minutos, CD1, Fallido.
+Tanque vacio: 79 minutos.
+Peticion: 79 minutos, CD1, Fallido.
+Peticion: 79 minutos, CD1, Fallido.
+Peticion: 79 minutos, CD1, Fallido.
+Peticion: 79 minutos, CD1, Fallido.
+Peticion: 79 minutos, CD1, Fallido.
+Peticion: 79 minutos, CD1, Fallido.
+Peticion: 79 minutos, CD1, Fallido.
+Peticion: 79 minutos, CD1, Fallido.
+Peticion: 79 minutos, CD1, Fallido.
+Peticion: 79 minutos, CD1, Fallido.
+Tanque vacio: 80 minutos.
+Peticion: 80 minutos, CD1, Fallido.
+Peticion: 80 minutos, CD1, Fallido.
+Peticion: 80 minutos, CD1, Fallido.
+Peticion: 80 minutos, CD1, Fallido.
+Peticion: 80 minutos, CD1, Fallido.
+Peticion: 80 minutos, CD1, Fallido.
+Peticion: 80 minutos, CD1, Fallido.
+Peticion: 80 minutos, CD1, Fallido.
+Peticion: 80 minutos, CD1, Fallido.
+Peticion: 80 minutos, CD1, Fallido.
+Tanque vacio: 81 minutos.
+Peticion: 81 minutos, CD1, Fallido.
+Peticion: 81 minutos, CD1, Fallido.
+Peticion: 81 minutos, CD1, Fallido.
+Peticion: 81 minutos, CD1, Fallido.
+Peticion: 81 minutos, CD1, Fallido.
+Peticion: 81 minutos, CD1, Fallido.
+Peticion: 81 minutos, CD1, Fallido.
+Peticion: 81 minutos, CD1, Fallido.
+Peticion: 81 minutos, CD1, Fallido.
+Peticion: 81 minutos, CD1, Fallido.
+Tanque vacio: 82 minutos.
+Peticion: 82 minutos, CD1, Fallido.
+Peticion: 82 minutos, CD1, Fallido.
+Peticion: 82 minutos, CD1, Fallido.
+Peticion: 82 minutos, CD1, Fallido.
+Peticion: 82 minutos, CD1, Fallido.
+Peticion: 82 minutos, CD1, Fallido.
+Peticion: 82 minutos, CD1, Fallido.
+Peticion: 82 minutos, CD1, Fallido.
+Peticion: 82 minutos, CD1, Fallido.
+Peticion: 82 minutos, CD1, Fallido.
+Tanque vacio: 83 minutos.
+Peticion: 83 minutos, CD1, Fallido.
+Peticion: 83 minutos, CD1, Fallido.
+Peticion: 83 minutos, CD1, Fallido.
+Peticion: 83 minutos, CD1, Fallido.
+Peticion: 83 minutos, CD1, Fallido.
+Peticion: 83 minutos, CD1, Fallido.
+Peticion: 83 minutos, CD1, Fallido.
+Peticion: 83 minutos, CD1, Fallido.
+Peticion: 83 minutos, CD1, Fallido.
+Peticion: 83 minutos, CD1, Fallido.
+Peticion: 83 minutos, CD1, Fallido.
+Tanque vacio: 84 minutos.
+Peticion: 84 minutos, CD1, Fallido.
+Peticion: 84 minutos, CD1, Fallido.
+Peticion: 84 minutos, CD1, Fallido.
+Peticion: 84 minutos, CD1, Fallido.
+Peticion: 84 minutos, CD1, Fallido.
+Peticion: 84 minutos, CD1, Fallido.
+Peticion: 84 minutos, CD1, Fallido.
+Peticion: 84 minutos, CD1, Fallido.
+Peticion: 84 minutos, CD1, Fallido.
+Peticion: 84 minutos, CD1, Fallido.
+Tanque vacio: 85 minutos.
+Peticion: 85 minutos, CD1, Fallido.
+Peticion: 85 minutos, CD1, Fallido.
+Peticion: 85 minutos, CD1, Fallido.
+Peticion: 85 minutos, CD1, Fallido.
+Peticion: 85 minutos, CD1, Fallido.
+Peticion: 85 minutos, CD1, Fallido.
+Peticion: 85 minutos, CD1, Fallido.
+Peticion: 85 minutos, CD1, Fallido.
+Peticion: 85 minutos, CD1, Fallido.
+Peticion: 85 minutos, CD1, Fallido.
+Tanque vacio: 86 minutos.
+Peticion: 86 minutos, CD1, Fallido.
+Peticion: 86 minutos, CD1, Fallido.
+Peticion: 86 minutos, CD1, Fallido.
+Peticion: 86 minutos, CD1, Fallido.
+Peticion: 86 minutos, CD1, Fallido.
+Peticion: 86 minutos, CD1, Fallido.
+Peticion: 86 minutos, CD1, Fallido.
+Peticion: 86 minutos, CD1, Fallido.
+Peticion: 86 minutos, CD1, Fallido.
+Peticion: 86 minutos, CD1, Fallido.
+Peticion: 86 minutos, CD1, Fallido.
+Tanque vacio: 87 minutos.
+Peticion: 87 minutos, CD1, Fallido.
+Peticion: 87 minutos, CD1, Fallido.
+Peticion: 87 minutos, CD1, Fallido.
+Peticion: 87 minutos, CD1, Fallido.
+Peticion: 87 minutos, CD1, Fallido.
+Peticion: 87 minutos, CD1, Fallido.
+Peticion: 87 minutos, CD1, Fallido.
+Peticion: 87 minutos, CD1, Fallido.
+Peticion: 87 minutos, CD1, Fallido.
+Peticion: 87 minutos, CD1, Fallido.
+Tanque vacio: 88 minutos.
+Peticion: 88 minutos, CD1, Fallido.
+Peticion: 88 minutos, CD1, Fallido.
+Peticion: 88 minutos, CD1, Fallido.
+Peticion: 88 minutos, CD1, Fallido.
+Peticion: 88 minutos, CD1, Fallido.
+Peticion: 88 minutos, CD1, Fallido.
+Peticion: 88 minutos, CD1, Fallido.
+Peticion: 88 minutos, CD1, Fallido.
+Peticion: 88 minutos, CD1, Fallido.
+Peticion: 88 minutos, CD1, Fallido.
+Tanque vacio: 89 minutos.
+Peticion: 89 minutos, CD1, Fallido.
+Peticion: 89 minutos, CD1, Fallido.
+Peticion: 89 minutos, CD1, Fallido.
+Peticion: 89 minutos, CD1, Fallido.
+Peticion: 89 minutos, CD1, Fallido.
+Peticion: 89 minutos, CD1, Fallido.
+Peticion: 89 minutos, CD1, Fallido.
+Peticion: 89 minutos, CD1, Fallido.
+Peticion: 89 minutos, CD1, Fallido.
+Peticion: 89 minutos, CD1, Fallido.
+Peticion: 89 minutos, CD1, Fallido.
+Tanque vacio: 90 minutos.
+Peticion: 90 minutos, CD1, Fallido.
+Peticion: 90 minutos, CD1, Fallido.
+Peticion: 90 minutos, CD1, Fallido.
+Peticion: 90 minutos, CD1, Fallido.
+Peticion: 90 minutos, CD1, Fallido.
+Peticion: 90 minutos, CD1, Fallido.
+Peticion: 90 minutos, CD1, Fallido.
+Peticion: 90 minutos, CD1, Fallido.
+Peticion: 90 minutos, CD1, Fallido.
+Peticion: 90 minutos, CD1, Fallido.
+Tanque vacio: 91 minutos.
+Peticion: 91 minutos, CD1, Fallido.
+Peticion: 91 minutos, CD1, Fallido.
+Peticion: 91 minutos, CD1, Fallido.
+Peticion: 91 minutos, CD1, Fallido.
+Peticion: 91 minutos, CD1, Fallido.
+Peticion: 91 minutos, CD1, Fallido.
+Peticion: 91 minutos, CD1, Fallido.
+Peticion: 91 minutos, CD1, Fallido.
+Peticion: 91 minutos, CD1, Fallido.
+Peticion: 91 minutos, CD1, Fallido.
+Tanque vacio: 92 minutos.
+Peticion: 92 minutos, CD1, Fallido.
+Peticion: 92 minutos, CD1, Fallido.
+Peticion: 92 minutos, CD1, Fallido.
+Peticion: 92 minutos, CD1, Fallido.
+Peticion: 92 minutos, CD1, Fallido.
+Peticion: 92 minutos, CD1, Fallido.
+Peticion: 92 minutos, CD1, Fallido.
+Peticion: 92 minutos, CD1, Fallido.
+Peticion: 92 minutos, CD1, Fallido.
+Peticion: 92 minutos, CD1, Fallido.
+Peticion: 92 minutos, CD1, Fallido.
+Tanque vacio: 93 minutos.
+Peticion: 93 minutos, CD1, Fallido.
+Peticion: 93 minutos, CD1, Fallido.
+Peticion: 93 minutos, CD1, Fallido.
+Peticion: 93 minutos, CD1, Fallido.
+Peticion: 93 minutos, CD1, Fallido.
+Peticion: 93 minutos, CD1, Fallido.
+Peticion: 93 minutos, CD1, Fallido.
+Peticion: 93 minutos, CD1, Fallido.
+Peticion: 93 minutos, CD1, Fallido.
+Peticion: 93 minutos, CD1, Fallido.
+Tanque vacio: 94 minutos.
+Peticion: 94 minutos, CD1, Fallido.
+Peticion: 94 minutos, CD1, Fallido.
+Peticion: 94 minutos, CD1, Fallido.
+Peticion: 94 minutos, CD1, Fallido.
+Peticion: 94 minutos, CD1, Fallido.
+Peticion: 94 minutos, CD1, Fallido.
+Peticion: 94 minutos, CD1, Fallido.
+Peticion: 94 minutos, CD1, Fallido.
+Peticion: 94 minutos, CD1, Fallido.
+Peticion: 94 minutos, CD1, Fallido.
+Tanque vacio: 95 minutos.
+Peticion: 95 minutos, CD1, Fallido.
+Peticion: 95 minutos, CD1, Fallido.
+Peticion: 95 minutos, CD1, Fallido.
+Peticion: 95 minutos, CD1, Fallido.
+Peticion: 95 minutos, CD1, Fallido.
+Peticion: 95 minutos, CD1, Fallido.
+Peticion: 95 minutos, CD1, Fallido.
+Peticion: 95 minutos, CD1, Fallido.
+Peticion: 95 minutos, CD1, Fallido.
+Peticion: 95 minutos, CD1, Fallido.
+Tanque vacio: 96 minutos.
+Peticion: 96 minutos, CD1, Fallido.
+Peticion: 96 minutos, CD1, Fallido.
+Peticion: 96 minutos, CD1, Fallido.
+Peticion: 96 minutos, CD1, Fallido.
+Peticion: 96 minutos, CD1, Fallido.
+Peticion: 96 minutos, CD1, Fallido.
+Peticion: 96 minutos, CD1, Fallido.
+Peticion: 96 minutos, CD1, Fallido.
+Peticion: 96 minutos, CD1, Fallido.
+Peticion: 96 minutos, CD1, Fallido.
+Tanque vacio: 97 minutos.
+Peticion: 97 minutos, CD1, Fallido.
+Peticion: 97 minutos, CD1, Fallido.
+Peticion: 97 minutos, CD1, Fallido.
+Peticion: 97 minutos, CD1, Fallido.
+Peticion: 97 minutos, CD1, Fallido.
+Peticion: 97 minutos, CD1, Fallido.
+Peticion: 97 minutos, CD1, Fallido.
+Peticion: 97 minutos, CD1, Fallido.
+Peticion: 97 minutos, CD1, Fallido.
+Peticion: 97 minutos, CD1, Fallido.
+Tanque vacio: 98 minutos.
+Peticion: 98 minutos, CD1, Fallido.
+Peticion: 98 minutos, CD1, Fallido.
+Peticion: 98 minutos, CD1, Fallido.
+Peticion: 98 minutos, CD1, Fallido.
+Peticion: 98 minutos, CD1, Fallido.
+Peticion: 98 minutos, CD1, Fallido.
+Peticion: 98 minutos, CD1, Fallido.
+Peticion: 98 minutos, CD1, Fallido.
+Peticion: 98 minutos, CD1, Fallido.
+Peticion: 98 minutos, CD1, Fallido.
+Tanque vacio: 99 minutos.
+Peticion: 99 minutos, CD1, Fallido.
+Peticion: 99 minutos, CD1, Fallido.
+Peticion: 99 minutos, CD1, Fallido.
+Peticion: 99 minutos, CD1, Fallido.
+Peticion: 99 minutos, CD1, Fallido.
+Peticion: 99 minutos, CD1, Fallido.
+Peticion: 99 minutos, CD1, Fallido.
+Peticion: 99 minutos, CD1, Fallido.
+Peticion: 99 minutos, CD1, Fallido.
+Peticion: 99 minutos, CD1, Fallido.
+Tanque vacio: 100 minutos.
+Peticion: 100 minutos, CD1, Fallido.
+Peticion: 100 minutos, CD1, Fallido.
+Peticion: 100 minutos, CD1, Fallido.
+Peticion: 100 minutos, CD1, Fallido.
+Peticion: 100 minutos, CD1, Fallido.
+Peticion: 100 minutos, CD1, Fallido.
+Peticion: 100 minutos, CD1, Fallido.
+Peticion: 100 minutos, CD1, Fallido.
+Peticion: 100 minutos, CD1, Fallido.
+Peticion: 100 minutos, CD1, Fallido.
+Tanque vacio: 101 minutos.
+Peticion: 101 minutos, CD1, Fallido.
+Peticion: 101 minutos, CD1, Fallido.
+Peticion: 101 minutos, CD1, Fallido.
+Peticion: 101 minutos, CD1, Fallido.
+Peticion: 101 minutos, CD1, Fallido.
+Peticion: 101 minutos, CD1, Fallido.
+Peticion: 101 minutos, CD1, Fallido.
+Peticion: 101 minutos, CD1, Fallido.
+Peticion: 101 minutos, CD1, Fallido.
+Peticion: 101 minutos, CD1, Fallido.
+Tanque vacio: 102 minutos.
+Peticion: 102 minutos, CD1, Fallido.
+Peticion: 102 minutos, CD1, Fallido.
+Peticion: 102 minutos, CD1, Fallido.
+Peticion: 102 minutos, CD1, Fallido.
+Peticion: 102 minutos, CD1, Fallido.
+Peticion: 102 minutos, CD1, Fallido.
+Peticion: 102 minutos, CD1, Fallido.
+Peticion: 102 minutos, CD1, Fallido.
+Peticion: 102 minutos, CD1, Fallido.
+Peticion: 102 minutos, CD1, Fallido.
+Peticion: 102 minutos, CD1, Fallido.
+Tanque vacio: 103 minutos.
+Peticion: 103 minutos, CD1, Fallido.
+Peticion: 103 minutos, CD1, Fallido.
+Peticion: 103 minutos, CD1, Fallido.
+Peticion: 103 minutos, CD1, Fallido.
+Peticion: 103 minutos, CD1, Fallido.
+Peticion: 103 minutos, CD1, Fallido.
+Peticion: 103 minutos, CD1, Fallido.
+Peticion: 103 minutos, CD1, Fallido.
+Peticion: 103 minutos, CD1, Fallido.
+Peticion: 103 minutos, CD1, Fallido.
+Tanque vacio: 104 minutos.
+Peticion: 104 minutos, CD1, Fallido.
+Peticion: 104 minutos, CD1, Fallido.
+Peticion: 104 minutos, CD1, Fallido.
+Peticion: 104 minutos, CD1, Fallido.
+Peticion: 104 minutos, CD1, Fallido.
+Peticion: 104 minutos, CD1, Fallido.
+Peticion: 104 minutos, CD1, Fallido.
+Peticion: 104 minutos, CD1, Fallido.
+Peticion: 104 minutos, CD1, Fallido.
+Peticion: 104 minutos, CD1, Fallido.
+Peticion: 104 minutos, CD1, Fallido.
+Tanque vacio: 105 minutos.
+Peticion: 105 minutos, CD1, Fallido.
+Peticion: 105 minutos, CD1, Fallido.
+Peticion: 105 minutos, CD1, Fallido.
+Peticion: 105 minutos, CD1, Fallido.
+Peticion: 105 minutos, CD1, Fallido.
+Peticion: 105 minutos, CD1, Fallido.
+Peticion: 105 minutos, CD1, Fallido.
+Peticion: 105 minutos, CD1, Fallido.
+Peticion: 105 minutos, CD1, Fallido.
+Peticion: 105 minutos, CD1, Fallido.
+Tanque vacio: 106 minutos.
+Peticion: 106 minutos, CD1, Fallido.
+Peticion: 106 minutos, CD1, Fallido.
+Peticion: 106 minutos, CD1, Fallido.
+Peticion: 106 minutos, CD1, Fallido.
+Peticion: 106 minutos, CD1, Fallido.
+Peticion: 106 minutos, CD1, Fallido.
+Peticion: 106 minutos, CD1, Fallido.
+Peticion: 106 minutos, CD1, Fallido.
+Peticion: 106 minutos, CD1, Fallido.
+Peticion: 106 minutos, CD1, Fallido.
+Tanque vacio: 107 minutos.
+Peticion: 107 minutos, CD1, Fallido.
+Peticion: 107 minutos, CD1, Fallido.
+Peticion: 107 minutos, CD1, Fallido.
+Peticion: 107 minutos, CD1, Fallido.
+Peticion: 107 minutos, CD1, Fallido.
+Peticion: 107 minutos, CD1, Fallido.
+Peticion: 107 minutos, CD1, Fallido.
+Peticion: 107 minutos, CD1, Fallido.
+Peticion: 107 minutos, CD1, Fallido.
+Peticion: 107 minutos, CD1, Fallido.
+Tanque vacio: 108 minutos.
+Peticion: 108 minutos, CD1, Fallido.
+Peticion: 108 minutos, CD1, Fallido.
+Peticion: 108 minutos, CD1, Fallido.
+Peticion: 108 minutos, CD1, Fallido.
+Peticion: 108 minutos, CD1, Fallido.
+Peticion: 108 minutos, CD1, Fallido.
+Peticion: 108 minutos, CD1, Fallido.
+Peticion: 108 minutos, CD1, Fallido.
+Peticion: 108 minutos, CD1, Fallido.
+Tanque vacio: 109 minutos.
+Peticion: 109 minutos, CD1, Fallido.
+Peticion: 109 minutos, CD1, Fallido.
+Peticion: 109 minutos, CD1, Fallido.
+Peticion: 109 minutos, CD1, Fallido.
+Peticion: 109 minutos, CD1, Fallido.
+Peticion: 109 minutos, CD1, Fallido.
+Peticion: 109 minutos, CD1, Fallido.
+Peticion: 109 minutos, CD1, Fallido.
+Peticion: 109 minutos, CD1, Fallido.
+Peticion: 109 minutos, CD1, Fallido.
+Tanque vacio: 110 minutos.
+Peticion: 110 minutos, CD1, Fallido.
+Peticion: 110 minutos, CD1, Fallido.
+Peticion: 110 minutos, CD1, Fallido.
+Peticion: 110 minutos, CD1, Fallido.
+Peticion: 110 minutos, CD1, Fallido.
+Peticion: 110 minutos, CD1, Fallido.
+Peticion: 110 minutos, CD1, Fallido.
+Peticion: 110 minutos, CD1, Fallido.
+Peticion: 110 minutos, CD1, Fallido.
+Peticion: 110 minutos, CD1, Fallido.
+Tanque vacio: 111 minutos.
+Peticion: 111 minutos, CD1, Fallido.
+Peticion: 111 minutos, CD1, Fallido.
+Peticion: 111 minutos, CD1, Fallido.
+Peticion: 111 minutos, CD1, Fallido.
+Peticion: 111 minutos, CD1, Fallido.
+Peticion: 111 minutos, CD1, Fallido.
+Peticion: 111 minutos, CD1, Fallido.
+Peticion: 111 minutos, CD1, Fallido.
+Peticion: 111 minutos, CD1, Fallido.
+Peticion: 111 minutos, CD1, Fallido.
+Tanque vacio: 112 minutos.
+Peticion: 112 minutos, CD1, Fallido.
+Peticion: 112 minutos, CD1, Fallido.
+Peticion: 112 minutos, CD1, Fallido.
+Peticion: 112 minutos, CD1, Fallido.
+Peticion: 112 minutos, CD1, Fallido.
+Peticion: 112 minutos, CD1, Fallido.
+Peticion: 112 minutos, CD1, Fallido.
+Peticion: 112 minutos, CD1, Fallido.
+Peticion: 112 minutos, CD1, Fallido.
+Peticion: 112 minutos, CD1, Fallido.
+Tanque vacio: 113 minutos.
+Peticion: 113 minutos, CD1, Fallido.
+Peticion: 113 minutos, CD1, Fallido.
+Peticion: 113 minutos, CD1, Fallido.
+Peticion: 113 minutos, CD1, Fallido.
+Peticion: 113 minutos, CD1, Fallido.
+Peticion: 113 minutos, CD1, Fallido.
+Peticion: 113 minutos, CD1, Fallido.
+Peticion: 113 minutos, CD1, Fallido.
+Peticion: 113 minutos, CD1, Fallido.
+Peticion: 113 minutos, CD1, Fallido.
+Peticion: 113 minutos, CD1, Fallido.
+Tanque vacio: 114 minutos.
+Peticion: 114 minutos, CD1, Fallido.
+Peticion: 114 minutos, CD1, Fallido.
+Peticion: 114 minutos, CD1, Fallido.
+Peticion: 114 minutos, CD1, Fallido.
+Peticion: 114 minutos, CD1, Fallido.
+Peticion: 114 minutos, CD1, Fallido.
+Peticion: 114 minutos, CD1, Fallido.
+Peticion: 114 minutos, CD1, Fallido.
+Peticion: 114 minutos, CD1, Fallido.
+Peticion: 114 minutos, CD1, Fallido.
+Tanque vacio: 115 minutos.
+Peticion: 115 minutos, CD1, Fallido.
+Peticion: 115 minutos, CD1, Fallido.
+Peticion: 115 minutos, CD1, Fallido.
+Peticion: 115 minutos, CD1, Fallido.
+Peticion: 115 minutos, CD1, Fallido.
+Peticion: 115 minutos, CD1, Fallido.
+Peticion: 115 minutos, CD1, Fallido.
+Peticion: 115 minutos, CD1, Fallido.
+Peticion: 115 minutos, CD1, Fallido.
+Peticion: 115 minutos, CD1, Fallido.
+Peticion: 115 minutos, CD1, Fallido.
+Tanque vacio: 116 minutos.
+Peticion: 116 minutos, CD1, Fallido.
+Peticion: 116 minutos, CD1, Fallido.
+Peticion: 116 minutos, CD1, Fallido.
+Peticion: 116 minutos, CD1, Fallido.
+Peticion: 116 minutos, CD1, Fallido.
+Peticion: 116 minutos, CD1, Fallido.
+Peticion: 116 minutos, CD1, Fallido.
+Peticion: 116 minutos, CD1, Fallido.
+Peticion: 116 minutos, CD1, Fallido.
+Peticion: 116 minutos, CD1, Fallido.
+Tanque vacio: 117 minutos.
+Peticion: 117 minutos, CD1, Fallido.
+Peticion: 117 minutos, CD1, Fallido.
+Peticion: 117 minutos, CD1, Fallido.
+Peticion: 117 minutos, CD1, Fallido.
+Peticion: 117 minutos, CD1, Fallido.
+Peticion: 117 minutos, CD1, Fallido.
+Tanque vacio: 118 minutos.
+Tanque vacio: 119 minutos.
+Tanque vacio: 120 minutos.
+Tanque vacio: 121 minutos.
+Tanque vacio: 122 minutos.
+Tanque vacio: 123 minutos.
+Tanque vacio: 124 minutos.
+Tanque vacio: 125 minutos.
+Tanque vacio: 126 minutos.
+Tanque vacio: 127 minutos.
+Tanque vacio: 128 minutos.
+Tanque vacio: 129 minutos.
+Tanque vacio: 130 minutos.
+Tanque vacio: 131 minutos.
+Tanque vacio: 132 minutos.
+Tanque vacio: 133 minutos.
+Tanque vacio: 134 minutos.
+Tanque vacio: 135 minutos.
+Tanque vacio: 136 minutos.
+Tanque vacio: 137 minutos.
+Tanque vacio: 138 minutos.
+Tanque vacio: 139 minutos.
+Tanque vacio: 140 minutos.
+Tanque vacio: 141 minutos.
+Tanque vacio: 142 minutos.
+Tanque vacio: 143 minutos.
+Tanque vacio: 144 minutos.
+Tanque vacio: 145 minutos.
+Tanque vacio: 146 minutos.
+Tanque vacio: 147 minutos.
+Tanque vacio: 148 minutos.
+Tanque vacio: 149 minutos.
+Tanque vacio: 150 minutos.
+Tanque vacio: 151 minutos.
+Tanque vacio: 152 minutos.
+Tanque vacio: 153 minutos.
+Tanque vacio: 154 minutos.
+Tanque vacio: 155 minutos.
+Tanque vacio: 156 minutos.
+Tanque vacio: 157 minutos.
+Tanque vacio: 158 minutos.
+Tanque vacio: 159 minutos.
+Tanque vacio: 160 minutos.
+Tanque vacio: 161 minutos.
+Tanque vacio: 162 minutos.
+Tanque vacio: 163 minutos.
+Tanque vacio: 164 minutos.
+Tanque vacio: 165 minutos.
+Tanque vacio: 166 minutos.
+Tanque vacio: 167 minutos.
+Tanque vacio: 168 minutos.
+Tanque vacio: 169 minutos.
+Tanque vacio: 170 minutos.
+Tanque vacio: 171 minutos.
+Tanque vacio: 172 minutos.
+Tanque vacio: 173 minutos.
+Tanque vacio: 174 minutos.
+Tanque vacio: 175 minutos.
+Tanque vacio: 176 minutos.
+Tanque vacio: 177 minutos.
+Tanque vacio: 178 minutos.
+Tanque vacio: 179 minutos.
+Tanque vacio: 180 minutos.
+Tanque vacio: 181 minutos.
+Tanque vacio: 182 minutos.
+Tanque vacio: 183 minutos.
+Tanque vacio: 184 minutos.
+Tanque vacio: 185 minutos.
+Tanque vacio: 186 minutos.
+Tanque vacio: 187 minutos.
+Tanque vacio: 188 minutos.
+Tanque vacio: 189 minutos.
+Tanque vacio: 190 minutos.
+Tanque vacio: 191 minutos.
+Tanque vacio: 192 minutos.
+Tanque vacio: 193 minutos.
+Tanque vacio: 194 minutos.
+Tanque vacio: 195 minutos.
+Tanque vacio: 196 minutos.
+Tanque vacio: 197 minutos.
+Tanque vacio: 198 minutos.
+Tanque vacio: 199 minutos.
+Tanque vacio: 200 minutos.
+Tanque vacio: 201 minutos.
+Tanque vacio: 202 minutos.
+Tanque vacio: 203 minutos.
+Tanque vacio: 204 minutos.
+Tanque vacio: 205 minutos.
+Tanque vacio: 206 minutos.
+Tanque vacio: 207 minutos.
+Tanque vacio: 208 minutos.
+Tanque vacio: 209 minutos.
+Tanque vacio: 210 minutos.
+Tanque vacio: 211 minutos.
+Tanque vacio: 212 minutos.
+Tanque vacio: 213 minutos.
+Tanque vacio: 214 minutos.
+Tanque vacio: 215 minutos.
+Tanque vacio: 216 minutos.
+Tanque vacio: 217 minutos.
+Tanque vacio: 218 minutos.
+Tanque vacio: 219 minutos.
+Tanque vacio: 220 minutos.
+Tanque vacio: 221 minutos.
+Tanque vacio: 222 minutos.
+Tanque vacio: 223 minutos.
+Tanque vacio: 224 minutos.
+Tanque vacio: 225 minutos.
+Tanque vacio: 226 minutos.
+Tanque vacio: 227 minutos.
+Tanque vacio: 228 minutos.
+Tanque vacio: 229 minutos.
+Tanque vacio: 230 minutos.
+Tanque vacio: 231 minutos.
+Tanque vacio: 232 minutos.
+Tanque vacio: 233 minutos.
+Tanque vacio: 234 minutos.
+Tanque vacio: 235 minutos.
+Tanque vacio: 236 minutos.
+Tanque vacio: 237 minutos.
+Tanque vacio: 238 minutos.
+Tanque vacio: 239 minutos.
+Tanque vacio: 240 minutos.
+Tanque vacio: 241 minutos.
+Tanque vacio: 242 minutos.
+Tanque vacio: 243 minutos.
+Tanque vacio: 244 minutos.
+Tanque vacio: 245 minutos.
+Tanque vacio: 246 minutos.
+Tanque vacio: 247 minutos.
+Tanque vacio: 248 minutos.
+Tanque vacio: 249 minutos.
+Tanque vacio: 250 minutos.
+Tanque vacio: 251 minutos.
+Tanque vacio: 252 minutos.
+Tanque vacio: 253 minutos.
+Tanque vacio: 254 minutos.
+Tanque vacio: 255 minutos.
+Tanque vacio: 256 minutos.
+Tanque vacio: 257 minutos.
+Tanque vacio: 258 minutos.
+Tanque vacio: 259 minutos.
+Tanque vacio: 260 minutos.
+Tanque vacio: 261 minutos.
+Tanque vacio: 262 minutos.
+Tanque vacio: 263 minutos.
+Tanque vacio: 264 minutos.
+Tanque vacio: 265 minutos.
+Tanque vacio: 266 minutos.
+Tanque vacio: 267 minutos.
+Tanque vacio: 268 minutos.
+Tanque vacio: 269 minutos.
+Tanque vacio: 270 minutos.
+Tanque vacio: 271 minutos.
+Tanque vacio: 272 minutos.
+Tanque vacio: 273 minutos.
+Tanque vacio: 274 minutos.
+Tanque vacio: 275 minutos.
+Tanque vacio: 276 minutos.
+Tanque vacio: 277 minutos.
+Tanque vacio: 278 minutos.
+Tanque vacio: 279 minutos.
+Tanque vacio: 280 minutos.
+Tanque vacio: 281 minutos.
+Tanque vacio: 282 minutos.
+Tanque vacio: 283 minutos.
+Tanque vacio: 284 minutos.
+Tanque vacio: 285 minutos.
+Tanque vacio: 286 minutos.
+Tanque vacio: 287 minutos.
+Tanque vacio: 288 minutos.
+Tanque vacio: 289 minutos.
+Tanque vacio: 290 minutos.
+Tanque vacio: 291 minutos.
+Tanque vacio: 292 minutos.
+Tanque vacio: 293 minutos.
+Tanque vacio: 294 minutos.
+Tanque vacio: 295 minutos.
+Tanque vacio: 296 minutos.
+Tanque vacio: 297 minutos.
+Tanque vacio: 298 minutos.
+Tanque vacio: 299 minutos.
+Tanque vacio: 300 minutos.
+Tanque vacio: 301 minutos.
+Tanque vacio: 302 minutos.
+Tanque vacio: 303 minutos.
+Tanque vacio: 304 minutos.
+Tanque vacio: 305 minutos.
+Tanque vacio: 306 minutos.
+Tanque vacio: 307 minutos.
+Tanque vacio: 308 minutos.
+Tanque vacio: 309 minutos.
+Tanque vacio: 310 minutos.
+Tanque vacio: 311 minutos.
+Tanque vacio: 312 minutos.
+Tanque vacio: 313 minutos.
+Tanque vacio: 314 minutos.
+Tanque vacio: 315 minutos.
+Tanque vacio: 316 minutos.
+Tanque vacio: 317 minutos.
+Tanque vacio: 318 minutos.
+Tanque vacio: 319 minutos.
+Tanque vacio: 320 minutos.
+Tanque vacio: 321 minutos.
+Tanque vacio: 322 minutos.
+Tanque vacio: 323 minutos.
+Tanque vacio: 324 minutos.
+Tanque vacio: 325 minutos.
+Tanque vacio: 326 minutos.
+Tanque vacio: 327 minutos.
+Tanque vacio: 328 minutos.
+Tanque vacio: 329 minutos.
+Tanque vacio: 330 minutos.
+Tanque vacio: 331 minutos.
+Tanque vacio: 332 minutos.
+Tanque vacio: 333 minutos.
+Tanque vacio: 334 minutos.
+Tanque vacio: 335 minutos.
+Tanque vacio: 336 minutos.
+Tanque vacio: 337 minutos.
+Tanque vacio: 338 minutos.
+Tanque vacio: 339 minutos.
+Tanque vacio: 340 minutos.
+Tanque vacio: 341 minutos.
+Tanque vacio: 342 minutos.
+Tanque vacio: 343 minutos.
+Tanque vacio: 344 minutos.
+Tanque vacio: 345 minutos.
+Tanque vacio: 346 minutos.
+Tanque vacio: 347 minutos.
+Tanque vacio: 348 minutos.
+Tanque vacio: 349 minutos.
+Tanque vacio: 350 minutos.
+Tanque vacio: 351 minutos.
+Tanque vacio: 352 minutos.
+Tanque vacio: 353 minutos.
+Tanque vacio: 354 minutos.
+Tanque vacio: 355 minutos.
+Tanque vacio: 356 minutos.
+Tanque vacio: 357 minutos.
+Tanque vacio: 358 minutos.
+Tanque vacio: 359 minutos.
+Tanque vacio: 360 minutos.
+Tanque vacio: 361 minutos.
+Tanque vacio: 362 minutos.
+Tanque vacio: 363 minutos.
+Tanque vacio: 364 minutos.
+Tanque vacio: 365 minutos.
+Tanque vacio: 366 minutos.
+Tanque vacio: 367 minutos.
+Tanque vacio: 368 minutos.
+Tanque vacio: 369 minutos.
+Tanque vacio: 370 minutos.
+Tanque vacio: 371 minutos.
+Tanque vacio: 372 minutos.
+Tanque vacio: 373 minutos.
+Tanque vacio: 374 minutos.
+Tanque vacio: 375 minutos.
+Tanque vacio: 376 minutos.
+Tanque vacio: 377 minutos.
+Tanque vacio: 378 minutos.
+Tanque vacio: 379 minutos.
+Tanque vacio: 380 minutos.
+Tanque vacio: 381 minutos.
+Tanque vacio: 382 minutos.
+Tanque vacio: 383 minutos.
+Tanque vacio: 384 minutos.
+Tanque vacio: 385 minutos.
+Tanque vacio: 386 minutos.
+Tanque vacio: 387 minutos.
+Tanque vacio: 388 minutos.
+Tanque vacio: 389 minutos.
+Tanque vacio: 390 minutos.
+Tanque vacio: 391 minutos.
+Tanque vacio: 392 minutos.
+Tanque vacio: 393 minutos.
+Tanque vacio: 394 minutos.
+Tanque vacio: 395 minutos.
+Tanque vacio: 396 minutos.
+Tanque vacio: 397 minutos.
+Tanque vacio: 398 minutos.
+Tanque vacio: 399 minutos.
+Tanque vacio: 400 minutos.
+Tanque vacio: 401 minutos.
+Tanque vacio: 402 minutos.
+Tanque vacio: 403 minutos.
+Tanque vacio: 404 minutos.
+Tanque vacio: 405 minutos.
+Tanque vacio: 406 minutos.
+Tanque vacio: 407 minutos.
+Tanque vacio: 408 minutos.
+Tanque vacio: 409 minutos.
+Tanque vacio: 410 minutos.
+Tanque vacio: 411 minutos.
+Tanque vacio: 412 minutos.
+Tanque vacio: 413 minutos.
+Tanque vacio: 414 minutos.
+Tanque vacio: 415 minutos.
+Tanque vacio: 416 minutos.
+Tanque vacio: 417 minutos.
+Tanque vacio: 418 minutos.
+Tanque vacio: 419 minutos.
+Tanque vacio: 420 minutos.
+Tanque vacio: 421 minutos.
+Tanque vacio: 422 minutos.
+Tanque vacio: 423 minutos.
+Tanque vacio: 424 minutos.
+Tanque vacio: 425 minutos.
+Tanque vacio: 426 minutos.
+Tanque vacio: 427 minutos.
+Tanque vacio: 428 minutos.
+Tanque vacio: 429 minutos.
+Tanque vacio: 430 minutos.
+Tanque vacio: 431 minutos.
+Tanque vacio: 432 minutos.
+Tanque vacio: 433 minutos.
+Tanque vacio: 434 minutos.
+Tanque vacio: 435 minutos.
+Tanque vacio: 436 minutos.
+Tanque vacio: 437 minutos.
+Tanque vacio: 438 minutos.
+Tanque vacio: 439 minutos.
+Tanque vacio: 440 minutos.
+Tanque vacio: 441 minutos.
+Tanque vacio: 442 minutos.
+Tanque vacio: 443 minutos.
+Tanque vacio: 444 minutos.
+Tanque vacio: 445 minutos.
+Tanque vacio: 446 minutos.
+Tanque vacio: 447 minutos.
+Tanque vacio: 448 minutos.
+Tanque vacio: 449 minutos.
+Tanque vacio: 450 minutos.
+Tanque vacio: 451 minutos.
+Tanque vacio: 452 minutos.
+Tanque vacio: 453 minutos.
+Tanque vacio: 454 minutos.
+Tanque vacio: 455 minutos.
+Tanque vacio: 456 minutos.
+Tanque vacio: 457 minutos.
+Tanque vacio: 458 minutos.
+Tanque vacio: 459 minutos.
+Tanque vacio: 460 minutos.
+Tanque vacio: 461 minutos.
+Tanque vacio: 462 minutos.
+Tanque vacio: 463 minutos.
+Tanque vacio: 464 minutos.
+Tanque vacio: 465 minutos.
+Tanque vacio: 466 minutos.
+Tanque vacio: 467 minutos.
+Tanque vacio: 468 minutos.
+Tanque vacio: 469 minutos.
+Tanque vacio: 470 minutos.
+Tanque vacio: 471 minutos.
+Tanque vacio: 472 minutos.
+Tanque vacio: 473 minutos.
+Tanque vacio: 474 minutos.
+Tanque vacio: 475 minutos.
+Tanque vacio: 476 minutos.
+Tanque vacio: 477 minutos.
+Tanque vacio: 478 minutos.
+Tanque vacio: 479 minutos.
