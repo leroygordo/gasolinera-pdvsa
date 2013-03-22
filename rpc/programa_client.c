@@ -202,7 +202,7 @@ main (int argc, char *argv[])
 
       int respuesta;
       respuesta = *pedir_gasolina_1(c.ticket_,clnt);
-      printf("%d\n",respuesta);
+
       if(respuesta == 0) {
         if(c.next == NULL)
           c = *directorio_centros;
