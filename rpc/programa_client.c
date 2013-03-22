@@ -162,35 +162,10 @@ main (int argc, char *argv[])
     printf("Error: no se pudo crear el hilo para controlar el funcionamiento.");
     exit(EXIT_FAILURE);
   }
-  exit(EXIT_SUCCESS);
+
   centro c;
   c = *directorio_centros;
-  clnt = clnt_create (c.hostname, PROGRAMA_PROG, PROGRAMA_VER, "udp");
-  desafio *d;
-  d = (desafio *) malloc(sizeof(desafio));
-  d->pregunta = (char *) malloc(32);
 
-  char **p = preguntar_1(&nombre_bomba,clnt);
-  if (p == (char **) NULL) {
-    clnt_perror (clnt, "call failed");
-  }
-  strcpy(d->pregunta,*p);
-  printf("%s\n",d->pregunta);
-
-  char *centro_enc  = (char *) malloc(32);
-  MDString(c.nombre_centro,centro_enc);
- 
-  d->respuesta = (char *) malloc(64);
-  sprintf(d->respuesta,"%s%s",d->pregunta,centro_enc);
-  printf("%s\n",d->respuesta);
-
-  d->nombre_bomba = (char *) malloc(sizeof(strlen(nombre_bomba)));
-  strcpy(d->nombre_bomba,nombre_bomba);
-  printf("%s\n",d->nombre_bomba);
-
-//  ticket *t = responder_1(d,clnt);
-
-  exit(EXIT_SUCCESS);
   while (t_funcionamiento > 0 ) {  
     if (capacidad - inventario >= 38000) {
       clnt = clnt_create (c.hostname, PROGRAMA_PROG, PROGRAMA_VER, "udp");
