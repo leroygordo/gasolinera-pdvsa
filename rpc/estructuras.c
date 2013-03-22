@@ -53,8 +53,6 @@ int agregar_directorio(centro** directorio, char *nombre_centro, char *hostname,
 
   centro_->send_t = *pedir_tiempo_1(centro_->ticket_, clnt);
 
-  printf("%d\n",*pedir_gasolina_1(centro_->ticket_,clnt));
-
   free(d->pregunta);
   free(d->respuesta);
   free(d->nombre_bomba);

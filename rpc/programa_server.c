@@ -20,6 +20,9 @@ pthread_attr_t attr1, attr2, attr3;
 
 void crear_ticket(ticket *t,char *bomba); 
 
+
+// preguntar: funcion que recibe el nombre de la bomba quien llama al procedimiento
+//            retorna este argumento encriptado con el algoritmo mD5
 char **
 preguntar_1_svc(char **argp, struct svc_req *rqstp)
 {
@@ -29,6 +32,10 @@ preguntar_1_svc(char **argp, struct svc_req *rqstp)
   return &(result);
 }
 
+
+// responder: funcion que recibe la pregunta y respuesta para generar un ticket en caso de 
+//            haber pasado el desafio. La respuesta al desafio es el nombre de la bomba 
+//            encriptado y concantenado con el nombre del centro encriptado
 ticket *
 responder_1_svc(desafio *argp, struct svc_req *rqstp)
 {
@@ -48,11 +55,18 @@ responder_1_svc(desafio *argp, struct svc_req *rqstp)
   return result;
 }
 
+// pedir_gasolina: retorna el estado de solicitud de gasolina.
 int *
 pedir_gasolina_1_svc(ticket *argp, struct svc_req *rqstp)
 {
   pthread_mutex_lock(&mtx);
   static int  result;
+
+/*  if (!ticket_valido(argp)) {
+    result = 2;
+    return &result;
+  }*/
+  
   if (inventario < 38000)
     result = 0;
   else {
@@ -64,6 +78,7 @@ pedir_gasolina_1_svc(ticket *argp, struct svc_req *rqstp)
   return &result;
 }
 
+// pedir_tiempo: retorna el tiempo de llegada de una gandola del centro
 int *
 pedir_tiempo_1_svc(ticket *argp, struct svc_req *rqstp)
 {
@@ -74,6 +89,7 @@ pedir_tiempo_1_svc(ticket *argp, struct svc_req *rqstp)
   return &result;
 }
 
+// crear_ticket: crea un ticket para determinada bomba
 void crear_ticket(ticket *t,char *bomba) {
   t->nro_ticket = nro_ticket;
   nro_ticket++;
@@ -84,10 +100,17 @@ void crear_ticket(ticket *t,char *bomba) {
   strcpy(t->nombre_bomba,bomba);
 }
 
+// ticket_valido: verifica si un ticket cumple con las condiciones de validacion
+int ticket_valido(ticket *t) {
+  return (t->nro_ticket <= nro_ticket) && 
+         !(strcmp(t->nombre_centro,nombre_centro)) &&
+         (5 <= 480 - t->hora && 480 - t->hora <= 60);
+}
+
 void *inventario_suministro(void * tid) {
   int suministro = (int) tid;
   while (TRUE) {
-    printf("%d lts.\n",inventario);
+    //printf("%d lts.\n",inventario);
     usleep(100000);
     if(inventario == 0)
       fprintf(log_file,"Tanque vacio: %d minutos.\n",480 - t_funcionamiento);
@@ -106,7 +129,7 @@ void *inventario_suministro(void * tid) {
 
 void *tiempo_funcionamiento(void * tid) {
   while (TRUE) {
-    printf("%d min. \n",t_funcionamiento);
+    //printf("%d min. \n",t_funcionamiento);
     usleep(100000);
     t_funcionamiento--;
     if(!t_funcionamiento)
@@ -226,6 +249,8 @@ int valid_arg(char *nombre_centro,int capacidad,int inventario,int suministro,in
   return valid;
 }
 
+
+// auxiliar_main: main auxiliar para preparar el ambiente de simulacion del sistema
 void auxiliar_main(int argc, char **argv) {
   if(argc != 11){
     print_use();

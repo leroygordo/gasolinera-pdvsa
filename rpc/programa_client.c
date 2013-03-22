@@ -83,7 +83,7 @@ int valid_arg(int capacidad, char *fichero_centros, char *nombre_bomba, int inve
 void *inventario_consumo(void * tid) {
   int consumo = (int) tid;
   while (TRUE) {
-    printf("%d lts. \n",inventario);
+    //printf("%d lts. \n",inventario);
     usleep(100000);
     if(inventario == capacidad)
       fprintf(log_file,"Tanque full: %d minutos.\n",480 - t_funcionamiento);
@@ -100,7 +100,7 @@ void *inventario_consumo(void * tid) {
 
 void *tiempo(void * tid) {
   while (TRUE) {
-    printf("%d min.\n",t_funcionamiento);
+    //printf("%d min.\n",t_funcionamiento);
     usleep(100000);
     t_funcionamiento--;
     if(!t_funcionamiento)
@@ -186,6 +186,7 @@ main (int argc, char *argv[])
       char **p = preguntar_1(&nombre_bomba,clnt);
       if (p == (char **) NULL) {
   	  clnt_perror (clnt, "call failed");
+          break;
       }
       strcpy(d->pregunta,*p);
 
@@ -199,18 +200,26 @@ main (int argc, char *argv[])
       strcpy(d->nombre_bomba,nombre_bomba);
 
       ticket *t = responder_1(d,clnt);
+      if (t == (ticket *) NULL) {
+  	  clnt_perror (clnt, "call failed");
+          break;
+      }
 
-      int respuesta;
-      respuesta = *pedir_gasolina_1(c.ticket_,clnt);
-      printf("%d\n",respuesta);
-      if(respuesta == 0) {
+      int *respuesta;
+      respuesta = pedir_gasolina_1(c.ticket_,clnt);
+      if (respuesta == (int *) NULL) { 
+         clnt_perror (clnt,"call failed");
+         break;
+      }
+
+      if(*respuesta == 0) {
         if(c.next == NULL)
           c = *directorio_centros;
          else
           c = *c.next;
           fprintf(log_file,"Peticion: %d minutos, %s, Fallido.\n",480 - t_funcionamiento,c.nombre_centro);
       }
-      else if (respuesta == 1) {
+      else if (*respuesta == 1) {
         fprintf(log_file,"Peticion: %d minutos, %s, OK.\n",480 - t_funcionamiento,c.nombre_centro);
         usleep(c.send_t * 100000);
         if (inventario + 38000 >= capacidad) {
@@ -221,7 +230,11 @@ main (int argc, char *argv[])
         }
         fprintf(log_file,"Llegada de la gandola: %d minutos, %d litros.\n",480 - t_funcionamiento,inventario);
         c = *directorio_centros;
-      }         
+      }
+      else if (*respuesta == 2) {
+        // Renovar el ticket
+        *c.ticket_ = *t;
+      }
     }
   }
 
