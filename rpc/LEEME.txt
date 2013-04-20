@@ -1,0 +1,49 @@
+Hancel Gonzalez 07-40983
+Susana Charara  08-10223
+
+Archivos: 
+	programa_client.c: Main del cliente que establece la conexion con el servidor de rpc. Las funciones que se ejecutaran remotamente son:pide el 		desafio al seridor, responde el desafio, y realiza peticiones a centros de distribucion.
+        programa_server.c: Main del servidor. Contiene las funciones que se ejecutaran remotamente. Simula el funcionamiento de un centro de 		distribucion de gasolina: descenso y aumento de su inventario, envio de gandolas a bombas solicitantes.
+        estructuras.h: firma de las estructuras y metodos para manipular un directorio de centros de distribucion.
+        estructuras.c: implementacion de los metodos en estructuras.h.
+	desafio.c: Contiene las funciones que permite generar desafios haciendo uso del algoritmo de encriptacion md5.
+		
+
+bomba y centro simulan por un tiempo de simulacion de 480 minutos, el funcionamiento de un sistema de abastecimiento/consumo de gasolina en la vida.
+Esto incluye comunicacion con algun centro para solicitar gandola o bomba para responder a la peticion, asi como la generacion de tickets para permitir la conexion cliente/servidor. Suministro y consumo de gasolina. Paso del tiempo.
+
+Para ejecutar ambos programas:
+
+  bomba  -n <nombre_bomba> -cp <capacidad_maxima> -fc <archivo_centros> -c <consumo> -i <inventario_inicial>
+  centro -n <nombre_centro> -cp <capacidad_maxima> -i <inventario_inicial> -t <tiempo_gandola> -s <suministro>
+
+  Nota: no importa el orden de los argumentos para ambos programas.
+
+Limitaciones: - <nombre_centro>, <nombre_bomba> no debe tener espacio.
+              - el resto de los parametros deben ser numeros enteros, los rangos se validas al ejecutar el programa. En caso de fallar, se orienta al usuario.
+
+Estructura del programa:
+
+Programa cliente:
+
+Se hace la lectura y validacion de los argumentos.
+Se crea una estructura donde se guardara la informacion de los centros disponibles. 
+Se crea el archivo donde se guardara el log del resumen de los eventos relevantes de la simulacion.
+Se crean dos hilos: uno para controlar el tiempo de corrida del programa, y el otro para controlar el consumo de gasolina por minuto del inventario. Se crean las estructuras necesarias para realizar la conexion con el servidor, y se pide el tiempo de cada servidor. Mientras el tiempo de funcionamiento del programa no haya terminado:
+Si la bomba tiene capacidad para recibir una nueva gandola, la bomba genera una peticion de desafio al servidor, y lo responde. En caso de haber respondido bien al desafio, resibe un ticket del centro, que tendra una duracion de 5 minutos . Si el ticket no ha vencido y el centro tiene inventario, recibe gasolina. Si el centro no tiene inventario, se realiza el mismo proceso de peticion con el proximo centro. En caso de que el ticket haya vencido, se renueva y se iniciael proceso de peticion.
+
+Programa servidor:
+
+En primer lugar, se realiza la lectura y validacion de los argumentos de entrada. 
+Se crea el archivo donde se guardara el log del resumen de los eventos relevantes de la simulacion. 
+Se crean dos hilos: uno para controlar el tiempo de corrida del programa, y el otro para controlar el suministro de gasolina al centro. 
+Se crean las estructuras necesarias para realizar la conexion con el cliente. 
+Mientras el tiempo de funcionamiento del programa no haya terminado: Si recibe una conexion, genera un desafio que enviara a la bomba. Si la bomba responde correctamente, genera un ticket con una duracion de 5 minutos. Si posee inventario suficiente, se entrega una gandola a la bomba.
+
+Funciones no implementadas:
+
+En el proceso de renovacion de tickets en caso de que esten vencidos, estos no se generan correctamente. Por esta razon, se omite el proceso de validacion del ticket.
+
+Explicacion aplicacion:
+
+Se trata de una aplicacion distribuida que se basa en el modelo Cliente/Servidor. Para la comunicacion entre ellos se utiliza el protocolo RPC (Remote Procedure Call), que permite ejecutar codigo en otras maquinas remotas, sin que interese como es el proceso de comunicacion entre el cliente y el servidor.
